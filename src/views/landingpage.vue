@@ -5,13 +5,13 @@
             <b-row align-v="center">
             <b-col cols="1"></b-col>
             <b-col cols="10" align-self="center">
-        <b-card img-src="https://placekitten.com/300/300" img-alt="Card image" img-left class="center text-center">
+        <b-card img-src="https://placekitten.com/400/300" img-alt="Card image" img-left class="text-center">
             <b-card-title>Holy Hospital</b-card-title>
             <div class="my-4">
-            <b-button block variant="primary">Login</b-button>
+            <b-button block class="ungubutton" to="/login">Login</b-button>
             </div>
             <div class="my-4">
-            <b-button block variant="primary">Get Username</b-button>
+            <b-button block variant="light" class="ungu">Get Username</b-button>
             </div>
     </b-card>
     </b-col>
@@ -33,9 +33,13 @@ export default {
 .bodyimage {
     background-image: url("/src/assets/bglp.jpg");
     height: auto;
+    padding-top: 20%;
+    padding-bottom: 20%;
 }
-.center {
-  margin-top: 50%;
-  margin-bottom:50%;
+.ungubutton {
+    background-color: #8E5FA8;
+}
+.ungu {
+    color: #8E5FA8;
 }
 </style>
