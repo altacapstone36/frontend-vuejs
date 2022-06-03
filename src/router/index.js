@@ -1,7 +1,7 @@
 import landingPage from '@/views/landingpage.vue'
 import loginPage from '@/views/login.vue'
 import registerPage from '@/views/register.vue'
-
+import homePage from '@/views/home.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -12,6 +12,11 @@ const routes = [
     path: '/landingpage',
     name: 'landingPage',
     component: landingPage
+},
+{
+    path: '/home',
+    name: 'homePage',
+    component: homePage
 },
 
 {
