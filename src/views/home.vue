@@ -6,19 +6,27 @@
             <b-row>
 <navdrawVue/>
 <b-col cols="9">
-            <h1>HOME</h1>
-            <div id="page-content-wrapper">
+    <div class="d-flex mx-2 my-2">
+        <div class="mx-2">
+<b-avatar src="https://placekitten.com/300/300" size="6rem"></b-avatar>
+        </div>
+        <div class="mx-2">    
+            <h1>Nama User</h1>
+            <h1>Administrtor</h1>
+        </div>
+        </div>
+    <div id="page-content-wrapper">
                 <!-- Page content-->
-                <div class="container-fluid">
-                    <h1 class="mt-4">Simple Sidebar</h1>
-                    <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
-                    <p>
-                        Make sure to keep all page content within the
-                        <code>#page-content-wrapper</code>
-                        . The top navbar is optional, and just for demonstration. Just create an element with the
-                        <code>#sidebarToggle</code>
-                        ID which will toggle the menu when clicked.
-                    </p>
+                <div class="d-flex justify-center">
+        <b-card text-variant="white" class="text-center mx-2 my-2 ungusecondary">
+        <b-card-text>Manage Patient Data</b-card-text>
+      </b-card>
+      <b-card text-variant="white" class="text-center mx-2 my-2 ungusecondary">
+        <b-card-text>Manage Outpatient Report</b-card-text>
+      </b-card>
+      <b-card text-variant="white" class="text-center mx-2 my-2 ungusecondary">
+        <b-card-text>Report Log</b-card-text>
+      </b-card>
                 </div>
             </div>
 </b-col>        
@@ -38,3 +46,12 @@ export default {
 }
 </script>
 
+
+<style scoped>
+.unguprimary {
+    background-color: #50266A;
+}
+.ungusecondary {
+    background-color: #794B93;
+}
+</style>
