@@ -12,7 +12,7 @@
             <b-button block class="ungubutton" to="/login">LOGIN</b-button>
             </div>
             <div class="my-4">
-            <b-button block variant="white" class="ungu">REGISTER</b-button>
+            <b-button block variant="white" class="ungu" to="/register">REGISTER</b-button>
             </div>
     </b-card>
     </div>
