@@ -1,11 +1,12 @@
 <template>
     <div class="bodyimage">
         <b-container>
-        <div class="row">
-            <b-row align-v="center">
+        <div class="row align-items-center vh-100"> 
+            <b-row align-h="center">
             <b-col cols="1"></b-col>
             <b-col cols="10" align-self="center">
-        <b-card img-src="https://placekitten.com/400/300" img-alt="Card image" img-left class="text-center">
+            <div class="centercard">
+        <b-card img-src="https://i.ibb.co/LY0qTqj/banner.png" img-width="50%" img-alt="Card image" img-left class="text-center p-3">
             <b-card-title>Holy Hospital</b-card-title>
             <div class="my-4">
             <b-button block class="ungubutton" to="/login">Login</b-button>
@@ -14,6 +15,7 @@
             <b-button block variant="light" class="ungu">Get Username</b-button>
             </div>
     </b-card>
+    </div>
     </b-col>
     <b-col cols="1"></b-col>
     </b-row>
@@ -31,15 +33,19 @@ export default {
 
 <style scoped>
 .bodyimage {
-    background-image: url("/src/assets/bglp.jpg");
-    height: auto;
-    padding-top: 20%;
-    padding-bottom: 20%;
+    background-image: url("https://i.ibb.co/Vpcht5r/landingpage.png");
+    background-size: 100%;
+    background-position: center;
 }
 .ungubutton {
     background-color: #8E5FA8;
 }
 .ungu {
     color: #8E5FA8;
+}
+.centercard {
+    align-content: center;
+    justify-content: center;
+    margin-top: 50px;
 }
 </style>
