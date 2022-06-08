@@ -9,10 +9,10 @@
         <b-card img-src="https://i.ibb.co/LY0qTqj/banner.png" img-width="50%" img-alt="Card image" img-left class="text-center p-3">
             <b-card-title>Holy Hospital</b-card-title>
             <div class="my-4">
-            <b-button block class="ungubutton" to="/login">Login</b-button>
+            <b-button block class="ungubutton" to="/login">LOGIN</b-button>
             </div>
             <div class="my-4">
-            <b-button block variant="light" class="ungu">Get Username</b-button>
+            <b-button block variant="white" class="ungu">REGISTER</b-button>
             </div>
     </b-card>
     </div>
