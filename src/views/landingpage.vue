@@ -2,17 +2,17 @@
     <div class="bodyimage">
         <b-container>
         <div class="row align-items-center vh-100"> 
-            <b-row align-h="center">
+            <b-row >
             <b-col cols="1"></b-col>
-            <b-col cols="10" align-self="center">
-            <div class="centercard">
-        <b-card img-src="https://i.ibb.co/LY0qTqj/banner.png" img-width="50%" img-alt="Card image" img-left class="text-center p-3">
+            <b-col cols="10">
+            <div class="">
+<b-card img-src="https://i.ibb.co/LY0qTqj/banner.png" img-width="50%" img-alt="Card image" img-left class="text-center p-3">
             <b-card-title>Holy Hospital</b-card-title>
-            <div class="my-4">
-            <b-button block class="ungubutton" to="/login">LOGIN</b-button>
+            <div class="">
+            <b-button block class="ungubutton width100" to="/login" >LOGIN</b-button>
             </div>
-            <div class="my-4">
-            <b-button block variant="white" class="ungu" to="/register">REGISTER</b-button>
+            <div class="">
+            <b-button block variant="white" class="ungu width100" to="/register">REGISTER</b-button>
             </div>
     </b-card>
     </div>
@@ -48,4 +48,8 @@ export default {
     justify-content: center;
     margin-top: 50px;
 }
+.width100 {
+    width: 100%;
+}
 </style>
+
