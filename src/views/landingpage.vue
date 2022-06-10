@@ -6,12 +6,12 @@
             <b-col cols="1"></b-col>
             <b-col cols="10">
             <div class="">
-<b-card img-src="https://i.ibb.co/LY0qTqj/banner.png" img-width="50%" img-alt="Card image" img-left class="text-center p-3">
+<b-card img-src="https://i.ibb.co/LY0qTqj/banner.png" img-width="55%" img-alt="Card image" img-left class="text-center p-3">
             <b-card-title>Holy Hospital</b-card-title>
-            <div class="">
+            <div class="my-3">
             <b-button block class="ungubutton width100" to="/login" >LOGIN</b-button>
             </div>
-            <div class="">
+            <div class="my-3">
             <b-button block variant="white" class="ungu width100" to="/register">REGISTER</b-button>
             </div>
     </b-card>
