@@ -9,10 +9,10 @@
 <b-card img-src="https://i.ibb.co/LY0qTqj/banner.png" img-width="55%" img-alt="Card image" img-left class="text-center p-3">
             <b-card-title>Holy Hospital</b-card-title>
             <div class="my-3">
-            <b-button block class="ungubutton width100" to="/login" >LOGIN</b-button>
+            <b-button block class="ungubutton width90" to="/login" >LOGIN</b-button>
             </div>
             <div class="my-3">
-            <b-button block variant="white" class="ungu width100" to="/register">REGISTER</b-button>
+            <b-button block variant="white" class="ungu width90" to="/register">REGISTER</b-button>
             </div>
     </b-card>
     </div>
@@ -48,8 +48,8 @@ export default {
     justify-content: center;
     margin-top: 50px;
 }
-.width100 {
-    width: 100%;
+.width90 {
+    width: 90%;
 }
 </style>
 
