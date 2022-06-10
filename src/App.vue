@@ -16,9 +16,10 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://use.typekit.net/uhs5dlf.css");
+
+div {
+font-family: 'nunito', sans-serif;
 }
+
 </style>
