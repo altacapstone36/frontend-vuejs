@@ -16,9 +16,11 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap");
+
+div {
+font-family: 'Nunito', sans-serif;
+;
 }
+
 </style>
