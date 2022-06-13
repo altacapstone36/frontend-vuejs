@@ -23,12 +23,14 @@
   <div></div>
   </b-container>
     </div>
+
 </template>
 
 <script>
 export default {
     name: "landingPage"
 }
+
 </script>
 
 <style scoped>
