@@ -16,10 +16,11 @@ export default {
 </script>
 
 <style>
-@import url("https://use.typekit.net/uhs5dlf.css");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap");
 
 div {
-font-family: 'nunito', sans-serif;
+font-family: 'Nunito', sans-serif;
+;
 }
 
 </style>
