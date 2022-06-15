@@ -9,7 +9,10 @@
         <p>administrator</p>
         </div>
         <div class="icon">
-
+            <svg height="250" width="610">
+  <ellipse cx="500" cy="110" rx="300" ry="230"
+  class="elips" />
+</svg>
         </div>
     </div>
 
@@ -61,6 +64,7 @@ export default {
 }
 .hero {
     display: flex;
+    height: 250;
 }
 .imageprofile {
     margin-left: 10px;
@@ -73,4 +77,10 @@ export default {
 .icon {
 
 }
+.elips {
+    fill:#D09DEB;
+    stroke:purple;
+    stroke-width:2;
+}
+
 </style>
