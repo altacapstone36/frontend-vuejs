@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="">
     <div class="hero ungusecondary">
         <div class="imageprofile">
         <b-img rounded="circle" src="https://picsum.photos/250/250/?image=54" alt="Image 1"></b-img>
@@ -9,8 +9,11 @@
         <p>administrator</p>
         </div>
         <div class="icon">
-            <svg height="250" width="610">
-  <ellipse cx="500" cy="110" rx="300" ry="230"
+            <img src = "../assets/Illu/illus2.svg" width="170" alt="My Happy SVG" class="bgbanner"/>
+
+            <svg height="250" width="600">
+              
+  <ellipse cx="300" cy="110" rx="300" ry="230"
   class="elips" />
 </svg>
         </div>
@@ -62,25 +65,36 @@ export default {
 .ungusecondary {
     background-color: #794B93;
 }
+
 .hero {
     display: flex;
     height: 250;
 }
 .imageprofile {
-    margin-left: 10px;
+    margin-left: 105px;
 }
 .nameprofile {
-    margin-left: 30px;
+    margin-left: 50px;
     color: white;
     margin-top: 100px;
 }
 .icon {
-
+  display: flex;
+  align-content: center;
+margin-left: 180px;
+align-self: flex-end;
 }
 .elips {
     fill:#D09DEB;
     stroke:purple;
     stroke-width:2;
+}
+.bgbanner {
+  margin-left: 180px;
+  margin-top: 30px;
+  position: absolute;
+  align-content: center;
+  
 }
 
 </style>

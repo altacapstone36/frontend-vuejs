@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="noscroll">
     <component :is="layout">
       <router-view></router-view>
     </component>
@@ -29,4 +29,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.noscroll {
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 </style>
