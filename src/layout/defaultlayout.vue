@@ -1,11 +1,26 @@
 <template>
-<div class="wrapper">
-    <router-view></router-view>
+<div class="row">
+<navbar-vue></navbar-vue>
+<div class="col-3">    
+<navdraw-vue></navdraw-vue>
+</div>
+<div class="col-9">
+<router-view></router-view>
+</div>
+<div class="d-flex">
+</div>
+
 </div>
 </template>
 
 <script>
+import navbarVue from '../components/navbar.vue'
+import navdrawVue from '../components/navdraw.vue'
 export default {
-    name: "defaultLayout"
+    name: "defaultLayout",
+    components: {
+        navbarVue,
+        navdrawVue,
+    }
 }
 </script>
