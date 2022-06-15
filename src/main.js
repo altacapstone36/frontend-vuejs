@@ -2,9 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import router from './router'
-// Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import defaultLayout from './layouts/defaultlayout.vue'
+import blankLayout from './layouts/blank.vue'
+
+Vue.component('default-layout', defaultLayout)
+Vue.component('blank-layout', blankLayout)
+
 
 Vue.config.productionTip = false
 

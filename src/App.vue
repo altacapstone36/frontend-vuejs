@@ -1,14 +1,24 @@
 <template>
-    <defaultLayout/>
+<div>
+    <component :is="layout">
+      <router-view></router-view>
+    </component>
+</div>
 </template>
 
 <script>
-import defaultLayout from './layout/defaultlayout.vue'
-
+//import defaultlayoutVue from './layout/defaultlayout.vue'
+//import defaultLayout from './layout/defaultlayout.vue'
+const defaultLayout = 'default'
 export default {
   name: 'App',
+  computed: {
+    layout(){
+      return(this.$route.meta.layout || defaultLayout ) + '-layout'
+    }
+  },
   components: {
-    defaultLayout
+  //  defaultLayout
   }
 }
 </script>

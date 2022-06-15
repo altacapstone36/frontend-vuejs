@@ -5,7 +5,7 @@
 <navdraw-vue></navdraw-vue>
 </div>
 <div class="col-9">
-<router-view></router-view>
+    <slot></slot>
 </div>
 <div class="d-flex">
 </div>
