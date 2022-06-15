@@ -4,6 +4,7 @@ import registerPage from '@/views/register.vue'
 import homePage from '@/views/home.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import  notfound  from '@/views/404.vue'
 
 Vue.use(VueRouter)
 
@@ -11,6 +12,7 @@ const routes = [
 {
     path: '/landingpage',
     name: 'landingPage',
+    meta: {layout: 'blank'},
     component: landingPage
 },
 {
@@ -29,7 +31,12 @@ const routes = [
     name: 'registerPage',
     component: registerPage
 },
-
+{
+    path: '*',
+    name: 'notfound',
+    meta: {layout: 'blank'},
+    component: notfound
+},
 ]
 
 
