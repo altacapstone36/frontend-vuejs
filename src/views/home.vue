@@ -1,27 +1,44 @@
 <template>
-    <div class="d-flex my-2">
-        <div class="mx-2">
-<b-avatar src="https://placekitten.com/300/300" size="6rem"></b-avatar>
+<div>
+    <div class="hero ungusecondary">
+        <div class="imageprofile">
+        <b-img rounded="circle" src="https://picsum.photos/250/250/?image=54" alt="Image 1"></b-img>
         </div>
-        <div class="mx-2">    
-            <h1>Nama User</h1>
-            <h1>Administrtor</h1>
+        <div class="nameprofile">
+        <h3>Nama User</h3>
+        <p>administrator</p>
         </div>
+        <div class="icon">
+
+        </div>
+    </div>
+
     <div id="page-content-wrapper">
                 <!-- Page content-->
-                <div class="d-flex justify-center">
-        <b-card text-variant="white" class="text-center mx-2 my-2 ungusecondary">
+                <div class="d-flex justify-content-center">
+        <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
         <b-card-text>Manage Patient Data</b-card-text>
       </b-card>
-      <b-card text-variant="white" class="text-center mx-2 my-2 ungusecondary">
+      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
         <b-card-text>Manage Outpatient Report</b-card-text>
       </b-card>
-      <b-card text-variant="white" class="text-center mx-2 my-2 ungusecondary">
-        <b-card-text>Report Log</b-card-text>
+      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <b-card-text>Manage User</b-card-text>
+      </b-card>
+                </div>
+        <div class="d-flex justify-content-center">
+        <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <b-card-text>Display Employee Schedule</b-card-text>
+      </b-card>
+      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <b-card-text>Change Password</b-card-text>
+      </b-card>
+      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <b-card-text>Logout</b-card-text>
       </b-card>
                 </div>
             </div>
-            </div>
+</div>
 </template>
 
 <script>
@@ -41,5 +58,19 @@ export default {
 }
 .ungusecondary {
     background-color: #794B93;
+}
+.hero {
+    display: flex;
+}
+.imageprofile {
+    margin-left: 10px;
+}
+.nameprofile {
+    margin-left: 30px;
+    color: white;
+    margin-top: 100px;
+}
+.icon {
+
 }
 </style>
