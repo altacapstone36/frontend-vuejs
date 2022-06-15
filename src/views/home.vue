@@ -18,28 +18,33 @@
 </svg>
         </div>
     </div>
-
     <div id="page-content-wrapper">
                 <!-- Page content-->
                 <div class="d-flex justify-content-center">
-        <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
+        <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple" @click="patient()">
+          <img src="../assets/Icon/patient.svg" width="100px" class="svgmx"/>
         <b-card-text>Manage Patient Data</b-card-text>
       </b-card>
       <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <img src="../assets/Icon/outpatient.svg" width="100px" class="svgmx"/>
         <b-card-text>Manage Outpatient Report</b-card-text>
       </b-card>
       <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <img src="../assets/Icon/user.svg" width="100px" class="svgmx"/>
         <b-card-text>Manage User</b-card-text>
       </b-card>
                 </div>
         <div class="d-flex justify-content-center">
         <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <img src="../assets/Icon/schedule.svg" width="100px" class="svgmx"/>
         <b-card-text>Display Employee Schedule</b-card-text>
       </b-card>
       <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <img src="../assets/Icon/change password.svg" width="100px" class="svgmx"/>
         <b-card-text>Change Password</b-card-text>
       </b-card>
       <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <img src="../assets/Icon/logout.svg" width="100px" class="svgmx"/>
         <b-card-text>Logout</b-card-text>
       </b-card>
                 </div>
@@ -51,9 +56,7 @@
 
 export default {
     name: "homePage",
-    components: {
-
-    }
+  
 }
 </script>
 
@@ -95,6 +98,9 @@ align-self: flex-end;
   position: absolute;
   align-content: center;
   
+}
+.card {
+  width: 300px;
 }
 
 </style>

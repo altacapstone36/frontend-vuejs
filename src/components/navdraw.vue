@@ -1,14 +1,14 @@
 <template>
 
                 <div class="ungusecondary sidebar m-0 pl1">
-                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3 " @click="togglepatient = !togglepatient" @dblclick="togel()"> Patient <b-icon icon="chevron-down"></b-icon></a>        
+                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3 " @click="togglepatient = !togglepatient" @dblclick="togel()"><div><img src="../assets/Icon/patientsidebar.svg" width="50" class="svgmx"/>Patient</div><img src="../assets/Icon/drop down.svg" width="30" class="iconmx"/></a>        
 <!-- toggle -->                   
                         <div class="sub-menu" v-if="togglepatient">
                             <a class="list-group-item ungusecondary border-bottom text-white p-3" href="#!">Add Patient</a>
                             <a class="list-group-item ungusecondary border-bottom text-white p-3" href="#!">Patient Data</a>
                         </div>
 <!-- ENDtoggle -->
-                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3" @click="toggleoutpatient = !toggleoutpatient" @dblclick="togel()">Outpatient <b-icon icon="chevron-down"></b-icon></a>        
+                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3" @click="toggleoutpatient = !toggleoutpatient" @dblclick="togel()"><div><img src="../assets/Icon/outpatientsidebar.svg" width="50" class="svgmx"/>Outpatient</div> <img src="../assets/Icon/drop down.svg" width="30" class="iconmx"/></a>        
 <!-- toggle -->                   
                         <div class="sub-menu" v-if="toggleoutpatient">
                             <a class="list-group-item  ungusecondary border-bottom text-white p-3" href="#!">Add Outpatient</a>
@@ -16,14 +16,14 @@
                             <a class="list-group-item ungusecondary border-bottom text-white p-3" href="#!">Outpatient List</a>
                         </div>
 <!-- ENDtoggle -->
-                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3" @click="toggleschedule = !toggleschedule" @dblclick="togel()">Schedule <b-icon icon="chevron-down"></b-icon></a>        
+                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3" @click="toggleschedule = !toggleschedule" @dblclick="togel()"><div><img src="../assets/Icon/schedulesidebar.svg" width="50" class="svgmx"/>Schedule</div> <img src="../assets/Icon/drop down.svg" width="30" class="iconmx"/></a>        
 <!-- toggle -->                   
                         <div class="sub-menu" v-if="toggleschedule">
                             <a class="list-group-item ungusecondary border-bottom text-white p-3" href="#!">Add Schedule</a>
                             <a class="list-group-item ungusecondary border-bottom text-white p-3" href="#!">Schedule List</a>
                         </div>
 <!-- ENDtoggle -->
-                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3" @click="toggleusers = !toggleusers" @dblclick="togel()">User Menu <b-icon icon="chevron-down"></b-icon></a>        
+                    <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3" @click="toggleusers = !toggleusers" @dblclick="togel()"><div><img src="../assets/Icon/usersidebar.svg" width="50" class="svgmx"/>User Menu</div> <img src="../assets/Icon/drop down.svg" width="30" class="iconmx"/></a>        
 <!-- toggle -->                   
                         <div class="sub-menu" v-if="toggleusers">
                             <a class="list-group-item ungusecondary border-bottom text-white p-3" href="#!">Manage User</a>
@@ -70,5 +70,14 @@ export default {
 }
 .w10px {
     width: 10px;
+}
+.svgmx {
+margin-left: 2px;
+margin-right: 10px;
+color: white;
+}
+.iconmx {
+    margin-left: 0px;
+    
 }
 </style>
