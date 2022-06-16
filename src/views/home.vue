@@ -2,7 +2,7 @@
 <div class="">
     <div class="hero ungusecondary">
         <div class="imageprofile">
-        <b-img rounded="circle" src="https://picsum.photos/250/250/?image=54" alt="Image 1"></b-img>
+        <b-img rounded="circle" src="https://picsum.photos/200/200/?image=54" alt="Image 1"></b-img>
         </div>
         <div class="nameprofile">
         <h3>Nama User</h3>
@@ -21,30 +21,45 @@
     <div id="page-content-wrapper">
                 <!-- Page content-->
                 <div class="d-flex justify-content-center">
-        <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple" @click="patient()">
-          <img src="../assets/Icon/patient.svg" width="100px" class="svgmx"/>
+        <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
+        <a href="/patientdata" class="btn btn-light stretched-link">
+        <img src="../assets/Icon/patient.svg" width="100px" class="svgmx" />
+        </a>
         <b-card-text>Manage Patient Data</b-card-text>
+        
       </b-card>
-      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+      <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
+        <a href="/outpatientreport" class="stretched-link">
         <img src="../assets/Icon/outpatient.svg" width="100px" class="svgmx"/>
+        </a>
         <b-card-text>Manage Outpatient Report</b-card-text>
       </b-card>
-      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+      
+      <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
+        <a href="/user" class="stretched-link">
         <img src="../assets/Icon/user.svg" width="100px" class="svgmx"/>
-        <b-card-text>Manage User</b-card-text>
+        </a>
+      <b-card-text>Manage User</b-card-text>
       </b-card>
+      
                 </div>
         <div class="d-flex justify-content-center">
-        <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+        <b-card bg-variant="light" class=" card text-center mx-2 my-2 text-purple">
+        <a href="/schedulelist" class="btn btn-light stretched-link">
         <img src="../assets/Icon/schedule.svg" width="100px" class="svgmx"/>
+        </a>
         <b-card-text>Display Employee Schedule</b-card-text>
       </b-card>
-      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+      <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
+        <a href="/changepassword" class="btn btn-light stretched-link">
         <img src="../assets/Icon/change password.svg" width="100px" class="svgmx"/>
+        </a>
         <b-card-text>Change Password</b-card-text>
       </b-card>
-      <b-card bg-variant="light" class="text-center mx-2 my-2 text-purple">
+      <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
+        <a href="/logout" class="btn btn-light stretched-link">
         <img src="../assets/Icon/logout.svg" width="100px" class="svgmx"/>
+        </a>
         <b-card-text>Logout</b-card-text>
       </b-card>
                 </div>
