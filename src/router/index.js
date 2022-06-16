@@ -5,6 +5,8 @@ import homePage from '@/views/home.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
+import outpatientAdd from '@/views/outpatientadd.vue'
+import outpatientData from '@/views/outpatientdata.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +38,18 @@ const routes = [
     name: 'notfound',
     meta: {layout: 'blank'},
     component: notfound
+},
+
+{
+    path: '/addoutpatient',
+    name: 'outpatientAdd',
+    component: outpatientAdd
+},
+
+{
+    path: '/outpatientdata',
+    name: 'outpatientData',
+    component: outpatientData
 },
 ]
 
