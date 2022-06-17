@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
 import outpatientAdd from '@/views/outpatientadd.vue'
 import outpatientData from '@/views/outpatientdata.vue'
+import outpatientList from '@/views/outpatientlist.vue'
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,12 @@ const routes = [
     path: '/outpatientdata',
     name: 'outpatientData',
     component: outpatientData
+},
+
+{
+    path: '/outpatientlist',
+    name: 'outpatientList',
+    component: outpatientList
 },
 ]
 
