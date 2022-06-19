@@ -2,6 +2,8 @@ import landingPage from '@/views/landingpage.vue'
 import loginPage from '@/views/login.vue'
 import registerPage from '@/views/register.vue'
 import homePage from '@/views/home.vue'
+import addPatient from'@/views/addpatient.vue'
+import editPatient from'@/views/editpatient.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
@@ -42,6 +44,19 @@ const routes = [
     name: 'changePassword',
     component: changePassword
 },
+
+{
+    path: '/addpatient',
+    name: 'addPatient',
+    component: addPatient
+},
+{
+    path: '/editpatient',
+    name: 'editPatient',
+    component: editPatient
+},
+
+
 ]
 
 
