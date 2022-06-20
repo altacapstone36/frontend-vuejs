@@ -4,14 +4,13 @@ import registerPage from '@/views/register.vue'
 import homePage from '@/views/home.vue'
 import addPatient from'@/views/addpatient.vue'
 import editPatient from'@/views/editpatient.vue'
-import patientData  from'@/views/patientdata.vue'
+import patientData from'@/views/patientdata.vue'
 import forgotPassword from'@/views/lupapassword.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
 import changePassword from '@/views/changepassword.vue'
 Vue.use(VueRouter)
-
 const routes = [
 {
     path: '/landingpage',
@@ -38,13 +37,6 @@ const routes = [
     component: registerPage
 },
 {
-    path: '/lupapassword',
-    name: 'forgotPassword',
-    meta: {layout: 'blank'},
-    component: forgotPassword
-},
-
-{
     path: '*',
     name: 'notfound',
     meta: {layout: 'blank'},
@@ -70,6 +62,12 @@ const routes = [
     path: '/patientdata',
     name: 'patientData',
     component: patientData
+},
+{
+    path: '/lupapassword',
+    name: 'forgotPassword',
+    meta: {layout: 'blank'},
+    component: forgotPassword
 },
 
 
