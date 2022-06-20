@@ -48,8 +48,8 @@ const routes = [
 },
 
 {
-    path: '/outpatientdata',
-    name: 'outpatientData',
+    path: '/outpatientreport',
+    name: 'outpatientReport',
     component: outpatientData
 },
 

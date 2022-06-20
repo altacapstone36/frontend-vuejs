@@ -8,61 +8,6 @@
 
         </div>
         <div class="d-block cardinput">
-            <!-- <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple"> -->
-                
- <!-- <b-form @submit="onSubmit" @reset="onReset"> -->
-    <!-- <table class="table table-borderless" head>
-        <thead head-variant="dark">
-            <tr class="tablerow text-center">
-                <td><p class="textmargin">Kode Pasien</p></td>
-                <td><p class="textmargin">Nama Pasien</p></td>
-                <td><p class="textmargin">Tanggal Kontrol</p></td>
-                <td><p class="textmargin">Keluhan</p></td>
-                <td><p class="textmargin">Jenis Poli</p></td>
-                <td><p class="textmargin">Jadwal Sesi</p></td>
-                <td><p class="textmargin">Nama Dokter</p></td>
-                <td><p class="textmargin">Nomor Antrian</p></td>
-                
-            </tr>
-        </thead>
-        <tbody>
-             <tr class="tablerow text-center border-bottom">
-                <td>
-                    <p>1</p>
-                </td>
-                <td>
-                    <p>Ujang</p>
-                </td>
-                <td>
-                    <p>12/12/12</p>
-                </td>
-                <td>
-                    <p>Sakit</p>
-                </td>
-                <td>
-                    <p>Umum</p>
-                </td>
-                <td>
-                    <p>1/1/1</p>
-                </td>
-                <td>
-                    <p>Dr. Seno</p>
-                </td>
-                <td>
-                    <p>1</p>
-                </td>
-            </tr>
-             
-                    </tbody>
-
-    </table> -->
-    <!-- <div class="d-flex mx-2 justify-content-end">
-    <b-button type="submit"  class="unguprimary btnset">Submit</b-button>
-    <b-button disabled type="reset" class="unguprimary btnset">Reset</b-button>
-    </div>
-    </b-form> -->
-    <!-- </b-card> -->
-
 
     <b-table
       :striped="striped"
