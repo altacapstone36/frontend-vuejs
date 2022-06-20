@@ -6,6 +6,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
 import changePassword from '@/views/changepassword.vue'
+import scheduleList from '@/views/schedulelist.vue'
+import adddoctorSchedule from '@/views/adddoctorschedule.vue'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -41,6 +45,16 @@ const routes = [
     path: '/changepassword',
     name: 'changePassword',
     component: changePassword
+},
+{
+    path: '/schedulelist',
+    name: 'scheduleList',
+    component: scheduleList
+},
+{
+    path: '/adddoctorschedule',
+    name: 'adddoctorSchedule',
+    component: adddoctorSchedule
 },
 ]
 
