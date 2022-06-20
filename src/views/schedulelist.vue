@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div class="container my-2">
         <div class="d-flex text-center">
-            <img src="@/assets/Icon/schedule list.svg" width="100"/>
+            <img src="@/assets/Icon/schedule list.svg" width="70"/>
             <h3 class="textmargin">SCHEDULE LIST</h3>
         </div>
         <div class="d-block">
