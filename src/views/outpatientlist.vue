@@ -2,26 +2,44 @@
     <div class="container">
         <div class="d-flex">
 
-            <h3>OUTPATIENT DATA FORM</h3>
+            <h3>OUTPATIENT LIST</h3>
         </div>
-        <div>
-
+        <div class="d-flex">
+          <b-card>
+          <b-form-datepicker id="example-datepicker" v-model="value" aria-controls="my-table" button-only class="mb-2"></b-form-datepicker>
+          </b-card>
+          <b-card>
+          <b-form-datepicker id="example-datepicker" v-model="value" button-only aria-controls="my-table" class="mb-2"></b-form-datepicker>
+          </b-card>
+          <p>Value: '{{ value }}'</p>
         </div>
-        <div class="d-block cardinput">
-
+        <div class="d-block cardinput lightdark-b tablelong">
     <b-table
-      :striped="striped"
-      :bordered="bordered"
-      :borderless="borderless"
-      :outlined="outlined"
+    :id="my-table"    
       :items="items"
       :fields="fields"
-      :head-variant="headVariant"
-      :table-variant="tableVariant"
-    ></b-table>
+      :sort-by.sync="sortBy"
+      :per-page="perPage"
+      :current-page="currentPage"
+      borderless
 
-
+      class="text-center lightdark-b"
+    >
+    </b-table>
         </div>
+        <div class="d-flex my-2 ">
+<p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
+<b-pagination
+      v-model="currentPage"
+      :total-rows="totalRows"
+      :per-page="perPage"
+      aria-controls="my-table"
+      label-next-page="nextPage"
+      label-prev-page="prevPage"
+    >
+    </b-pagination>        
+    </div>
+
         
     </div>
 </template>
@@ -29,25 +47,51 @@
 <script>
 export default {
     name: "outpatientList",
-    computed: {
-      state() {
-        return this.name.length >= 4
-      },
-      invalidFeedback() {
-        if (this.name.length > 0) {
-          return 'Enter at least 4 characters.'
-        }
-        return 'Please enter something.'
-      }
+        computed: {
+        totalRows() {
+        return this.items.length
+        }, 
+        totalPage() {
+            const x = 1 + 1
+            const y = this.totalRows
+            const z = y / x / x 
+            return Math.floor(z)       
+            }
     },
+
     data() {
       return {
-        fields: ['nomor_antrian', 'kode_pasien', 'nama_pasien', 'tanggal_daftar', 'jenis_poli', 'nama_dokter', 'tanggal_kontrol'],
+        value: '',
+        fields: [
+                { key: 'nomor_antrian', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'kode_pasien', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'nama_pasien', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'tanggal_daftar', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'jenis_poli', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'nama_dokter', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'tanggal_kontrol', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
+                // { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
+                
+                ],
         items: [
-        { nomor_antrian: '1', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '2', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '1', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '2', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         { nomor_antrian: '3', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        
+        { nomor_antrian: '4', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '5', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '6', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '7', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '8', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '9', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },        
+        { nomor_antrian: '10', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '11', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '12', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '13', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '14', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '15', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '16', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '17', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '18', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         ],
         tableVariants: [
           'primary',
@@ -59,13 +103,17 @@ export default {
           'light',
           'dark'
         ],
-        bordered: true,
+        striped: false,
         hover: true,
         headVariant: 'light',
-        tableVariant: 'light',
+        tableVariant: 'secondary',
+        sortBy: '',
+        perPage: 5,
+        currentPage: 1,
+        
 }
-    }
-  
+    },
+
 }
 </script>
 
@@ -82,13 +130,27 @@ export default {
   padding-right: 24px;
 }
 
+.tablelong {
+  padding-bottom: 100px;
+}
+
 tr {
     
    text-align:left; 
 }
-/* td {
-    text-align:left;
-} */
+.lightdark-a {
+  background-color: #DDDDDD;
+;
+
+;
+}
+.lightdark-b {
+background-color: #F3F3F3;
+
+;
+}
+
+
 .inputdata {
     border-color: black;
 }

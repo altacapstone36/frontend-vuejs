@@ -2,65 +2,82 @@
     <div class="container">
         <div class="d-flex">
 
-            <h3>OUTPATIENT DATA FORM</h3>
+            <h3>OUTPATIENT REPORT</h3>
         </div>
-        <div class="d-flex justify-content-end">
-            <b-button variant="light" @click="sortnew()">SORT BY OLDEST TO NEWEST</b-button>
+        <div class="d-flex justify-content-end  my-4">
+            <b-button class="lightdark-a text-black"  dark @click="sortnew()">SORT BY OLDEST TO NEWEST</b-button>
         </div>
-        <div class="d-block cardinput">
+        <div class="d-block">
 
     <b-table
     :id="my-table"
-      :striped="striped"
-      :bordered="bordered"
-      :borderless="borderless"
-      :outlined="outlined"
+    
       :items="items"
       :fields="fields"
-      :head-variant="headVariant"
-      :table-variant="tableVariant"
       :sort-by.sync="sortBy"
       :per-page="perPage"
       :current-page="currentPage"
+      borderless
+
+      class="text-center lightdark-b"
     >
 
-        <template #cell(show_details)="row">
-        <b-button size="sm" variant="success" @click="row.toggleDetails" class="mr-2">
-          {{ row.detailsShowing ? 'Hide' : 'Show'}} Report
+        <template #cell(show_detail)="row">
+        <div class="d-flex" v-if="row.detailsShowing" >
+        <b-button size="sm"  @click="row.toggleDetails" class="mr-2  lightdark">
+        View Report <b-icon icon="caret-up-fill"></b-icon>
         </b-button>
-
+        </div>
+        <div v-if="!row.detailsShowing" class="d-flex">
+        <b-button size="sm" variant="success" @click="row.toggleDetails" class="mr-2">
+        View Report <b-icon icon="caret-down-fill"></b-icon>
+        </b-button>
+        </div>
         <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
         
       </template>
 
       <template #row-details="row">
+      <b-card class="textdetail lightdark-a">      
                     <b-row class="mb-2">
-            <b-col cols="3" class="text-sm-right"><b>Resep Obat:</b></b-col>
+            <b-col cols="2" class="text-sm-right"><b>Keluhan</b></b-col>
+            <b-col cols="1" class="d-flex justify-content-end">:</b-col>
             <b-col cols="9"><b-card class="">{{ row.item.jenis_poli }}</b-card></b-col>
           </b-row>
 
                     <b-row class="mb-2">
-            <b-col cols="3" class="text-sm-right"><b>Resep Obat:</b></b-col>
+            <b-col cols="2" class="text-sm-right"><b>Hasil Diagnosa</b></b-col>
+            <b-col cols="1" class="d-flex justify-content-end">:</b-col>
             <b-col cols="9"><b-card class="">{{ row.item.jenis_poli }}</b-card></b-col>
           </b-row>
 
                     <b-row class="mb-2">
-            <b-col cols="3" class="text-sm-right"><b>Resep Obat:</b></b-col>
+            <b-col cols="2" class="text-sm-right"><b>Resep Obat</b></b-col>
+            <b-col cols="1" class="d-flex justify-content-end">:</b-col>
             <b-col cols="9"><b-card class="">{{ row.item.jenis_poli }}</b-card></b-col>
           </b-row>
-            <b-button variant="success" class="justify-content-end">Submit</b-button>
+      </b-card>
       </template>
 
       
     </b-table>
+<div class="d-flex my-2 ">
+<p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
 <b-pagination
       v-model="currentPage"
       :total-rows="totalRows"
       :per-page="perPage"
       aria-controls="my-table"
-    ></b-pagination>
-        </div>
-        
+      label-next-page="nextPage"
+      label-prev-page="prevPage"
+    >
+    </b-pagination>        
+    </div>
+
+</div>
+      <!-- <b-button aria-label="nextPage" aria-controls="my-table">&lsaquo;</b-button>
+      <b-button aria-label="prevPage" aria-controls="my-table">&rsaquo;</b-button> -->
+      
     </div>
 </template>
 
@@ -71,10 +88,27 @@ export default {
         totalRows() {
         return this.items.length
         }, 
+        totalPage() {
+            const x = 1 + 1
+            const y = this.totalRows
+            const z = y / x / x 
+            return Math.floor(z)       
+            }
     },
+
     data() {
       return {
-        fields: ['nomor_antrian', 'kode_pasien', 'nama_pasien', 'tanggal_daftar', 'jenis_poli', 'nama_dokter', 'tanggal_kontrol', 'show_details'],
+        fields: [
+                { key: 'nomor_antrian', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'kode_pasien', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'nama_pasien', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'tanggal_daftar', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'jenis_poli', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'nama_dokter', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'tanggal_kontrol', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
+                
+                ],
         items: [
         { nomor_antrian: '1', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         { nomor_antrian: '2', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
@@ -85,6 +119,15 @@ export default {
         { nomor_antrian: '7', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         { nomor_antrian: '8', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         { nomor_antrian: '9', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },        
+        { nomor_antrian: '10', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '11', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '12', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '13', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '14', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '15', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '16', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '17', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '18', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         ],
         tableVariants: [
           'primary',
@@ -96,20 +139,21 @@ export default {
           'light',
           'dark'
         ],
-        bordered: true,
+        striped: false,
         hover: true,
         headVariant: 'light',
-        tableVariant: 'light',
+        tableVariant: 'secondary',
         sortBy: '',
         perPage: 5,
-        //totalRows: 0,
         currentPage: 1,
+        
 }
     },
     methods: {
         sortnew() {
             if (this.sortBy == ''){
                 this.sortBy = 'tanggal_daftar'
+              console.log(this.currentPage)
             }
             else {
                 this.sortBy = ''
@@ -123,8 +167,24 @@ export default {
 </script>
 
 <style scoped>
+
+
 .unguprimary {
     background-color: #50266A;
+}
+.textdetail {
+  text-align: start;
+}
+.lightdark-a {
+  background-color: #DDDDDD;
+;
+
+;
+}
+.lightdark-b {
+background-color: #F3F3F3;
+
+;
 }
 
 .cardpadding {
@@ -138,10 +198,7 @@ export default {
   padding-right: 24px;
 }
 
-tr {
-    
-   text-align:left; 
-}
+
 /* td {
     text-align:left;
 } */
@@ -160,11 +217,3 @@ tr {
 
 </style>
 
-<!-- <b-form-group id="input-group-3" label="Food:" label-for="input-3">
-        <b-form-select
-          id="input-3"
-          v-model="form.food"
-          :options="foods"
-          required
-        ></b-form-select>
-      </b-form-group> -->
