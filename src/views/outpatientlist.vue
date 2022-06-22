@@ -6,10 +6,10 @@
         </div>
         <div class="d-flex">
           <b-card>
-          <b-form-datepicker id="example-datepicker" v-model="value" aria-controls="my-table" button-only class="mb-2"></b-form-datepicker>
+          <b-form-datepicker id="example-datepicker" v-model="minDate" aria-controls="my-table" button-only class="mb-2"></b-form-datepicker>
           </b-card>
           <b-card>
-          <b-form-datepicker id="example-datepicker" v-model="value" button-only aria-controls="my-table" class="mb-2"></b-form-datepicker>
+          <b-form-datepicker id="example-datepicker" v-model="maxDate" button-only aria-controls="my-table" class="mb-2"></b-form-datepicker>
           </b-card>
           <p>Value: '{{ value }}'</p>
         </div>

@@ -5,87 +5,39 @@
             <h3>OUTPATIENT DATA FORM</h3>
         </div>
         <div class="d-block cardinput">
-            <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
-                
- <b-form @submit="onSubmit" @reset="onReset">
-    <table class="table table-borderless">
-        <tbody>
-            <tr class="tablerow">
-                <td><p class="textmargin">Kode Pasien</p></td>
-                <td>
-                <b-form-input v-model="kodepasien" class="inputdata"></b-form-input>
-                </td>
-            </tr>
-             <tr class="tablerow">
-                <td><p class="textmargin">Nama Pasien</p></td>
-                <td>
-                <b-form-input v-model="kodepasien" class="inputdata"></b-form-input>
-                </td>
-            </tr>
-             <tr class="tablerow">
-                <td><p class="textmargin">Tanggal Kontrol</p></td>
-                <td>
-                <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2"></b-form-datepicker>
-                </td>
-            </tr>
-            <tr class="tablerow">
-                <td><p class="textmargin">Keluhan</p></td>
-                <td>
-                <b-form-input v-model="kodepasien" class="inputdata"></b-form-input>
-               </td>
-            </tr>
-            <tr class="tablerow">
-                <td><p class="textmargin">Jenis Poli</p></td>
-                <td>
-                <b-form-select
-                        id="input-3"
-                        v-model="food"
-                        :options="poli"
-                        required
-                        class="w-100"
-                      ></b-form-select>
-                </td>
-            </tr>
-            <tr class="tablerow">
-                <td><p class="textmargin">Jadwal Sesi</p></td>
-                <td>
-                <b-form-select
-                        id="input-3"
-                        v-model="food"
-                        :options="sesi"
-                        required
-                        class="w-100"
-                      ></b-form-select>
-                </td>
-            </tr>
-            <tr class="tablerow">
-                <td><p class="textmargin">Nama Dokter</p></td>
-                <td>
-                <b-form-select
-                        id="input-3"
-                        v-model="food"
-                        :options="dokter"
-                        required
-                        class="w-100"
-                      ></b-form-select>
-                </td>
-            </tr>
-            <tr class="tablerow">
-                <td><p class="textmargin">Nomor Antrian</p></td>
-                <td>
-                <b-form-input v-model="kodepasien" class="inputdata"></b-form-input>
-               </td>
-            </tr>
+        <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
+          <b-row class="my-3">
+            <b-col cols="2">
+              <label class="mt-2" aria-controls="fieldset-1">kodepasien</label>
+            </b-col>
+              <b-col cols="10">
+              <b-form-group
+                id="fieldset-1"
+                :invalid-feedback="invalidFeedback"
+                :state="state"
+              >
+          <b-form-input id="input-1" v-model="name" :state="state" trim></b-form-input>
+        </b-form-group>
+              </b-col>
+          </b-row>
 
-                    </tbody>
+          <b-row class="my-3">
+            <b-col cols="2">
+              <label class="mt-2" aria-controls="fieldset-1">kodepasien</label>
+            </b-col>
+              <b-col cols="10">
+              <b-form-group
+                id="fieldset-2"
+                :invalid-feedback="invalidFeedback"
+                :state="state"
+              >
+          <b-form-input id="input-2" v-model="name" :state="state" trim></b-form-input>
+        </b-form-group>
+              </b-col>
+          </b-row>
 
-    </table>
-    <div class="d-flex mx-2 justify-content-end">
-    <b-button type="submit"  class="unguprimary btnset">Submit</b-button>
-    <b-button disabled type="reset" class="unguprimary btnset">Reset</b-button>
-    </div>
-    </b-form>
-    </b-card>
+          
+        </b-card>
 
         </div>
         
@@ -101,9 +53,9 @@ export default {
       },
       invalidFeedback() {
         if (this.name.length > 0) {
-          return 'Enter at least 4 characters.'
+          return 'Minimal 4 huruf characters.'
         }
-        return 'Please enter something.'
+        return 'Harap masukan nama.'
       }
     },
     data() {
