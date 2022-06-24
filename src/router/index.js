@@ -8,6 +8,7 @@ import  notfound  from '@/views/404.vue'
 import outpatientAdd from '@/views/outpatientadd.vue'
 import outpatientData from '@/views/outpatientdata.vue'
 import outpatientList from '@/views/outpatientlist.vue'
+import changePassword from '@/views/changepassword.vue'
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,12 @@ const routes = [
     path: '/outpatientlist',
     name: 'outpatientList',
     component: outpatientList
+},
+
+{
+    path: '/changepassword',
+    name: 'changePassword',
+    component: changePassword
 },
 ]
 

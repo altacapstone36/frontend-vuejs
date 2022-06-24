@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="noscroll">
     <component :is="layout">
       <router-view></router-view>
     </component>
@@ -29,6 +29,12 @@ export default {
 div {
 font-family: 'Nunito', sans-serif;
 ;
+}
+
+.noscroll {
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 </style>
