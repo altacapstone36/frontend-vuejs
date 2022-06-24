@@ -7,7 +7,7 @@
         <div class="d-block cardinput">
         <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
           <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-1">Kode Pasien</label>
             </b-col>
               <b-col cols="10">
@@ -22,7 +22,7 @@
           </b-row>
 
           <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-2">Nama Pasien</label>
             </b-col>
               <b-col cols="10">
@@ -37,7 +37,7 @@
           </b-row>
 
         <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-5">Tanggal Kontrol</label>
             </b-col>
               <b-col cols="10">
@@ -45,7 +45,7 @@
               </b-col>
           </b-row>
           <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-3">Keluhan</label>
             </b-col>
               <b-col cols="10">
@@ -60,7 +60,7 @@
           </b-row>
 
           <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-6">Jenis Poli</label>
             </b-col>
               <b-col cols="10">
@@ -75,7 +75,7 @@
           </b-row>
 
           <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-6">Jadwal Sesi</label>
             </b-col>
               <b-col cols="10">
@@ -90,7 +90,7 @@
           </b-row>
 
           <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-6">Nama Dokter</label>
             </b-col>
               <b-col cols="10">
@@ -107,7 +107,7 @@
           </b-row>
 
           <b-row class="my-3">
-            <b-col cols="2">
+            <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-4">Nomor Antrian</label>
             </b-col>
               <b-col cols="10">

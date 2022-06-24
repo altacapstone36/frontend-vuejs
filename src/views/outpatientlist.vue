@@ -9,7 +9,7 @@
           <b-form-datepicker id="example-datepicker" v-model="minDate" aria-controls="my-table" button-only class="mb-2"></b-form-datepicker>
           </b-card>
           <b-card>
-          <b-form-datepicker id="example-datepicker" v-model="maxDate" button-only aria-controls="my-table" class="mb-2"></b-form-datepicker>
+          <b-form-datepicker id="example-datepicker" v-model="maxDate" aria-controls="my-table" class="mb-2"></b-form-datepicker>
           </b-card>
           <p>Value: '{{ value }}'</p>
         </div>
@@ -52,10 +52,10 @@ export default {
         return this.items.length
         }, 
         totalPage() {
-            const x = 1 + 1
+            const x = this.perPage
             const y = this.totalRows
-            const z = y / x / x 
-            return Math.floor(z)       
+            const z = y / x  
+            return Math.floor(z) + 1       
             }
     },
 
@@ -92,6 +92,10 @@ export default {
         { nomor_antrian: '16', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         { nomor_antrian: '17', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         { nomor_antrian: '18', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '19', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '20', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '21', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '22', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         ],
         tableVariants: [
           'primary',
@@ -108,7 +112,7 @@ export default {
         headVariant: 'light',
         tableVariant: 'secondary',
         sortBy: '',
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         
 }
@@ -131,7 +135,7 @@ export default {
 }
 
 .tablelong {
-  padding-bottom: 100px;
+  padding-bottom: 30px;
 }
 
 tr {

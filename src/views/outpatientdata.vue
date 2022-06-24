@@ -89,10 +89,10 @@ export default {
         return this.items.length
         }, 
         totalPage() {
-            const x = 1 + 1
+            const x = this.perPage
             const y = this.totalRows
-            const z = y / x / x 
-            return Math.floor(z)       
+            const z = y / x  
+            return Math.floor(z) + 1       
             }
     },
 
@@ -144,7 +144,7 @@ export default {
         headVariant: 'light',
         tableVariant: 'secondary',
         sortBy: '',
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         
 }
