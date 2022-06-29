@@ -17,8 +17,7 @@
                         v-model="jenis_poli"
                         :options="poli"
                         required
-                        plain
-                        class="w-100"
+                        class="w-100 hdrop"
                       ></b-form-select>
 
               </b-col>
@@ -33,8 +32,8 @@
                         v-model="nama_dokter"
                         :options="dokter"
                         required
-                        plain
-                        class="w-100"
+                        
+                        class="w-100 hdrop selectWrapper"
                       ></b-form-select>
 
               </b-col>
@@ -46,10 +45,8 @@
               <b-col cols="10">
                             <b-form-group
                                 id="fieldset-1"
-                                :invalid-feedback="invalidfeedbackJP"
-                                :state="stateJP"
                             >
-                        <b-form-input id="input-1" v-model="jenis_perawatan" :state="stateJP" trim></b-form-input>
+                        <b-form-input id="input-1" disabled v-model="jenis_perawatan" trim class="hdrop"></b-form-input>
                         </b-form-group>
 
               </b-col>
@@ -59,7 +56,7 @@
               <label class="mt-2" aria-controls="fieldset-1">Pilih Hari</label>
             </b-col>
               <b-col cols="10">
-               <b-form-datepicker id="example-datepicker" v-model="hari" class="mb-2"></b-form-datepicker>
+               <b-form-datepicker id="example-datepicker" v-model="hari" class="mb-2 hdrop"></b-form-datepicker>
 
               </b-col>
           </b-row>
@@ -73,8 +70,8 @@
                         v-model="jadwal_sesi"
                         :options="sesi"
                         required
-                        plain
-                        class="w-100"
+                        
+                        class="w-100 hdrop"
                       ></b-form-select>
                             </b-col>
                         </b-row>
@@ -105,7 +102,7 @@ export default {
     },
     data() {
       return {
-        jenis_perawatan: '',
+        jenis_perawatan: 'Rawat Jalan',
         hari: '',
         jadwal_sesi: null,
         nama_dokter: null,
@@ -127,3 +124,27 @@ export default {
     }
 }
 </script>
+
+
+<style scoped>
+.unguprimary {
+    background-color: #50266A;
+}
+.ungusecondary {
+    background-color: #794B93;
+}
+.hdrop {
+  height: 38px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+ border-radius: 5px; 
+ border: 1px solid #1b1515;
+ background: #F3F3F3;
+}
+/* .selectWrapper{
+  border-radius:5px;
+  overflow:hidden;
+  background:#ffffff;
+  border:1px solid #1b1515;
+} */
+</style>
