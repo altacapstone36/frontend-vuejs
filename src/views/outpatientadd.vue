@@ -1,8 +1,9 @@
 <template>
     <div class="container">
         <div class="d-flex">
+              <img src="../assets/Icon/outpatient data form.svg" width="40px"/>
 
-            <h3>OUTPATIENT DATA FORM</h3>
+            <h3 class="mt-1 m-1">OUTPATIENT DATA FORM</h3>
         </div>
         <div class="d-block cardinput">
         <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
