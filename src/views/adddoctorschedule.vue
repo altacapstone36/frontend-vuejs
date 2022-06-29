@@ -17,6 +17,7 @@
                         v-model="jenis_poli"
                         :options="poli"
                         required
+                        plain
                         class="w-100"
                       ></b-form-select>
 
@@ -32,6 +33,7 @@
                         v-model="nama_dokter"
                         :options="dokter"
                         required
+                        plain
                         class="w-100"
                       ></b-form-select>
 
@@ -71,6 +73,7 @@
                         v-model="jadwal_sesi"
                         :options="sesi"
                         required
+                        plain
                         class="w-100"
                       ></b-form-select>
                             </b-col>
@@ -104,18 +107,22 @@ export default {
       return {
         jenis_perawatan: '',
         hari: '',
-        jadwal_sesi: '',
-        nama_dokter: '',
-        jenis_poli: '',
+        jadwal_sesi: null,
+        nama_dokter: null,
+        jenis_poli: null,
         food: null,
-      poli: [{ text: 'Pilih Poli', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-      sesi: [{ text: 'Pilih Sesi', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
-      dokter: [{ text: 'Pilih Dokter', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
+      poli: [{ text: 'Pilih Poli', value: null }, 'Umum', 'Anak', 'Gigi'],
+      sesi: [{ text: 'Pilih Sesi', value: null }, 'Pagi', 'Siang', 'Sore'],
+      dokter: [{ text: 'Pilih Dokter', value: null }, 'Dr. Alshad Ahmad', 'Dr. Seno'],
    }
     },
     methods: {
         onSubmit() {
-            console.log(this.data.hari)
+            console.log(this.hari)
+            console.log(this.jenis_perawatan)
+            console.log(this.jadwal_sesi)
+            console.log(this.nama_dokter)
+            console.log(this.jenis_poli)
         }
     }
 }

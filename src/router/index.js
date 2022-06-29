@@ -52,7 +52,7 @@ const routes = [
     component: scheduleList
 },
 {
-    path: '/adddoctorschedule',
+    path: '/addschedule',
     name: 'adddoctorSchedule',
     component: adddoctorSchedule
 },
