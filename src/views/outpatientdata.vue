@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="d-flex">
-          <img src="../assets/Icon/outpatient report.svg" width="50px"/>
-            <h3>OUTPATIENT REPORT</h3>
+        <div class="d-flex mt-2">
+          <img src="../assets/Icon/outpatient report.svg" width="40px"/>
+            <h3 class="titlehero">OUTPATIENT REPORT</h3>
         </div>
-        <div class="d-flex justify-content-end  my-4">
+        <div class="d-flex justify-content-end  my-3">
             <b-button class="lightdark-a text-black"  dark @click="sortnew()">SORT BY OLDEST TO NEWEST</b-button>
         </div>
         <div class="d-block">
@@ -224,6 +224,12 @@ background-color: #F3F3F3;
     margin-bottom: 16px;
     margin-left: 24px;
     margin-right: 0px;
+}
+.titlehero {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 </style>
