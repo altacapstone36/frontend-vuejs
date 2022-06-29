@@ -119,6 +119,10 @@
               >
           <b-form-input id="input-4" v-model="nomor_antrian" :state="stateNA" trim></b-form-input>
         </b-form-group>
+        <div class="d-flex justify-content-end">
+        <b-btn @click="testapi()">Submit</b-btn>
+                <b-btn @click="onReset()">Reset</b-btn>
+              </div>
               </b-col>
           </b-row>
 
@@ -188,7 +192,28 @@ export default {
       dokter: [{ text: 'Pilih Dokter', value: null }, 'dr. Alshad Ahmad', 'dr. Adira Putri', 'dr. Seno', 'dr. Christie'],
     
 }
+    },
+    methods: {
+      testapi() {
+        
+        console.log(this.nama_dokter)
+        console.log(this.nama_pasien)
+        console.log(this.jadwal_sesi)
+        console.log(this.jenis_poli)
+        console.log(this.kode_pasien)
+        console.log(this.nomor_antrian)
+        console.log(this.tanggal_kontrol)
+        console.log(this.keluhan)
+      },
+      onReset() {
+      this.nama_dokter = '',
+      this.nama_pasien = null,
+      this.jadwal_sesi = null
+      
+      },
     }
+
+
   
 }
 </script>

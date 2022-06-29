@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import defaultLayout from './layouts/defaultlayout.vue'
 import blankLayout from './layouts/blank.vue'
+import store from './store'
 
 Vue.component('default-layout', defaultLayout)
 Vue.component('blank-layout', blankLayout)
@@ -19,5 +20,6 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

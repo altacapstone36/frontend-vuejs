@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="d-flex">
-          <img src="../assets/Icon/outpatient report.svg"/>
+          <img src="../assets/Icon/outpatient report.svg" width="50px"/>
             <h3>OUTPATIENT REPORT</h3>
         </div>
         <div class="d-flex justify-content-end  my-4">
@@ -92,8 +92,14 @@ export default {
             const y = this.totalRows
             const z = y / x  
             return Math.floor(z) + 1       
-            }
-    },
+            },
+    //     listPokemon() {
+    //   return this.$store.state.pokemon.items;
+    // },
+    // infoPokemon() {
+    //   return this.$store.state.pokemon.info;
+    // },
+},
 
     data() {
       return {
@@ -157,10 +163,16 @@ export default {
             else {
                 this.sortBy = ''
             }
+},
+    // fetchPokemon() {
+    //   this.$store.dispatch("pokemon/fetchList");
+    // },
 
+    },
 
-}
-    }
+  //     mounted() {
+  //   this.fetchPokemon();
+  // },
   
 }
 </script>
