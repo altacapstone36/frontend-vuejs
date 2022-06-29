@@ -17,7 +17,7 @@
                 :invalid-feedback="invalidfeedbackKP"
                 :state="state"
               >
-          <b-form-input id="input-1" v-model="kode_pasien" :state="stateKP" trim></b-form-input>
+          <b-form-input id="input-1" v-model="kode_pasien" :state="stateKP" trim class="hdrop"></b-form-input>
         </b-form-group>
               </b-col>
           </b-row>
@@ -32,7 +32,7 @@
                 :invalid-feedback="invalidfeedbackNP"
                 :state="stateNP"
               >
-          <b-form-input id="input-2" v-model="nama_pasien" :state="stateNP" trim></b-form-input>
+          <b-form-input id="input-2" v-model="nama_pasien" :state="stateNP" trim class="hdrop"></b-form-input>
         </b-form-group>
               </b-col>
           </b-row>
@@ -42,7 +42,7 @@
               <label class="mt-2" aria-controls="fieldset-5">Tanggal Kontrol</label>
             </b-col>
               <b-col cols="10">
-           <b-form-datepicker id="example-datepicker" v-model="tanggal_kontrol" class="mb-2"></b-form-datepicker>
+           <b-form-datepicker id="example-datepicker" v-model="tanggal_kontrol" class="mb-2 hdrop"></b-form-datepicker>
               </b-col>
           </b-row>
           <b-row class="my-3">
@@ -55,7 +55,7 @@
                 :invalid-feedback="invalidfeedbackKel"
                 :state="stateKel"
               >
-          <b-form-input id="input-3" v-model="keluhan" :state="stateKel" trim></b-form-input>
+          <b-form-input id="input-3" v-model="keluhan" :state="stateKel" trim class="hdrop"></b-form-input>
         </b-form-group>
               </b-col>
           </b-row>
@@ -71,6 +71,7 @@
                           :options="poli"
                           required
                           plain
+                           class="hdrop"
                         ></b-form-select>
               </b-col>
           </b-row>
@@ -86,6 +87,7 @@
                           :options="sesi"
                           required
                           plain
+                           class="hdrop"
                         ></b-form-select>
               </b-col>
           </b-row>
@@ -101,7 +103,7 @@
                           :options="dokter"
                           required
                           plain
-                          
+                           class="hdrop"
                         >
                         </b-form-select>
               </b-col>
@@ -117,7 +119,7 @@
                 :invalid-feedback="invalidfeedbackNA"
                 :state="stateNA"
               >
-          <b-form-input id="input-4" v-model="nomor_antrian" :state="stateNA" trim></b-form-input>
+          <b-form-input id="input-4" v-model="nomor_antrian" :state="stateNA" trim class="hdrop"></b-form-input>
         </b-form-group>
         <div class="d-flex justify-content-end">
         <b-btn @click="testapi()">Submit</b-btn>
@@ -231,13 +233,14 @@ export default {
   padding-right: 24px;
 }
 
-tr {
-    
-   text-align:left; 
+.hdrop {
+  height: 38px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+ border-radius: 5px; 
+ border: 1px solid #1b1515;
+ background: #F3F3F3;
 }
-/* td {
-    text-align:left;
-} */
 .inputdata {
     border-color: black;
 }
