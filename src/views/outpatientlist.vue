@@ -8,11 +8,11 @@
           <p class="mx-2 mt-2">Sort Tanggal Kontrol From :</p>
           <!-- <b-button @click="mindateA()">test</b-button> -->
           <div class="d-flex justify-content-end">
-          <b-form-datepicker  id="example-datepicker" placeholder="mm/dd/yy" v-model="minDate" aria-controls="my-table" right class="mb-2"></b-form-datepicker>
+          <b-form-datepicker  id="example-datepicker" placeholder="mm/dd/yy" v-model="minDate" aria-controls="my-table" right class="mb-2 hdrop"></b-form-datepicker>
           </div>
           <h2 class="mx-3">-</h2>
           <div class="d-flex justify-content-end">
-          <b-form-datepicker id="example-datepicker" placeholder="mm/dd/yy" v-model="maxDate" aria-controls="my-table" right class="mb-2"></b-form-datepicker>
+          <b-form-datepicker id="example-datepicker" placeholder="mm/dd/yy" v-model="maxDate" aria-controls="my-table" right class="mb-2 hdrop"></b-form-datepicker>
           <!-- <p>Value: '{{ value }}'</p> -->
         </div>
         </div>
@@ -198,6 +198,15 @@ background-color: #F3F3F3;
     margin-left: 24px;
     margin-right: 0px;
 }
+.hdrop {
+  height: 38px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+ border-radius: 5px; 
+ border: 1px solid #1b1515;
+ background: #F3F3F3;
+}
+
 
 </style>
 

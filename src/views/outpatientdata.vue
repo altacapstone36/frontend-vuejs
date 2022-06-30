@@ -4,8 +4,12 @@
           <img src="../assets/Icon/outpatient report.svg" width="40px"/>
             <h3 class="titlehero">OUTPATIENT REPORT</h3>
         </div>
-        <div class="d-flex justify-content-end  my-3">
-            <b-button class="lightdark-a text-black"  dark @click="sortnew()">SORT BY OLDEST TO NEWEST</b-button>
+        <div class="d-flex justify-content-end  my-3" v-if="sortBy === ''">          
+            <b-button class="lightdark-a text-black"   @click="sortnew()">SORT BY OLDEST TO NEWEST <img src="../assets/Icon/sort oldest to newest.svg" width="28px"/></b-button>
+        </div>
+
+        <div class="d-flex justify-content-end  my-3" v-if="sortBy === 'tanggal_kontrol'">          
+            <b-button class="lightdark-a text-black"   @click="sortnew()">SORT BY NEWEST TO OLDEST <img src="../assets/Icon/sort newest to oldest.svg" width="28px"/></b-button>
         </div>
         <div class="d-block">
 
@@ -22,12 +26,12 @@
     >
 
         <template #cell(show_detail)="row">
-        <div class="d-flex" v-if="row.detailsShowing" >
+        <div v-if="row.detailsShowing" class="d-flex justify-content-center">
         <b-button size="sm"  @click="row.toggleDetails" class="mr-2  lightdark">
         View Report <b-icon icon="caret-up-fill"></b-icon>
         </b-button>
         </div>
-        <div v-if="!row.detailsShowing" class="d-flex">
+        <div v-if="!row.detailsShowing" class="d-flex justify-content-center">
         <b-button size="sm" variant="success" @click="row.toggleDetails" class="mr-2">
         View Report <b-icon icon="caret-down-fill"></b-icon>
         </b-button>
@@ -107,7 +111,6 @@ export default {
                 { key: 'nomor_antrian', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
                 { key: 'kode_pasien', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'nama_pasien', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'tanggal_daftar', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'jenis_poli', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
                 { key: 'nama_dokter', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'tanggal_kontrol', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
@@ -157,7 +160,7 @@ export default {
     methods: {
         sortnew() {
             if (this.sortBy == ''){
-                this.sortBy = 'tanggal_daftar'
+                this.sortBy = 'tanggal_kontrol'
               console.log(this.currentPage)
             }
             else {
@@ -209,10 +212,15 @@ background-color: #F3F3F3;
   padding-right: 24px;
 }
 
+.hdrop {
+  height: 38px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+ border-radius: 5px; 
+ border: 1px solid #1b1515;
+ background: #F3F3F3;
+}
 
-/* td {
-    text-align:left;
-} */
 .inputdata {
     border-color: black;
 }

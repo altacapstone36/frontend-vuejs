@@ -174,7 +174,7 @@ export default {
         if (this.nomor_antrian.length > 0) {
           return 'Minimal 1 nomor.'
         }
-        return 'Nomor antrain.'
+        return 'Nomor antriAn.'
       }
     },
     data() {
