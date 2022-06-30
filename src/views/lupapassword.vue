@@ -4,34 +4,27 @@
     <div class="col-sm-4">
         <div class="global-container">
       <div class="card login-form">
-        <div class="card-body">
-            <img class="img3" src="../assets/regis.png">
-
-            </div>
+        
 
             <div class="card-text">
                 <form>
-                    <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Name</label>
-    <input type="name" class="form-control" id="name" placeholder="Name">
+                    
+  <div class=" mb-3">
+  
+<label for="exampleInputEmail1" class="form-label">Enter Registered Email</label>
+  <input type="email" class="form-control" placeholder="Email Address">
+</div>
     
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="Email Address">
-    
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password">
-  </div>
   
   
-  <div class="d-grid gap-2"><button type="submit" class="btn btn-primary">REGISTER</button></div>
+  
+  
+  <div class="d-grid gap-2"><button type="submit" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
 </form>
             </div>
-            <br>
-            <p class=" text-center">Already have an account?<strong><a href="/login" class="text2 text-decoration-none"> Sign In</a></strong></p>
+            
+            <br><br>
+            <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p>
         </div>
        
     </div>
@@ -56,7 +49,7 @@ report.
 
 <script>
 export default {
-    name: "registerPage"
+    name: "forgotPassword"
 }
 </script>
 
@@ -69,7 +62,7 @@ export default {
 }
 
 .login-form{
-    height:425px;
+    height:170px;
     width: 330px;
     padding:20px;
     background: #F3F3F3;
@@ -102,7 +95,6 @@ top: 50pxpx;
   margin-left: auto;
   margin-right: auto;
   
-  
 }
 
 input[type="name"],
@@ -119,7 +111,7 @@ input[type="password"]{
 a{
   font-size: 13px;
   color: #794B93;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 p{
@@ -135,6 +127,19 @@ h4, h6{
 
 .form-label{
   color:gray;
+}
+
+.imglogin{
+    width: 16px;
+    height: 18px;
+}
+
+.img5{
+    width:50px;
+    height: 60px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
