@@ -9,7 +9,14 @@ import forgotPassword from'@/views/lupapassword.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
+import outpatientAdd from '@/views/outpatientadd.vue'
+import outpatientData from '@/views/outpatientdata.vue'
+import outpatientList from '@/views/outpatientlist.vue'
 import changePassword from '@/views/changepassword.vue'
+import scheduleList from '@/views/schedulelist.vue'
+import adddoctorSchedule from '@/views/adddoctorschedule.vue'
+
+
 Vue.use(VueRouter)
 const routes = [
 {
@@ -42,6 +49,25 @@ const routes = [
     meta: {layout: 'blank'},
     component: notfound
 },
+
+{
+    path: '/addoutpatient',
+    name: 'outpatientAdd',
+    component: outpatientAdd
+},
+
+{
+    path: '/outpatientreport',
+    name: 'outpatientReport',
+    component: outpatientData
+},
+
+{
+    path: '/outpatientlist',
+    name: 'outpatientList',
+    component: outpatientList
+},
+
 {
     path: '/changepassword',
     name: 'changePassword',
@@ -71,6 +97,16 @@ const routes = [
 },
 
 
+{
+    path: '/schedulelist',
+    name: 'scheduleList',
+    component: scheduleList
+},
+{
+    path: '/addschedule',
+    name: 'adddoctorSchedule',
+    component: adddoctorSchedule
+},
 ]
 
 
