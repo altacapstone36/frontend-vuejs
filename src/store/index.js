@@ -1,3 +1,5 @@
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import Vue from "vue";
 import Vuex from "vuex";
 //import createPersistedState from "vuex-persistedstate";
@@ -22,3 +24,28 @@ export default new Vuex.Store({
     
   },
 });
+=======
+=======
+>>>>>>> Stashed changes
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+import auth from './auth' 
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  state: {
+  },
+  mutations: {
+  },
+  actions: {
+  },
+  modules: {
+    auth
+  }
+})
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
