@@ -1,4 +1,5 @@
 <template>
+
     <div>
   <div class="row">
     <div class="col-sm-4">
@@ -6,32 +7,34 @@
       <div class="card login-form">
         <div class="card-body">
             <img class="img5" src="../assets/login.png">
-
-            </div>
-
-            <div class="card-text">
-                <form>
+                <form @submit.prevent="userLogin">    
+                    <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping">
+                      <img class="imglogin" src="../assets/login2.png">
+                  </span>
+                  <div class="alert alert-danger" v-for="(error, index) in errors" :key="index">
+                  {{ error[0] }}
+                  </div>
+                
+                    <input type="email" v-model="form.email" class="form-control" placeholder="Email">
+                  </div>
                     
-  <div class="input-group flex-nowrap mb-3">
-  <span class="input-group-text" id="addon-wrapping"><img class="imglogin" src="../assets/login2.png">
-</span>
-  <input type="email" class="form-control" placeholder="Email">
-</div>
-    
+                    <div class="input-group flex-nowrap mb-3">
+                    <span class="input-group-text" id="addon-wrapping"><img class="imglogin" src="../assets/password2.png"></span>
+                    <input type="password" v-model="form.password" class="form-control" placeholder="Password">
+                  </div>
+                    
   
-  <div class="input-group flex-nowrap mb-3">
-  <span class="input-group-text" id="addon-wrapping"><img class="imglogin" src="../assets/password2.png"></span>
-  <input type="password" class="form-control" placeholder="Password">
-</div>
-  
-  
-  <div class="d-grid gap-2"><button type="submit" class="btn btn-primary">ADMIN LOGIN</button></div>
-</form>
+                    <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">ADMIN LOGIN</button>
+                    </div>
+                  </form>
             </div>
             <br><br>
             <a href="/lupapassword" class="text-center text-decoration-none">FORGOT PASSWORD</a>
             <br><br>
             <p class=" text-center">Don't have an account yet?<a href="/register" class="text2 text-decoration-none"> Sign Up</a></p>
+
         </div>
        
     </div>
@@ -52,11 +55,33 @@ report.
     
 
 
+        </div>
 </template>
 
 <script>
 export default {
-    name: "loginPage"
+    name: "loginPage",
+    data(){
+      return{
+        form: {
+          email: '',
+          password: '',
+        },
+        errors: null
+      }
+    },
+    methods: {
+      userLogin() {
+        this.$store.dispatch('login', this.form)
+        .then(response => {
+          console.log(response)
+          this.$router.push({name: 'homePage'})
+        }).catch(error => {
+          this.errors = error.response.data.errors
+        })
+      }
+    }
+
 }
 </script>
 

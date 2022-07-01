@@ -1,11 +1,15 @@
 <template>
     <div class="container">
-        <div class="d-flex">
-
-            <h3>OUTPATIENT REPORT</h3>
+        <div class="d-flex mt-2">
+          <img src="../assets/Icon/outpatient report.svg" width="40px"/>
+            <h3 class="titlehero">OUTPATIENT REPORT</h3>
         </div>
-        <div class="d-flex justify-content-end  my-4">
-            <b-button class="lightdark-a text-black"  dark @click="sortnew()">SORT BY OLDEST TO NEWEST</b-button>
+        <div class="d-flex justify-content-end  my-3" v-if="sortBy === ''">          
+            <b-button class="lightdark-a text-black"   @click="sortnew()">SORT BY OLDEST TO NEWEST <img src="../assets/Icon/sort oldest to newest.svg" width="28px"/></b-button>
+        </div>
+
+        <div class="d-flex justify-content-end  my-3" v-if="sortBy === 'tanggal_kontrol'">          
+            <b-button class="lightdark-a text-black"   @click="sortnew()">SORT BY NEWEST TO OLDEST <img src="../assets/Icon/sort newest to oldest.svg" width="28px"/></b-button>
         </div>
         <div class="d-block">
 
@@ -17,18 +21,17 @@
       :sort-by.sync="sortBy"
       :per-page="perPage"
       :current-page="currentPage"
-      borderless
 
       class="text-center lightdark-b"
     >
 
         <template #cell(show_detail)="row">
-        <div class="d-flex" v-if="row.detailsShowing" >
+        <div v-if="row.detailsShowing" class="d-flex justify-content-center">
         <b-button size="sm"  @click="row.toggleDetails" class="mr-2  lightdark">
         View Report <b-icon icon="caret-up-fill"></b-icon>
         </b-button>
         </div>
-        <div v-if="!row.detailsShowing" class="d-flex">
+        <div v-if="!row.detailsShowing" class="d-flex justify-content-center">
         <b-button size="sm" variant="success" @click="row.toggleDetails" class="mr-2">
         View Report <b-icon icon="caret-down-fill"></b-icon>
         </b-button>
@@ -89,12 +92,18 @@ export default {
         return this.items.length
         }, 
         totalPage() {
-            const x = 1 + 1
+            const x = this.perPage
             const y = this.totalRows
-            const z = y / x / x 
-            return Math.floor(z)       
-            }
-    },
+            const z = y / x  
+            return Math.floor(z) + 1       
+            },
+    //     listPokemon() {
+    //   return this.$store.state.pokemon.items;
+    // },
+    // infoPokemon() {
+    //   return this.$store.state.pokemon.info;
+    // },
+},
 
     data() {
       return {
@@ -102,7 +111,6 @@ export default {
                 { key: 'nomor_antrian', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
                 { key: 'kode_pasien', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'nama_pasien', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'tanggal_daftar', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'jenis_poli', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
                 { key: 'nama_dokter', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'tanggal_kontrol', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
@@ -110,23 +118,23 @@ export default {
                 
                 ],
         items: [
-        { nomor_antrian: '1', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '2', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '1', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '11/12/10' },
+        { nomor_antrian: '2', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '12/12/10' },
         { nomor_antrian: '3', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '4', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '5', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '4', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '11/12/10' },
+        { nomor_antrian: '5', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '12/12/10' },
         { nomor_antrian: '6', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '7', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '8', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '7', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '11/12/10' },
+        { nomor_antrian: '8', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '12/12/10' },
         { nomor_antrian: '9', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },        
-        { nomor_antrian: '10', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '11', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '10', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '11/12/10' },
+        { nomor_antrian: '11', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '12/12/10' },
         { nomor_antrian: '12', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '13', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '14', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '13', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '11/12/10' },
+        { nomor_antrian: '14', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '12/12/10' },
         { nomor_antrian: '15', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '16', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
-        { nomor_antrian: '17', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
+        { nomor_antrian: '16', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '12/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '11/12/10' },
+        { nomor_antrian: '17', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '14/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '12/12/10' },
         { nomor_antrian: '18', kode_pasien: 'rm40', nama_pasien: 'Dickerson', tanggal_daftar: '13/12/12', jenis_poli: 'umum', nama_dokter: "dr.seno", tanggal_kontrol: '13/12/10' },
         ],
         tableVariants: [
@@ -144,7 +152,7 @@ export default {
         headVariant: 'light',
         tableVariant: 'secondary',
         sortBy: '',
-        perPage: 5,
+        perPage: 10,
         currentPage: 1,
         
 }
@@ -152,16 +160,22 @@ export default {
     methods: {
         sortnew() {
             if (this.sortBy == ''){
-                this.sortBy = 'tanggal_daftar'
+                this.sortBy = 'tanggal_kontrol'
               console.log(this.currentPage)
             }
             else {
                 this.sortBy = ''
             }
+},
+    // fetchPokemon() {
+    //   this.$store.dispatch("pokemon/fetchList");
+    // },
 
+    },
 
-}
-    }
+  //     mounted() {
+  //   this.fetchPokemon();
+  // },
   
 }
 </script>
@@ -198,10 +212,15 @@ background-color: #F3F3F3;
   padding-right: 24px;
 }
 
+.hdrop {
+  height: 38px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+ border-radius: 5px; 
+ border: 1px solid #1b1515;
+ background: #F3F3F3;
+}
 
-/* td {
-    text-align:left;
-} */
 .inputdata {
     border-color: black;
 }
@@ -213,6 +232,12 @@ background-color: #F3F3F3;
     margin-bottom: 16px;
     margin-left: 24px;
     margin-right: 0px;
+}
+.titlehero {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 </style>

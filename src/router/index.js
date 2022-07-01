@@ -15,12 +15,13 @@ import outpatientList from '@/views/outpatientlist.vue'
 import changePassword from '@/views/changepassword.vue'
 import scheduleList from '@/views/schedulelist.vue'
 import adddoctorSchedule from '@/views/adddoctorschedule.vue'
+import store from '../store'
 
 
 Vue.use(VueRouter)
 const routes = [
 {
-    path: '/landingpage',
+    path: '/',
     name: 'landingPage',
     meta: {layout: 'blank'},
     component: landingPage
@@ -117,4 +118,26 @@ const router = new VueRouter({
   routes
 })
 
-export default router
+router.beforeEach((to, from, next) => { 
+    if (to.matched.some(record => record.meta.auth)) {
+      if (store.getters.isLoggedIn && store.getters.user) {
+        next()
+        return
+      }
+      next('/login')
+    }
+  
+    if (to.matched.some(record => record.meta.guest)) {
+      if (!store.getters.isLoggedIn) {
+        next()
+        return
+      }
+      next('/profile')
+    }
+  
+    next()
+  })
+  
+  export default router
+  
+

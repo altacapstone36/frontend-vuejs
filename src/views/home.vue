@@ -57,7 +57,7 @@
         <b-card-text>Change Password</b-card-text>
       </b-card>
       <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
-        <a href="/logout" class="btn btn-light stretched-link">
+        <a @click="logout()" class="btn btn-light stretched-link">
         <img src="../assets/Icon/logout.svg" width="100px" class="svgmx"/>
         </a>
         <b-card-text>Logout</b-card-text>
@@ -71,6 +71,14 @@
 
 export default {
     name: "homePage",
+    methods: {
+            logout() {
+          this.$store.dispatch("logout").then(() => {
+          this.$router.push("/");
+        });
+              },
+
+    }
   
 }
 </script>
