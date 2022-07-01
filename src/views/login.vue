@@ -1,19 +1,5 @@
 <template>
-<<<<<<< Updated upstream
-<div>
-<div class="d-flex justify-content-end">
-            <b-btn @click="myCompare()">test</b-btn>
-          <p class="mx-2 mt-2">Sort Tanggal Kontrol From :</p>
-          <!-- <b-button @click="mindateA()">test</b-button> -->
-          <div class="d-flex justify-content-end">
-          <b-form-datepicker  id="example-datepicker" placeholder="mm/dd/yy" v-model="minDate" aria-controls="my-table" right class="mb-2 hdrop"></b-form-datepicker>
-          </div>
-          <h2 class="mx-3">-</h2>
-          <div class="d-flex justify-content-end">
-          <b-form-datepicker id="example-datepicker" placeholder="mm/dd/yy" v-model="maxDate" aria-controls="my-table" right class="mb-2 hdrop"></b-form-datepicker>
-          <!-- <p>Value: '{{ value }}'</p> -->
-        </div>
-=======
+
     <div>
   <div class="row">
     <div class="col-sm-4">
@@ -21,10 +7,6 @@
       <div class="card login-form">
         <div class="card-body">
             <img class="img5" src="../assets/login.png">
-
-            </div>
-
-            <div class="card-text">
                 <form @submit.prevent="userLogin">    
                     <div class="input-group flex-nowrap mb-3">
                     <span class="input-group-text" id="addon-wrapping">
@@ -52,53 +34,33 @@
             <a href="/lupapassword" class="text-center text-decoration-none">FORGOT PASSWORD</a>
             <br><br>
             <p class=" text-center">Don't have an account yet?<a href="/register" class="text2 text-decoration-none"> Sign Up</a></p>
->>>>>>> Stashed changes
+
         </div>
-        
-<b-table :items="items" :fields="fields" :sort-compare="myCompare">
-  </b-table>
+       
+    </div>
+    </div>
+    <div class="col-sm-8">
+      <img class="img2" src="../assets/amico.svg"><br>
+      <center><h4>Manage All Hospital Data Easily</h4></center><br>
+      <center><h6 class="paragraph">
+        This Hospital Management System there are 3 features<br>
+that can be used to make it easier for admins to manage<br>
+Patient data, manage employee schedules, and view all<br>
+report.
+      </h6></center>
+    </div>
+    
   </div>
+</div>
+    
+
+
+        </div>
 </template>
 
 <script>
 export default {
     name: "loginPage",
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-    data() {
-    return {
-        name: '',
-      fields: [
-        { key: 'nama', label: 'Name', sortable: false },
-        { key: 'date', label: 'Date', sortable: true }
-      ],
-      items: [
-        { name: 'Jack', date: '29/12/2001' },
-        { name: 'Jill', date: '14/04/2012' },
-        { name: 'Bob', date: '07/07/2009' }
-      ],
-
-      minDate: '',
-      maxDate: '',
-    }
-  },
-  methods: {
-    myCompare() {
-        if (this.minDate == '' || this.maxDate == '') {
-            return false
-        }else {
-            
-            console.log(this.minDate)
-            console.log(this.maxDate)
-        }
-  },
-}
-}
-</script>
-=======
-=======
->>>>>>> Stashed changes
     data(){
       return{
         form: {
@@ -214,4 +176,3 @@ h4, h6{
 
 
 </style>
->>>>>>> Stashed changes
