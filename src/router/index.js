@@ -9,15 +9,9 @@ import outpatientAdd from '@/views/outpatientadd.vue'
 import outpatientData from '@/views/outpatientdata.vue'
 import outpatientList from '@/views/outpatientlist.vue'
 import changePassword from '@/views/changepassword.vue'
-<<<<<<< Updated upstream
-=======
-import scheduleList from '@/views/schedulelist.vue'
-import adddoctorSchedule from '@/views/adddoctorschedule.vue'
+// import scheduleList from '@/views/schedulelist.vue'
+// import adddoctorSchedule from '@/views/adddoctorschedule.vue'
 import store from '../store'
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 Vue.use(VueRouter)
 
