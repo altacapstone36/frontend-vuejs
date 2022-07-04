@@ -1,4 +1,6 @@
+
 import axios from "axios";
+import VueCookie from "vue-cookie";
 
 const state = () => ({
   items: [],
@@ -16,14 +18,18 @@ const mutations = {
 
 const actions = {
   fetchList(store) {
-    axios.get('http://go-hospital-server.herokuapp.com/api/outpatient', {
-
+    const token = VueCookie.get('token')
+    axios.get('http://localhost:8080/api/outpatient', {      
+      headers: { 'Authorization': 'Bearer ' + token, 
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET'}
     })
-      
+      console.log(token)
       .then((response) => {
-        store.commit("setList", response.OutPatient);
+        store.commit("setList", response.OutPatient.data);
         store.commit("setInfo", "");
-        console.log("reponse", response)
+        console.log("response", response)
+
       })
       .catch((error) => {
         store.commit("setInfo", error);

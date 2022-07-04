@@ -55,10 +55,13 @@ report.
     
 
 
-        </div>
+
 </template>
 
 <script>
+import axios from 'axios'
+//import { setHeaderToken } from '@/utils/auth';
+
 export default {
     name: "loginPage",
     data(){
@@ -71,15 +74,51 @@ export default {
       }
     },
     methods: {
-      userLogin() {
-        this.$store.dispatch('login', this.form)
-        .then(response => {
-          console.log(response)
-          this.$router.push({name: 'homePage'})
-        }).catch(error => {
-          this.errors = error.response.data.errors
-        })
-      }
+      userLogin(submit) {
+        if(submit){
+          // const cors = {
+          //   headers : {'Access-Control-Allow-Headers' : '*',
+          //               'withCredentials' : true,
+          //               'Content-Type' : 'application/x-www-form-urlencoded'
+          //               }
+          // }
+          axios.post('http://localhost:8080/api/login', {
+            email: this.form.email,
+            password: this.form.password,
+            },
+        )
+          .then(response=>{
+            const tokenlocal = response.data.jwt.access_token
+            const token = this.$localStorage.set('token', tokenlocal)
+            this.$cookie.set('token', tokenlocal)
+            const headers = axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+            console.log(headers)
+            console.log(response)
+            this.$router.push({name: 'homePage'})
+            if(response.status === 200){
+              alert(response.message)
+            }
+          })
+          .catch(err=>{
+            const token = this.$localStorage.get('token')
+            if (!token) {
+              alert('Gagal Login')
+              delete axios.defaults.headers.common['Authorization']
+            }
+            alert(err.response.message)
+            console.log(err);
+        
+          });
+        }
+        // this.$store.dispatch('get_user')
+        // .then(response => {
+        //   console.log(response)
+        //   this.$router.push({name: 'homePage'})
+        // }).catch(error => {
+        //   this.errors = error
+        // })
+      },
+      
     }
 
 }

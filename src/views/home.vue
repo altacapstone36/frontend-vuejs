@@ -5,7 +5,7 @@
         <b-img rounded="circle" src="https://picsum.photos/200/200/?image=54" alt="Image 1"></b-img>
         </div>
         <div class="nameprofile">
-        <h3>Nama User</h3>
+        <!-- <h3>{{data.name}}</h3> -->
         <p>administrator</p>
         </div>
         <div class="icon">

@@ -2,7 +2,7 @@
  <nav>
             <div>
                 <b-navbar variant="faded" type="light" class="unguprimary">
-                    <b-navbar-brand href="#" class="mx-2 text-light">HOSPITAL MANAGEMENT SYSTEM</b-navbar-brand>
+                    <b-navbar-brand href="/home" class="mx-2 text-light">HOSPITAL MANAGEMENT SYSTEM</b-navbar-brand>
                 </b-navbar>
             </div>
 
