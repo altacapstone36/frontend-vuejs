@@ -89,6 +89,10 @@ export default {
         )
           .then(response=>{
             const tokenlocal = response.data.jwt.access_token
+            const tokennama = response.data.data.full_name
+            const tokenroles = response.data.data.roles
+            this.$localStorage.set('roles', tokenroles)
+            this.$localStorage.set('nama', tokennama)
             const token = this.$localStorage.set('token', tokenlocal)
             this.$cookie.set('token', tokenlocal)
             const headers = axios.defaults.headers.common['Authorization'] = 'Bearer ' + token

@@ -5,8 +5,8 @@
         <b-img rounded="circle" src="https://picsum.photos/200/200/?image=54" alt="Image 1"></b-img>
         </div>
         <div class="nameprofile">
-        <!-- <h3>{{data.name}}</h3> -->
-        <p>administrator</p>
+        <h4>{{nama}}</h4>
+        <p>{{roles}}</p>
         </div>
         <div class="icon">
             <img src = "../assets/Illu/illus2.svg" width="170" alt="My Happy SVG" class="bgbanner"/>
@@ -71,14 +71,27 @@
 
 export default {
     name: "homePage",
+    data(){
+      return{
+        nama: null,
+        roles: null
+      }
+    },
     methods: {
             logout() {
           this.$store.dispatch("logout").then(() => {
           this.$router.push("/");
         });
               },
-
-    }
+    },
+  mounted(){
+    const tokenlocal = this.$localStorage.get('nama')
+    const tokenroles = this.$localStorage.get('roles')
+  if (tokenlocal){
+    this.roles = tokenroles
+    this.nama = tokenlocal
+  }
+  }
   
 }
 </script>
@@ -100,9 +113,9 @@ export default {
     margin-left: 105px;
 }
 .nameprofile {
-    margin-left: 50px;
+    margin-left: 60px;
     color: white;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .icon {
   display: flex;
