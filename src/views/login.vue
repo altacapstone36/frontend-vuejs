@@ -95,9 +95,6 @@ export default {
             console.log(headers)
             console.log(response)
             this.$router.push({name: 'homePage'})
-            if(response.status === 200){
-              alert(response.message)
-            }
           })
           .catch(err=>{
             const token = this.$localStorage.get('token')

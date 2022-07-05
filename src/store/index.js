@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import outpatient from './outpatient'
 import auth from './auth' 
-import pokemon from './pokemon.store'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,6 +13,6 @@ export default new Vuex.Store({
   },
   modules: {
     auth,
-    pokemon
+    outpatient,
   }
 })
