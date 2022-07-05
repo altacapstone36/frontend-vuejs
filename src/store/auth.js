@@ -1,6 +1,7 @@
-import { setHeaderToken } from "@/utils/auth"
-import { removeHeaderToken } from "@/utils/auth"
+import router from "@/router"
+import { removeHeaderToken, setHeaderToken } from "@/utils/auth"
 import axios from "axios"
+import VueCookie from "vue-cookie"
 export default{
     state: {
         user: null,
@@ -54,7 +55,7 @@ export default{
               return  
             }
             try{ 
-              let response = await axios.get('user')
+              const response = await axios.get('user')
                 const set_user = response.data.data
                 commit('set_user', set_user)
                 console.log(response.data.data)
@@ -62,6 +63,14 @@ export default{
                 commit('reset_user') 
                 removeHeaderToken()
                 localStorage.removeItem('token')
+                const token = localStorage.getItem('token')
+                router.push('login')
+                console.log(token)
+                // if(!token){
+                //   alert('error no token')
+                //   removeHeaderToken()
+                //   
+                // }
                 return error
             } 
           },
@@ -69,6 +78,7 @@ export default{
             return new Promise((resolve) => {
              commit('reset_user')
              localStorage.removeItem('token')
+             VueCookie.delete('token')
              removeHeaderToken()
              resolve()
             })

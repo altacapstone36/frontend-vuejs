@@ -93,7 +93,6 @@ export default {
     this.nama = tokenlocal
   }
   }
-
   
 }
 </script>
@@ -116,7 +115,7 @@ export default {
     margin-top: 20px;
 }
 .nameprofile {
-    margin-left: 50px;
+    margin-left: 60px;
     color: white;
     margin-top: 70px;
 }
