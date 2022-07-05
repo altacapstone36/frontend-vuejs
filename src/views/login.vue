@@ -55,7 +55,6 @@ report.
     
 
 
-        </div>
 </template>
 
 <script>
@@ -77,7 +76,7 @@ export default {
           console.log(response)
           this.$router.push({name: 'homePage'})
         }).catch(error => {
-          this.errors = error.response.data.errors
+          this.errors = error
         })
       }
     }

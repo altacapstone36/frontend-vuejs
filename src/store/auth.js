@@ -34,8 +34,14 @@ export default{
                  setHeaderToken(token) 
                  dispatch('get_user')
                  resolve(response)
-                 console.log(response.data.jwt.access_token)
-               })
+                 console.log(response.data.data.full_name)
+                 const tokennama = response.data.data.full_name
+                 localStorage.setItem('nama', tokennama) 
+                 const tokenroles = response.data.data.roles
+                 localStorage.setItem('roles', tokenroles) 
+                
+                
+                })
                .catch(err => {
                  commit('reset_user')  
                  localStorage.removeItem('token')

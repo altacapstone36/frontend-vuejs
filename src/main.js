@@ -9,7 +9,8 @@ import blankLayout from './layouts/blank.vue'
 import store from './store'
 import axios from 'axios'
 import { setHeaderToken } from './utils/auth'
-
+import VueLocalStorage from 'vue-localstorage'
+Vue.use(VueLocalStorage)
 axios.defaults.baseURL = 'https://go-hospital-server.herokuapp.com/api/'
 Vue.component('default-layout', defaultLayout)
 Vue.component('blank-layout', blankLayout)
