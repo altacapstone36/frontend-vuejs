@@ -51,13 +51,13 @@
                     <b-row class="mb-2">
             <b-col cols="2" class="text-sm-right"><b>Hasil Diagnosa</b></b-col>
             <b-col cols="1" class="d-flex justify-content-end">:</b-col>
-            <b-col cols="9"><b-card class="">{{ row.item.jenis_poli }}</b-card></b-col>
+            <b-col cols="9"><b-card class="">{{ row.item.diagnose }}</b-card></b-col>
           </b-row>
 
                     <b-row class="mb-2">
             <b-col cols="2" class="text-sm-right"><b>Resep Obat</b></b-col>
             <b-col cols="1" class="d-flex justify-content-end">:</b-col>
-            <b-col cols="9"><b-card class="">{{ row.item.jenis_poli }}</b-card></b-col>
+            <b-col cols="9"><b-card class="">{{ row.item.prescription }}</b-card></b-col>
           </b-row>
       </b-card>
       </template>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 export default {
     name: "outpatientReport",
     computed: {
@@ -104,10 +104,9 @@ export default {
     data() {
       return {
         fields: [
-                { key: 'queue', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
-                { key: 'patient_code', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'full_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'complaint', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'serial_number', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'patient_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'facility', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
                 { key: 'doctor', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'date_check', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
@@ -146,44 +145,44 @@ export default {
         },
     
   },
-  async mounted() {
-     try {
-    const response1 = await axios.get('http://localhost:8080/api/outpatient');
-    this.items = response1.data.data;
-//    const dataOne = response1.data.data
-    console.log(this.items)
-//    console.log(response1.data.data.id)
-    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
-    // this.arrayTwo = response2.data.data;
-    // console.log(this.arrayTwo)
-  } catch(e) {
-    console.log(e);
-  }
-          //  try{
-          //  const token = this.$localStorage.get('token')
-          //   const responseOutpatient = await axios.get('http://localhost:8080/api/outpatient', {
-          //     headers: { 'Authorization': 'Bearer ' + token ,
-          //                 "Access-Control-Allow-Origin" : "*",
-          //                 "Content-type": "Application/json",
-          //               }
-          //   })
-          //   this.arrayOne = responseOutpatient.data.data
-          //   console.log(this.arrayOne) 
-          //    const responsePatient = await axios.get('http://localhost:8080/api/patient', {
-          //     headers: { 'Authorization': 'Bearer ' + token ,
-          //                 "Access-Control-Allow-Origin" : "*",
-          //                 "Content-type": "Application/json",
-          //               }
-          //   })
-          //   this.arrayTwo = responsePatient.data.data
-          //   console.log(this.arrayTwo) 
-          //   }
+//   async mounted() {
+//      try {
+//     const response1 = await axios.get('http://localhost:8080/api/outpatient');
+//     this.items = response1.data.data;
+// //    const dataOne = response1.data.data
+//     console.log(this.items)
+// //    console.log(response1.data.data.id)
+//     // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
+//     // this.arrayTwo = response2.data.data;
+//     // console.log(this.arrayTwo)
+//   } catch(e) {
+//     console.log(e);
+//   }
+//           //  try{
+//           //  const token = this.$localStorage.get('token')
+//           //   const responseOutpatient = await axios.get('http://localhost:8080/api/outpatient', {
+//           //     headers: { 'Authorization': 'Bearer ' + token ,
+//           //                 "Access-Control-Allow-Origin" : "*",
+//           //                 "Content-type": "Application/json",
+//           //               }
+//           //   })
+//           //   this.arrayOne = responseOutpatient.data.data
+//           //   console.log(this.arrayOne) 
+//           //    const responsePatient = await axios.get('http://localhost:8080/api/patient', {
+//           //     headers: { 'Authorization': 'Bearer ' + token ,
+//           //                 "Access-Control-Allow-Origin" : "*",
+//           //                 "Content-type": "Application/json",
+//           //               }
+//           //   })
+//           //   this.arrayTwo = responsePatient.data.data
+//           //   console.log(this.arrayTwo) 
+//           //   }
 
-          //   .catch(err => {
-          //      console.log(err)
-          //    });
+//           //   .catch(err => {
+//           //      console.log(err)
+//           //    });
 
-  },
+//   },
 
   
 }

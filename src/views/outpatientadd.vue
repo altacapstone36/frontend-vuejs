@@ -7,17 +7,19 @@
         </div>
         <div class="d-block cardinput">
         <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
-          <b-row class="my-3">
+          <b-form @submit="onSubmit">
+          <b-row class="my-3">  
             <b-col cols="2" class="d-flex justify-content-start">
               <label class="mt-2" aria-controls="fieldset-1">Kode Pasien</label>
             </b-col>
               <b-col cols="10">
               <b-form-group
                 id="fieldset-1"
-                :invalid-feedback="invalidfeedbackKP"
-                :state="state"
               >
-          <b-form-input id="input-1" v-model="kode_pasien" :state="stateKP" trim class="hdrop"></b-form-input>
+          <b-form-input id="input-1" v-model="kode_pasien" trim class="hdrop"></b-form-input>
+          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
+          </div>
         </b-form-group>
               </b-col>
           </b-row>
@@ -29,10 +31,12 @@
               <b-col cols="10">
               <b-form-group
                 id="fieldset-2"
-                :invalid-feedback="invalidfeedbackNP"
-                :state="stateNP"
               >
-          <b-form-input id="input-2" v-model="nama_pasien" :state="stateNP" trim class="hdrop"></b-form-input>
+          <b-form-input id="input-2" v-model="patient_name" trim class="hdrop"></b-form-input>
+          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
+          </div>
+
         </b-form-group>
               </b-col>
           </b-row>
@@ -42,7 +46,7 @@
               <label class="mt-2" aria-controls="fieldset-5">Tanggal Kontrol</label>
             </b-col>
               <b-col cols="10">
-           <b-form-datepicker id="example-datepicker" v-model="tanggal_kontrol" class="mb-2 hdrop"></b-form-datepicker>
+           <b-form-datepicker id="example-datepicker" v-model="date_check" class="mb-2 hdrop"></b-form-datepicker>
               </b-col>
           </b-row>
           <b-row class="my-3">
@@ -52,10 +56,12 @@
               <b-col cols="10">
               <b-form-group
                 id="fieldset-3"
-                :invalid-feedback="invalidfeedbackKel"
-                :state="stateKel"
               >
-          <b-form-input id="input-3" v-model="keluhan" :state="stateKel" trim class="hdrop"></b-form-input>
+          <b-form-input id="input-3" v-model="complaint" trim class="hdrop"></b-form-input>
+          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
+          </div>
+
         </b-form-group>
               </b-col>
           </b-row>
@@ -67,7 +73,7 @@
               <b-col cols="10">
                 <b-form-select
                           id="input-6"
-                          v-model="jenis_poli"
+                          v-model="facility"
                           :options="poli"
                           required
                           plain
@@ -99,7 +105,7 @@
               <b-col cols="10">
                 <b-form-select
                           id="input-6"
-                          v-model="nama_dokter"
+                          v-model="doctor"
                           :options="dokter"
                           required
                           plain
@@ -116,19 +122,18 @@
               <b-col cols="10">
               <b-form-group
                 id="fieldset-4"
-                :invalid-feedback="invalidfeedbackNA"
-                :state="stateNA"
               >
-          <b-form-input id="input-4" v-model="nomor_antrian" :state="stateNA" trim class="hdrop"></b-form-input>
+          <b-form-input id="input-4" v-model="queue" trim class="hdrop"></b-form-input>
         </b-form-group>
         <div class="d-flex justify-content-end">
-        <b-btn @click="testapi()">Submit</b-btn>
-                <b-btn @click="onReset()">Reset</b-btn>
-              </div>
+        <b-btn @click="onSubmit()">Submit</b-btn>
+        <b-btn @click="onReset()">Reset</b-btn>
+        </div>
+
               </b-col>
           </b-row>
 
-          
+      </b-form>          
         </b-card>
 
         </div>
@@ -140,78 +145,54 @@
 export default {
     name: "outpatientAdd",
     computed: {
-      stateKP() {
-        return this.kode_pasien.length >= 4
-      },
-      invalidfeedbackKP() {
-        if (this.kode_pasien.length > 0) {
-          return 'Minimal 4 huruf characters.'
-        }
-        return 'Harap masukan Kode Pasien.'
-      },
-      stateNP() {
-        return this.nama_pasien.length >= 4
-      },
-      invalidfeedbackNP() {
-        if (this.nama_pasien.length > 0) {
-          return 'Minimal 4 huruf characters.'
-        }
-        return 'Harap masukan Nama Pasien.'
-      },
-      stateKel() {
-        return this.keluhan.length >= 4
-      },
-      invalidfeedbackKel() {
-        if (this.keluhan.length > 0) {
-          return 'Minimal 4 huruf characters.'
-        }
-        return 'Tuliskan Keluhan anda.'
-      },
-      stateNA() {
-        return this.nomor_antrian.length >= 1
-      },
-      invalidfeedbackNA() {
-        if (this.nomor_antrian.length > 0) {
-          return 'Minimal 1 nomor.'
-        }
-        return 'Nomor antriAn.'
-      }
     },
     data() {
       return {
         name: '',
         kode_pasien: '',
-        nama_pasien: '',
-        keluhan: '',
-        nomor_antrian: '',
-        tanggal_kontrol: '',
-        jenis_poli: null,
+        patient_name: '',
+        complaint: '',
+        queue: '',
+        date_check: '',
+        facility: null,
         jadwal_sesi: null,
-        nama_dokter: null,
+        doctor: null,
+        toggleLength : false,
 
-      poli: [{ text: 'Pilih Poli', value: null }, 'Umum', 'Anak', 'Gigi'],
-      sesi: [{ text: 'Pilih Sesi', value: null }, 'Pagi (08.00 - 11.00)', 'Siang (13.00 - 15.00)', 'Sore (16.00 - 18.00)'],
-      dokter: [{ text: 'Pilih Dokter', value: null }, 'dr. Alshad Ahmad', 'dr. Adira Putri', 'dr. Seno', 'dr. Christie'],
+      poli: [{ text: 'Pilih Poli', value: null }, {text:'Umum', value: 1 }, {text:'Anak', value: 2 }, {text:'Gigi', value: 3 }],
+      sesi: [{ text: 'Pilih Sesi', value: null }, {text:'Pagi (08.00 - 11.00)', value: 1}, {text:'Siang (13.00 - 15.00)', value: 2 }, {text:'Sore (16.00 - 18.00)', value: 3 }],
+      dokter: [{ text: 'Pilih Dokter', value: null }, {text:'dr. Alshad Ahmad', value: 'DCR00001' }, {text:'dr. Adira Putri', value: 'DCR00002' }, {text:'dr. Shelley Herman', value: 'DCR00003' }, {text:'dr. Christie', value: 'DCR00004'}],
     
 }
     },
     methods: {
-      testapi() {
+      onSubmit() {
+        const namapasien = this.patient_name
+        const kodepasien = this.kode_pasien
+        const keluhan = this.complaint
         
-        console.log(this.nama_dokter)
-        console.log(this.nama_pasien)
+        if(namapasien.length < 4 || kodepasien.length< 4 || keluhan.length < 4){
+          this.toggleLength = true
+
+        }else        
+        console.log(this.doctor)
+        console.log(this.patient_name)
         console.log(this.jadwal_sesi)
-        console.log(this.jenis_poli)
+        console.log(this.facility)
         console.log(this.kode_pasien)
-        console.log(this.nomor_antrian)
-        console.log(this.tanggal_kontrol)
-        console.log(this.keluhan)
+        console.log(this.queue)
+        console.log(this.date_check)
+        console.log(this.complaint)
       },
       onReset() {
-      this.nama_dokter = '',
-      this.nama_pasien = null,
-      this.jadwal_sesi = null
-      
+      this.doctor = null,
+      this.patient_name = '',
+      this.jadwal_sesi = null,
+      this.facility = null,
+      this.queue = null,
+      this.complaint = null,
+      this.kode_pasien = '',
+      this.date_check = null  
       },
     }
 
