@@ -8,7 +8,7 @@
             <b-button class="lightdark-a text-black"   @click="sortnew()">SORT BY OLDEST TO NEWEST <img src="../assets/Icon/sort oldest to newest.svg" width="28px"/></b-button>
         </div>
 
-        <div class="d-flex justify-content-end  my-3" v-if="sortBy === 'tanggal_kontrol'">          
+        <div class="d-flex justify-content-end  my-3" v-if="sortBy === 'date_check'">          
             <b-button class="lightdark-a text-black"   @click="sortnew()">SORT BY NEWEST TO OLDEST <img src="../assets/Icon/sort newest to oldest.svg" width="28px"/></b-button>
         </div>
         <div class="d-block">
@@ -45,7 +45,7 @@
                     <b-row class="mb-2">
             <b-col cols="2" class="text-sm-right"><b>Keluhan</b></b-col>
             <b-col cols="1" class="d-flex justify-content-end">:</b-col>
-            <b-col cols="9"><b-card class="">{{ row.item.jenis_poli }}</b-card></b-col>
+            <b-col cols="9"><b-card class="">{{ row.item.complaint }}</b-card></b-col>
           </b-row>
 
                     <b-row class="mb-2">
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 export default {
     name: "outpatientReport",
     computed: {
@@ -137,48 +137,53 @@ export default {
     methods: {
         sortnew() {
             if (this.sortBy == ''){
-                this.sortBy = 'tanggal_kontrol'
+                this.sortBy = 'date_check'
               console.log(this.currentPage)
             }
             else {
                 this.sortBy = ''
             }
         },
-            fetch_outpatient(){
-              this.$store.dispatch('outpatient/fetch_outpatient')
-
-            },
     
   },
-  mounted() {
-      this.fetch_outpatient
+  async mounted() {
+     try {
+    const response1 = await axios.get('http://localhost:8080/api/outpatient');
+    this.items = response1.data.data;
+//    const dataOne = response1.data.data
+    console.log(this.items)
+//    console.log(response1.data.data.id)
+    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
+    // this.arrayTwo = response2.data.data;
+    // console.log(this.arrayTwo)
+  } catch(e) {
+    console.log(e);
+  }
+          //  try{
+          //  const token = this.$localStorage.get('token')
+          //   const responseOutpatient = await axios.get('http://localhost:8080/api/outpatient', {
+          //     headers: { 'Authorization': 'Bearer ' + token ,
+          //                 "Access-Control-Allow-Origin" : "*",
+          //                 "Content-type": "Application/json",
+          //               }
+          //   })
+          //   this.arrayOne = responseOutpatient.data.data
+          //   console.log(this.arrayOne) 
+          //    const responsePatient = await axios.get('http://localhost:8080/api/patient', {
+          //     headers: { 'Authorization': 'Bearer ' + token ,
+          //                 "Access-Control-Allow-Origin" : "*",
+          //                 "Content-type": "Application/json",
+          //               }
+          //   })
+          //   this.arrayTwo = responsePatient.data.data
+          //   console.log(this.arrayTwo) 
+          //   }
+
+          //   .catch(err => {
+          //      console.log(err)
+          //    });
+
   },
-
-
-
-
-
-
-
-
-  // created() {
-  //         const token = this.$localStorage.get('token')
-  //          axios 
-  //           .get('https://go-hospital-server.herokuapp.com/api/outpatient', {
-  //             headers: { 'Authorization': 'Bearer ' + token ,
-  //                         "Access-Control-Allow-Origin" : "*",
-  //                         "Content-type": "Application/json",
-  //                       }
-  //           })
-  //           .then(res => {
-  //             this.items = res.data
-  //             console.log(res)
-  //             console.log(token)
-  //             })
-  //           .catch(err => {
-  //              console.log(err)
-  //            });
-  //       },
 
   
 }

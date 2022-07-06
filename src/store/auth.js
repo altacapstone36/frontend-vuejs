@@ -66,11 +66,7 @@ export default{
                 const token = localStorage.getItem('token')
                 router.push('login')
                 console.log(token)
-                // if(!token){
-                //   alert('error no token')
-                //   removeHeaderToken()
-                //   
-                // }
+                
                 return error
             } 
           },
