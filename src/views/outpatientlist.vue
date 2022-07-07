@@ -8,16 +8,15 @@
           <p class="mx-2 mt-2">Sort Tanggal Kontrol From :</p>
           <!-- <b-button @click="mindateA()">test</b-button> -->
           <div class="d-flex justify-content-end">
-          <b-form-datepicker  id="example-datepicker" placeholder="mm/dd/yy" v-model="minDate" aria-controls="my-table" right class="mb-2 hdrop"></b-form-datepicker>
+          <input type="date" v-model="startDate">
           </div>
           <h2 class="mx-3">-</h2>
           <div class="d-flex justify-content-end">
-          <b-form-datepicker id="example-datepicker" placeholder="mm/dd/yy" v-model="maxDate" aria-controls="my-table" right class="mb-2 hdrop"></b-form-datepicker>
-          <!-- <p>Value: '{{ value }}'</p> -->
-        </div>
+          <input type="date" v-model="endDate">
+          </div>
         </div>
         <div class="d-block cardinput lightdark-b tablelong">
-    <b-table
+    <!-- <b-table
     :id="my-table"    
       :items="items"
       :fields="fields"
@@ -29,7 +28,33 @@
 
       class="text-center lightdark-b"
     >
-    </b-table>
+    </b-table> -->
+
+            <table>
+  <tr>
+    <th>Nomor Antrian</th>
+    <th>Kode Pasien</th>
+    <th>Nama Pasien</th>
+    <th>Tanggal Daftar</th>
+    <th>Jenis Poli</th>
+    <th>Nama Dokter</th>
+    <th>Tanggal Kontrol</th>
+
+    
+  </tr>
+  <tr v-for="item in filterItem" :key="item">
+    <td>{{item.queue}}</td>
+    <td>{{item.serial_number}}</td>
+    <td>{{item.patient_name}}</td>
+    <td>{{item.date_check}}</td>
+    <td>{{item.facility}}</td>
+    <td>{{item.doctor}}</td>
+    <td>{{item.id}}</td>
+
+  </tr>
+  </table>
+
+
         </div>
         <div class="d-flex my-2 ">
 <p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
@@ -48,7 +73,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+//import Vue from 'vue'
 import axios from 'axios'
 export default {
     name: "outpatientList",
@@ -62,37 +87,49 @@ export default {
             const z = y / x  
             return Math.floor(z) + 1       
             },
-             filteredDate(){
-                const startDate = this.minDate
-               const endDate =  this.maxDate
-               console.log(startDate)
-               console.log(endDate)
-               return Vue.filter(this.items, function(data) {
-                if(startDate == null && endDate == null){
-                  return ''
-                }else {
-                  const date = data.date_check
-                  return date >= startDate && date <= endDate
-                }
-               })
+filterItem() {
+      let filterType = this.selectedType;
+      let startDate = this.localizeDate(this.startDate);
+      let endDate = this.localizeDate(this.endDate);
+      console.log(startDate)
+      console
+      
+      const itemsByType = filterType ? this.items.filter(item => item.type === filterType) : this.items
+      return itemsByType
+        .filter(item => {
+          const itemDate = new Date(item.date_check)
+          if (startDate && endDate) {
+            return startDate <= itemDate && itemDate <= endDate;
+          }
+          if (startDate && !endDate) {
+            return startDate <= itemDate;
+          }
+          if (!startDate && endDate) {
+            return itemDate <= endDate;
+          }
+          return true;
+        })
+    }
 
-    },
     },
 
     data() {
       return {
+        selectedType: '',
+        startDate:null,
+        endDate:null,
         value: '',
-        fields: [
-                { key: 'id', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
-                { key: 'serial_number', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'patient_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'date_check', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black',} },
-                { key: 'facility', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
-                { key: 'doctor', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'date_check', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
-                // { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
+        // fields: [
+        //         { key: 'id', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+        //         { key: 'serial_number', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+        //         { key: 'patient_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+        //         { key: 'date_check', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black',} },
+        //         { key: 'facility', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+        //         { key: 'doctor', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
+        //         { key: 'date_check', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
+        //         // { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
                 
-                ],
+        //         ],
         items: [],
         tableVariants: [
           'primary',
@@ -111,15 +148,25 @@ export default {
         sortBy: '',
         perPage: 10,
         currentPage: 1,
-        selectedType: '',
-        minDate: null,
-        maxDate: null,
+
 
         
 }
     },
  
     methods: {
+      localizeDate(date) {
+      // Date picker uses ISO format (yyyy-mm-dd), which is UTC. The data
+      // contains locale specific date strings (mm/dd/yyyy), which `Date`
+      // parses with local time-zone offset instead of UTC. Normalize the
+      // ISO date so we're comparing local times.
+      if (!date || !date.includes('-')) return date
+      const [yyyy, mm, dd] = date.split('-')
+      return new Date(`${mm}/${dd}/${yyyy}`)
+    },
+    formatDate(date) {
+      return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date))
+    }
     },
  async mounted(){
          try {

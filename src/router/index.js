@@ -16,6 +16,7 @@ import changePassword from '@/views/changepassword.vue'
 import scheduleList from '@/views/schedulelist.vue'
 import adddoctorSchedule from '@/views/adddoctorschedule.vue'
 import store from '../store'
+import schedulePage from '@/views/schedule.vue'
 
 
 Vue.use(VueRouter)
@@ -103,6 +104,13 @@ const routes = [
     name: 'scheduleList',
     component: scheduleList
 },
+
+{
+    path: '/schedule',
+    name: 'schedulePage',
+    component: schedulePage
+},
+
 {
     path: '/addschedule',
     name: 'adddoctorSchedule',
