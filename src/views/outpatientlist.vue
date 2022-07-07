@@ -43,12 +43,12 @@
     >
     </b-pagination>        
     </div>
-
-        
+   
     </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import axios from 'axios'
 export default {
     name: "outpatientList",
@@ -62,19 +62,34 @@ export default {
             const z = y / x  
             return Math.floor(z) + 1       
             },
+             filteredDate(){
+                const startDate = this.minDate
+               const endDate =  this.maxDate
+               console.log(startDate)
+               console.log(endDate)
+               return Vue.filter(this.items, function(data) {
+                if(startDate == null && endDate == null){
+                  return ''
+                }else {
+                  const date = data.date_check
+                  return date >= startDate && date <= endDate
+                }
+               })
+
+    },
     },
 
     data() {
       return {
         value: '',
         fields: [
-                { key: 'queue', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
-                { key: 'kode_pasien', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'nama_pasien', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'tanggal_daftar', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black',} },
-                { key: 'jenis_poli', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
-                { key: 'nama_dokter', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'tanggal_kontrol', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'id', label: 'Nomor Antrian', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'serial_number', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'patient_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'date_check', label: 'Tanggal Daftar', thStyle: {background: '#DDDDDD', color: 'black',} },
+                { key: 'facility', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'doctor', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'date_check', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
                 // { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
                 
                 ],
@@ -96,34 +111,20 @@ export default {
         sortBy: '',
         perPage: 10,
         currentPage: 1,
-        minDate: '',
-        maxDate: '',
+        selectedType: '',
+        minDate: null,
+        maxDate: null,
 
         
 }
     },
-
+ 
     methods: {
-        mindateA() {
-
-          console.log(this.minDate)
-          console.log(this.maxDate)
-        },    
-        mySortCompare(maxDate, minDate, key) {
-      if (key === 'tanggal_kontrol') {
-        // Assuming the date field is a `Date` object, subtraction
-        // works on the date serial number (epoch value)
-        return maxDate[key] - minDate[key]
-      } else {
-        // Let b-table handle sorting other fields (other than `date` field)
-        return false
-      }
-    },
     },
  async mounted(){
          try {
-    const response1 = await axios.get('http://localhost:8080/api/outpatient');
-   // this.items = response1.data.data;
+    const response1 = await axios.get('http://localhost:8080/api/outpatient/report');
+   this.items = response1.data.data;
 //    const dataOne = response1.data.data
     console.log(response1.data)
 //    console.log(response1.data.data.id)
