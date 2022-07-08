@@ -30,8 +30,9 @@
     >
     </b-table> -->
 
-            <table>
-  <tr>
+  <table class="text-center tablefix">
+    <thead class="lightdark-a">
+  <tr class="text-center">
     <th>Nomor Antrian</th>
     <th>Kode Pasien</th>
     <th>Nama Pasien</th>
@@ -39,9 +40,9 @@
     <th>Jenis Poli</th>
     <th>Nama Dokter</th>
     <th>Tanggal Kontrol</th>
-
-    
   </tr>
+  </thead>
+  <tbody class="lightdark-b">
   <tr v-for="item in filterItem" :key="item">
     <td>{{item.queue}}</td>
     <td>{{item.serial_number}}</td>
@@ -49,9 +50,10 @@
     <td>{{item.date_check}}</td>
     <td>{{item.facility}}</td>
     <td>{{item.doctor}}</td>
-    <td>{{item.id}}</td>
+    <td>{{item.date_check}}</td>
 
   </tr>
+</tbody>  
   </table>
 
 
@@ -187,6 +189,16 @@ filterItem() {
 </script>
 
 <style scoped>
+
+.tablefix {
+  width: 100%;
+  height: auto;
+}
+td th {
+  border: 1px solid black;
+    padding: 8px 20px;
+}
+
 .titlehero {
   margin-top: 10px;
   margin-bottom: 5px;

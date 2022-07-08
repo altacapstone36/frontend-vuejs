@@ -25,7 +25,6 @@
   <tr v-for="item in filterItem" :key="item">
     <td>{{item.patient_name}}</td>
     <td>{{item.date_check}}</td>
-    
   </tr>
   </table>
       <!-- <p>Name: {{ item.patient_name }}</p>

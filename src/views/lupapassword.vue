@@ -7,22 +7,28 @@
         
 
             <div class="card-text">
-                <form>
-                    
-  <div class=" mb-3">
-  
-<label for="exampleInputEmail1" class="form-label">Enter Registered Email</label>
-  <input type="email" class="form-control" placeholder="Email Address">
-</div>
-    
-  
-  
-  
-  
-  <div class="d-grid gap-2"><button type="submit" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
-</form>
+                <!-- <form> -->
+                        <div class=" mb-7" v-if="!toggleEmail">
+                        <div class="d-flex justify-content-center m-2">
+                        <img src="../assets/Icon/reset password.svg" width="50px" />
+                        </div>
+                      <label for="exampleInputEmail1" class="form-label my-2">Enter Registered Email</label>
+                        <input type="email" v-model="email" class="form-control my-2" placeholder="Email Address">
+                        <div class="d-grid gap-2 m-2">
+                          <button @click="submitEmail()" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
+                          </div>
+                          
+                            <div class=" mb-3" v-if="toggleEmail">
+                        <div class="d-flex justify-content-center m-2">
+                        <img src="../assets/Icon/reset password.svg" width="50px" />
+                        </div>
+                      <label for="exampleInputEmail1" class="form-label my-2">Change Password</label>
+                        <input type="text" v-model="password" class="form-control my-2" placeholder="New Password">
+                        <div class="d-grid gap-2">
+                          <button @click="submitPass()" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
+                      </div>
+                <!-- </form> -->
             </div>
-            
             <br><br>
             <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p>
         </div>
@@ -48,8 +54,28 @@ report.
 </template>
 
 <script>
+
 export default {
-    name: "forgotPassword"
+    name: "forgotPassword",
+    data(){
+      return{
+        toggleEmail : false,
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+      submitEmail(){
+        if(!this.toggleEmail)
+        this.toggleEmail = true
+        console.log(this.email)
+        console.log(this.toggleEmail)
+      },
+      submitPass(){
+        this.toggleEmail = false
+        console.log(this.password)
+      }
+    }
 }
 </script>
 
@@ -62,7 +88,7 @@ export default {
 }
 
 .login-form{
-    height:170px;
+    height:330px;
     width: 330px;
     padding:20px;
     background: #F3F3F3;
