@@ -7,17 +7,17 @@
         
 
             <div class="card-text">
-                <!-- <form> -->
-                      <div class=" mb-3">
+                <form @submit.prevent="submitEmail()">
+                        <div class=" mb-7">
                         <div class="d-flex justify-content-center m-2">
                         <img src="../assets/Icon/reset password.svg" width="50px" />
                         </div>
-                      <label for="exampleInputEmail1" class="form-label my-2">Change Password</label>
-                        <input type="text" v-model="password" class="form-control my-2" placeholder="New Password">
-                        <div class="d-grid gap-2">
-                          <button @click="submitPass()" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
-                      </div>
-                <!-- </form> -->
+                      <label for="exampleInputEmail1" class="form-label my-2">Enter Registered Email</label>
+                        <input type="email" v-model="email" class="form-control my-2" placeholder="Email Address">
+                        <div class="d-grid gap-2 m-2">
+                          <button type="submit" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
+                          </div>
+                </form>
             </div>
             <br><br>
             <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p>
@@ -44,33 +44,24 @@ report.
 </template>
 
 <script>
-
+import axios from 'axios'
 export default {
-    name: "forgotPassword",
+    name: "findEmail",
     data(){
       return{
-       
-        password: ''
+        email: '',
       }
     },
     methods: {
+    async submitEmail(){
+      const response = await axios.post('find_email',{
+        email: this.email
+      })
+      console.log(response)
      
-      submitPass(){
-        let data = {
-        email: this.password,
-      };
-      this.$store
-        .dispatch("forgot_password", data)
-        .then(response => {
-          console.log(response)
-          this.$router.push({
-            name: 'loginPage'
-          })
-        }).catch(error => {
-          this.errors = error.response.data.errors
-        })
-      }
     }
+      },
+    
 }
 </script>
 

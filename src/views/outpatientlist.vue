@@ -4,7 +4,7 @@
           <img src="../assets/Icon/outpatient list.svg" width="40px"/>
             <h3 class="titlehero">OUTPATIENT LIST</h3>
         </div>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mb-4">
           <p class="mx-2 mt-2">Sort Tanggal Kontrol From :</p>
           <!-- <b-button @click="mindateA()">test</b-button> -->
           <div class="d-flex justify-content-end">
@@ -16,59 +16,43 @@
           </div>
         </div>
         <div class="d-block cardinput lightdark-b tablelong">
-    <!-- <b-table
-    :id="my-table"    
-      :items="items"
-      :fields="fields"
-      :sort-by.sync="sortBy"
-      :per-page="perPage"
-      :current-page="currentPage"
-      :sort-compare="mysortCompare"
-      
-
-      class="text-center lightdark-b"
-    >
-    </b-table> -->
-
-  <table class="text-center tablefix">
-    <thead class="lightdark-a">
-  <tr class="text-center">
-    <th>Nomor Antrian</th>
-    <th>Kode Pasien</th>
-    <th>Nama Pasien</th>
-    <th>Tanggal Daftar</th>
-    <th>Jenis Poli</th>
-    <th>Nama Dokter</th>
-    <th>Tanggal Kontrol</th>
-  </tr>
+<!-- <div class="card-body"> -->
+        <table class="table">
+  <thead class="lightdark-a">
+    <tr>
+     <th scope="col">Nomor Antrian</th>
+    <th scope="col">Kode Pasien</th>
+    <th scope="col">Nama Pasien</th>
+    <th scope="col">Tanggal Daftar</th>
+    <th scope="col">Jenis Poli</th>
+    <th scope="col">Nama Dokter</th>
+    <th scope="col">Tanggal Kontrol</th>
+    </tr>
   </thead>
-  <tbody class="lightdark-b">
-  <tr v-for="item in filterItem" :key="item">
-    <td>{{item.queue}}</td>
-    <td>{{item.serial_number}}</td>
-    <td>{{item.patient_name}}</td>
-    <td>{{item.date_check}}</td>
-    <td>{{item.facility}}</td>
-    <td>{{item.doctor}}</td>
-    <td>{{item.date_check}}</td>
+  <tbody>
+    <tr v-for="item in filterItem" :key="item">
+      <td scope="row">{{item.queue}}</td>
+    <td scope="row">{{item.serial_number}}</td>
+    <td scope="row">{{item.patient_name}}</td>
+    <td scope="row">{{item.date_check}}</td>
+    <td scope="row">{{item.facility}}</td>
+    <td scope="row">{{item.doctor}}</td>
+    <td scope="row">{{item.date_check}}</td>
+    </tr>    
+  </tbody>
+</table>
+<!-- </div> -->
+</div>
 
-  </tr>
-</tbody>  
-  </table>
-
-
-        </div>
         <div class="d-flex my-2 ">
 <p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
-<b-pagination
-      v-model="currentPage"
-      :total-rows="totalRows"
-      :per-page="perPage"
-      aria-controls="my-table"
-      label-next-page="nextPage"
-      label-prev-page="prevPage"
-    >
-    </b-pagination>        
+ <b-pagination
+          @change="onPageChanged"
+          :total-rows="totalRows"
+          :per-page="perPage"
+          v-model="currentPage"
+          class="my-0"
+        />
     </div>
    
     </div>
@@ -117,6 +101,7 @@ filterItem() {
 
     data() {
       return {
+        paginatedItems: this.items,
         selectedType: '',
         startDate:null,
         endDate:null,
@@ -189,12 +174,32 @@ filterItem() {
 </script>
 
 <style scoped>
+.img1{
+    height:50px;
+    width:50px;
 
+}
+
+.card-head{
+     margin-left: 60px;
+    font-size: 20px;
+    margin-top: 1.5rem;
+}
+
+
+
+.btn{
+    
+    height: 33px;
+    width: 55px;
+    background: #794B93;
+}
 .tablefix {
   width: 100%;
   height: auto;
+  padding: 8px 20px;
 }
-td th {
+td td {
   border: 1px solid black;
     padding: 8px 20px;
 }

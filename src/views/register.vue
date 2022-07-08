@@ -10,32 +10,32 @@
             </div>
 
             <div class="card-text">
-                <form>
+                <form @submit.prevent="register">
                     <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Name</label>
-    <input type="name" class="form-control" id="name" placeholder="Name">
-    
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input type="email" class="form-control" id="email" placeholder="Email Address">
-    
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password">
-  </div>
-  
-  
-  <div class="d-grid gap-2"><button type="submit" class="btn btn-primary">REGISTER</button></div>
-</form>
-            </div>
-            <br>
-            <p class=" text-center">Already have an account?<strong><a href="/login" class="text2 text-decoration-none"> Sign In</a></strong></p>
-        </div>
-       
-    </div>
-    </div>
+                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                    <input type="name" class="form-control" id="name" placeholder="Name" v-model="full_name">
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email Address" v-model="email">
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
+                  </div>
+                  
+                  
+                  <div class="d-grid gap-2"><button type="submit" class="btn btn-primary">REGISTER</button></div>
+                </form>
+                            </div>
+                            <br>
+                            <p class=" text-center">Already have an account?<strong><a href="/login" class="text2 text-decoration-none"> Sign In</a></strong></p>
+                        </div>
+                      
+                    </div>
+                    </div>
     <div class="col-sm-8">
       <img class="img2" src="../assets/amico.svg"><br>
       <center><h4>Manage All Hospital Data Easily</h4></center><br>
@@ -56,7 +56,40 @@ report.
 
 <script>
 export default {
-    name: "registerPage"
+    name: "registerPage",
+    data() {
+    return {
+      full_name: "",
+      email: "",
+      password: "",
+      facility_id: 1,
+      gender: "Male",
+      role_id: 1,
+      errors: null
+    };
+  },
+  methods: {
+    register() {
+      let data = {
+        full_name: this.full_name,
+        email: this.email,
+        password: this.password,
+        facility_id: this.facility_id,
+        gender: this.gender,
+        role_id: this.role_id
+      };
+      this.$store
+        .dispatch("register", data)
+        .then(response => {
+          console.log(response)
+          this.$router.push({
+            name: 'loginPage'
+          })
+        }).catch(error => {
+          this.errors = error.response.data.errors
+        })
+    }
+  }
 }
 </script>
 

@@ -114,6 +114,19 @@ export default {
 </script>
 
 <style scoped>
+
+.lightdark-a {
+  background-color: #DDDDDD;
+;
+
+;
+}
+.lightdark-b {
+background-color: #F3F3F3;
+
+;
+}
+
 .hdrop {
   height: 38px;
   margin-top: 5px;
@@ -134,7 +147,8 @@ export default {
 .cardlist{
     padding: 15px;
     margin: 5px;
-    background-color: white;
+    background-color:white;
+;
     display: flex;
     justify-content: space-between;
 }

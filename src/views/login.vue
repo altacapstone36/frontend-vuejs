@@ -12,9 +12,9 @@
                     <span class="input-group-text" id="addon-wrapping">
                       <img class="imglogin" src="../assets/login2.png">
                   </span>
-                  <div class="alert alert-danger" v-for="(error, index) in errors" :key="index">
+                  <!-- <div class="alert alert-danger" v-for="(error, index) in errors" :key="index">
                   {{ error[0] }}
-                  </div>
+                  </div> -->
                 
                     <input type="email" v-model="form.email" class="form-control" placeholder="Email">
                   </div>
@@ -31,7 +31,7 @@
                   </form>
             </div>
             <br><br>
-            <a href="/lupapassword" class="text-center text-decoration-none">FORGOT PASSWORD</a>
+            <a href="/findemail" class="text-center text-decoration-none">FORGOT PASSWORD</a>
             <br><br>
             <p class=" text-center">Don't have an account yet?<a href="/register" class="text2 text-decoration-none"> Sign Up</a></p>
 

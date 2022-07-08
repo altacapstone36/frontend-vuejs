@@ -79,5 +79,44 @@ export default{
              resolve()
             })
            },
+           
+           register({ commit }, data) {
+            return new Promise((resolve, reject) => { 
+             axios.post('register', data)
+              .then(resp => {
+                console.log(resp.message) 
+               resolve(resp)
+              })
+              .catch(err => {
+               commit('reset_user')   
+               reject(err)
+              })
+            })
+           },
+        //  async findEmail({ commit }, data) {
+        //      await axios.post('find_email', data)
+        //       .then(response => {
+        //         console.log(response) 
+               
+        //       })
+        //       .catch(err => {
+        //        commit('reset_user')   
+        //        console.log(err)
+        //       })
+            
+        //    },
+        //    forgot_password({ commit }, data) {
+        //     return new Promise((resolve, reject) => { 
+        //      axios.post('forgot_password', data)
+        //       .then(resp => {
+        //         console.log(resp) 
+        //        resolve(resp)
+        //       })
+        //       .catch(err => {
+        //        commit('reset_user')   
+        //        reject(err)
+        //       })
+        //     })
+        //    },
     } 
   }
