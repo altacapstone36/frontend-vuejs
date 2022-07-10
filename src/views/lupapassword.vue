@@ -4,7 +4,25 @@
     <div class="col-sm-4">
         <div class="global-container">
       <div class="card login-form">
-        
+        <b-alert
+      v-model="showTop"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
+      variant="secondary"
+      
+    >
+      {{message}}
+    </b-alert>
+    <!-- <b-alert
+      v-model="showError"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
+      variant="danger"
+      
+    >
+      {{messageError}}
+    </b-alert> -->
+   
 
             <div class="card-text">
                 <!-- <form> -->
@@ -15,7 +33,7 @@
                       <label for="exampleInputEmail1" class="form-label my-2">Change Password</label>
                         <input type="text" v-model="password" class="form-control my-2" placeholder="New Password">
                         <div class="d-grid gap-2">
-                          <button @click="submitPass()" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
+                          <button @click="submitPass()" class="btn btn-primary">SEND NEW PASSWORD</button></div>
                       </div>
                 <!-- </form> -->
             </div>
@@ -44,32 +62,77 @@ report.
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     name: "forgotPassword",
     data(){
       return{
-       
-        password: ''
+        dismissSecs: 5,
+        dismissCountDown: 0,
+        password: '',
+        message: '',
+        showTop: false,
+        showError: false,
       }
     },
     methods: {
-     
-      submitPass(){
-        let data = {
-        email: this.password,
-      };
-      this.$store
-        .dispatch("forgot_password", data)
-        .then(response => {
-          console.log(response)
-          this.$router.push({
-            name: 'loginPage'
-          })
-        }).catch(error => {
-          this.errors = error.response.data.errors
-        })
-      }
+//await axios.post('find_email', data)
+        //        .then(response => {
+        //         console.log(response)
+        //         const token = response.data.jwt.access_token  
+        //         localStorage.setItem('token', token) 
+        //         setHeaderToken(token) 
+                
+        //         })
+        //        .catch(err => {
+        //          commit('reset_user')  
+        //          console.log(err)
+        //         //  reject(err)
+        //       })
+        //     // })     
+     async submitPass(){
+      const token = this.$localStorage.get('token')
+       await axios.post('forgot_password', {
+        password: this.password
+       },{
+        params: {
+          token: token
+        }
+       }).then(response => {
+        console.log(response)
+        this.$router.push('login')
+      if (response.status === 200){
+        //alert(response.message)
+        const message = response.data.message
+        this.$localStorage.set('messagePass', message)
+        console.log(response.data.message)
+       }
+
+      }).catch(error => {
+        console.log(error)
+        if (error){
+            const message = error.response.data.error.password
+            this.message = message
+             this.showTop = true
+              setTimeout(() => {
+            this.showTop = false;
+                  }, 2000);
+            }
+       })
+       
+       }
+    },
+    mounted(){
+       const message = this.$localStorage.get('messageEmail')
+       if(message){
+          this.message = message
+               this.showTop = true
+              setTimeout(() => {
+            this.showTop = false;
+                  }, 2000);
+       }
+        
     }
 }
 </script>

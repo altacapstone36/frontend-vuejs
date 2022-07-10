@@ -104,7 +104,7 @@ filterItem() {
 
     data() {
       return {
-        paginatedItems: this.items,
+        // paginatedItems: this.items,
         selectedType: '',
         startDate:null,
         endDate:null,

@@ -14,17 +14,24 @@
                     <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Name</label>
                     <input type="name" class="form-control" id="name" placeholder="Name" v-model="full_name">
-                    
                   </div>
+                  <div v-if="apierrorNama" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{errorsNama}}
+                    </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Email Address" v-model="email">
-                    
                   </div>
+                  <div v-if="apierrorEmail" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{errorsEmail}}
+                    </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
                   </div>
+                  <div v-if="apierrorPassword" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{errorsPassword}}
+                    </div>
                   
                   
                   <div class="d-grid gap-2"><button type="submit" class="btn btn-primary">REGISTER</button></div>
@@ -65,7 +72,13 @@ export default {
       facility_id: 1,
       gender: "Male",
       role_id: 1,
-      errors: null
+      errorsNama: '',
+      errorsEmail: '',
+      errorsPassword: '',
+
+        apierrorEmail: false,
+        apierrorPassword: false,
+        apierrorNama: false,
     };
   },
   methods: {
@@ -78,16 +91,44 @@ export default {
         gender: this.gender,
         role_id: this.role_id
       };
-      this.$store
-        .dispatch("register", data)
+      this.$store.dispatch("register", data)
         .then(response => {
-          console.log(response)
+          const message = response
+          console.log(message)
+
           this.$router.push({
             name: 'loginPage'
           })
-        }).catch(error => {
-          this.errors = error.response.data.errors
         })
+        .catch(error => {
+          console.log(error.response.data.error)
+          
+          //const error = error.response.data.error
+          const errorEmail = error.response.data.error.email
+          const errorPassword = error.response.data.error.password
+          const errorNama = error.response.data.error.full_name
+          console.log(errorEmail)
+          if(errorEmail){
+            this.apierrorEmail = true
+            this.errorsEmail = errorEmail
+          }else{
+            this.apierrorEmail = false
+          }
+          if(errorPassword){
+            this.apierrorPassword = true
+            this.errorsPassword = errorPassword
+          }else{
+            this.apierrorPassword = false
+          }
+          if(errorNama){
+            this.apierrorNama = true
+            this.errorsNama = errorNama
+          }else{
+            this.apierrorNama = false
+          }
+          
+        })
+        
     }
   }
 }
@@ -102,7 +143,7 @@ export default {
 }
 
 .login-form{
-    height:425px;
+    height:auto;
     width: 330px;
     padding:20px;
     background: #F3F3F3;

@@ -41,7 +41,7 @@ const actions = {
       
       .then((response) => {
         store.commit("setList", response.data.data);
-        console.log("reponse", response)
+        console.log("reponse", response.data.data)
       })
       .catch((error) => {
         store.commit(error);
@@ -58,7 +58,7 @@ const actions = {
       
       .then((response) => {
         store.commit("setList", response.data.data);
-        console.log("reponse", response)
+        console.log("reponse", response.data.data)
       })
       .catch((error) => {
         store.commit(error);

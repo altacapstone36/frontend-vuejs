@@ -4,8 +4,15 @@
     <div class="col-sm-4">
         <div class="global-container">
       <div class="card login-form">
-        
-
+        <!-- <b-alert
+      v-model="showTop"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
+      variant="danger"
+      
+    >
+      {{message}}
+    </b-alert> -->
             <div class="card-text">
                 <form @submit.prevent="submitEmail">
                         <div class=" mb-7">
@@ -14,6 +21,9 @@
                         </div>
                       <label for="exampleInputEmail1" class="form-label my-2">Enter Registered Email</label>
                         <input type="email" v-model="email" class="form-control my-2" placeholder="Email Address">
+                        <div v-if="showTop" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class=" mx-2"></b-icon>{{message}}
+                    </div>
                         <div class="d-grid gap-2 m-2">
                           <button type="submit" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
                           </div>
@@ -44,29 +54,60 @@ report.
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
     name: "findEmail",
     data(){
       return{
         email: '',
+        showTop: false,
+        message: ''
       }
     },
     methods: {
-      submitEmail(){
-      let data = {
-        email: this.email,
-      };
-      this.$store
-        .dispatch("findEmail", data)
-        .then(response => {
-          console.log(this.email)
-          console.log(response)
-         
-        }).catch(error => {
-          this.errors = error.response.data.errors
-        })
-    }
+     async submitEmail(){
+        await axios.post('find_email', {email: this.email})
+          .then(response => {
+        console.log(response)
+        const token = response.data.jwt.access_token
+        console.log(token)
+        this.$localStorage.set('token', token)
+        if(token){
+           this.$router.push('forgotpassword')   
+          }
+          })
+          .catch(error => {
+            console.log(error.response.data.message)
+            if (error){
+            const message = error.response.data.message
+            this.message = message
+             this.showTop = true
+              setTimeout(() => {
+            this.showTop = false;
+                  }, 2000);
+            }
+          })
+        
+          
+            
+            
+          
+
+    //   const data = {
+    //     email: this.email,
+    //   };
+    //   this.$store
+    //     .dispatch("findEmail", data)
+    //     .then(res => {
+    //       console.log(this.email)
+    //       console.log(res)
+
+    //       const token = this.$localStorage.get('token')
+    //      console.log(token)
+    //     }).catch(error => {
+    //       this.errors = error.response.data.errors
+    //     })
+     }
       },
     
 }

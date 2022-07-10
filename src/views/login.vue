@@ -3,9 +3,21 @@
     <div>
   <div class="row">
     <div class="col-sm-4">
-      <div class="alert alert-danger mt-4" v-if="apierror">
+      
+    <b-alert
+      v-model="showTop"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
+      variant="secondary"
+      
+    >
+      {{message}}
+    </b-alert>
+
+      
+      <!-- <div class="alert alert-danger mt-4" v-if="apierror">
                  <b-icon icon="info-circle" class="mx-2"></b-icon> {{ errors }}
-                  </div>
+                  </div> -->
         <div class="global-container">
       <div class="card login-form">
         <div class="card-body">
@@ -79,7 +91,10 @@ export default {
         apierrorEmail: false,
         apierrorPassword: false,
         apierror: false,
-        errors: null
+        errors: null,
+          message: '',
+          showTop: false,
+
       }
     },
     methods: {
@@ -115,7 +130,19 @@ export default {
           // this.errors = error.response.data.error
         })
       }
+    },
+        mounted(){
+       const message = this.$localStorage.get('messagePass')
+       if(message){
+          this.message = message
+               this.showTop = true
+              setTimeout(() => {
+            this.showTop = false;
+                  }, 2000);
+       }
+        
     }
+
 
 }
 </script>

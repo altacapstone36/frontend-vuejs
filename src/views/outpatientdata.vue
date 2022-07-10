@@ -99,11 +99,11 @@ export default {
             const z = y / x  
             return Math.floor(z) + 1       
             },
-            listPatient() {
-            const items = this.$store.state.pokemon.items
-            return items;
+    //         listPatient() {
+    //         const items = this.$store.state.outpatient.items
+    //         return items;
             
-    },
+    // },
 
 },
 
@@ -151,8 +151,8 @@ export default {
         },
         fetchOutpatient(){
           this.$store.dispatch('outpatient/fetchoutpatientReport')
-          const listItems = this.$store.state.outpatient.items
-          this.items = listItems
+          this.items = this.$store.state.outpatient.items
+          console.log('test', this.items)
         }
     
   },

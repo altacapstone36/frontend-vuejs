@@ -93,34 +93,37 @@ export default{
               })
             })
            },
-        async findEmail({ commit }) {
-          // return new Promise((resolve, reject) => { 
-          const email = 'ardhan@holyhos.co.id'
-            await axios.get('find_email',{params:email})
-               .then(response => {
-                console.log(response) 
+        // async findEmail({ commit }, data) {
+        //   // return new Promise((resolve, reject) => { 
+        //   // const email = 'ardhan@holyhos.co.id'
+        //     await axios.post('find_email', data)
+        //        .then(response => {
+        //         console.log(response)
+        //         const token = response.data.jwt.access_token  
+        //         localStorage.setItem('token', token) 
+        //         setHeaderToken(token) 
                 
-                })
-               .catch(err => {
-                 commit('reset_user')  
-                 console.log(err)
-                //  reject(err)
-              })
-            // })
-           },
-           forgot_password({ commit }, data) {
+        //         })
+        //        .catch(err => {
+        //          commit('reset_user')  
+        //          console.log(err)
+        //         //  reject(err)
+        //       })
+        //     // })
+        //    },
+        //    forgot_password({ commit }, data) {
             
-             axios.post(`forgot_password`,data)
-              .then(resp => {
-                console.log(resp) 
+        //      axios.post(`forgot_password`,data)
+        //       .then(resp => {
+        //         console.log(resp) 
                
-              })
-              .catch(err => {
-               commit('reset_user') 
-               console.log(err)  
+        //       })
+        //       .catch(err => {
+        //        commit('reset_user') 
+        //        console.log(err)  
                
-              })
+        //       })
         
-           },
+        //    },
     } 
   }
