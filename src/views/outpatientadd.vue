@@ -76,8 +76,7 @@
                           v-model="facility"
                           :options="poli"
                           required
-                          plain
-                           class="hdrop"
+                           class="hdrop w100"
                         ></b-form-select>
               </b-col>
           </b-row>
@@ -92,8 +91,7 @@
                           v-model="jadwal_sesi"
                           :options="sesi"
                           required
-                          plain
-                           class="hdrop"
+                           class="hdrop w100"
                         ></b-form-select>
               </b-col>
           </b-row>
@@ -108,8 +106,7 @@
                           v-model="doctor"
                           :options="dokter"
                           required
-                          plain
-                           class="hdrop"
+                           class="hdrop w100"
                         >
                         </b-form-select>
               </b-col>
@@ -194,8 +191,13 @@ export default {
       this.kode_pasien = '',
       this.date_check = null  
       },
-    }
-
+      fetchPatient(){
+        this.$store.dispatch('outpatient/fetchPatient')
+      }
+    },
+  mounted(){
+    this.fetchPatient()
+  }
 
   
 }
@@ -213,14 +215,8 @@ export default {
   padding-left: 24px;
   padding-right: 24px;
 }
-
-.hdrop {
-  height: 38px;
-  margin-top: 5px;
-  margin-bottom: 5px;
- border-radius: 5px; 
- border: 1px solid #1b1515;
- background: #F3F3F3;
+.w100{
+  width: 100%;
 }
 .inputdata {
     border-color: black;
@@ -233,6 +229,14 @@ export default {
     margin-bottom: 16px;
     margin-left: 24px;
     margin-right: 0px;
+}
+.hdrop {
+  height: 38px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+ border-radius: 5px; 
+ border: 1px solid #1b1515;
+ background: #F3F3F3;
 }
 
 </style>

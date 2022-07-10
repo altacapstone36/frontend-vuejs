@@ -93,30 +93,34 @@ export default{
               })
             })
            },
-        //  async findEmail({ commit }, data) {
-        //      await axios.post('find_email', data)
-        //       .then(response => {
-        //         console.log(response) 
-               
-        //       })
-        //       .catch(err => {
-        //        commit('reset_user')   
-        //        console.log(err)
-        //       })
+        async findEmail({ commit }) {
+          // return new Promise((resolve, reject) => { 
+          const email = 'ardhan@holyhos.co.id'
+            await axios.get('find_email',{params:email})
+               .then(response => {
+                console.log(response) 
+                
+                })
+               .catch(err => {
+                 commit('reset_user')  
+                 console.log(err)
+                //  reject(err)
+              })
+            // })
+           },
+           forgot_password({ commit }, data) {
             
-        //    },
-        //    forgot_password({ commit }, data) {
-        //     return new Promise((resolve, reject) => { 
-        //      axios.post('forgot_password', data)
-        //       .then(resp => {
-        //         console.log(resp) 
-        //        resolve(resp)
-        //       })
-        //       .catch(err => {
-        //        commit('reset_user')   
-        //        reject(err)
-        //       })
-        //     })
-        //    },
+             axios.post(`forgot_password`,data)
+              .then(resp => {
+                console.log(resp) 
+               
+              })
+              .catch(err => {
+               commit('reset_user') 
+               console.log(err)  
+               
+              })
+        
+           },
     } 
   }

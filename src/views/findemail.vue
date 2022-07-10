@@ -7,7 +7,7 @@
         
 
             <div class="card-text">
-                <form @submit.prevent="submitEmail()">
+                <form @submit.prevent="submitEmail">
                         <div class=" mb-7">
                         <div class="d-flex justify-content-center m-2">
                         <img src="../assets/Icon/reset password.svg" width="50px" />
@@ -44,7 +44,7 @@ report.
 </template>
 
 <script>
-import axios from 'axios'
+
 export default {
     name: "findEmail",
     data(){
@@ -53,12 +53,19 @@ export default {
       }
     },
     methods: {
-    async submitEmail(){
-      const response = await axios.post('find_email',{
-        email: this.email
-      })
-      console.log(response)
-     
+      submitEmail(){
+      let data = {
+        email: this.email,
+      };
+      this.$store
+        .dispatch("findEmail", data)
+        .then(response => {
+          console.log(this.email)
+          console.log(response)
+         
+        }).catch(error => {
+          this.errors = error.response.data.errors
+        })
     }
       },
     

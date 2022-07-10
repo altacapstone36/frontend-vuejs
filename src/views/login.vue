@@ -3,6 +3,9 @@
     <div>
   <div class="row">
     <div class="col-sm-4">
+      <div class="alert alert-danger mt-4" v-if="apierror">
+                 <b-icon icon="info-circle" class="mx-2"></b-icon> {{ errors }}
+                  </div>
         <div class="global-container">
       <div class="card login-form">
         <div class="card-body">
@@ -12,18 +15,21 @@
                     <span class="input-group-text" id="addon-wrapping">
                       <img class="imglogin" src="../assets/login2.png">
                   </span>
-                  <!-- <div class="alert alert-danger" v-for="(error, index) in errors" :key="index">
-                  {{ error[0] }}
-                  </div> -->
+                 
                 
                     <input type="email" v-model="form.email" class="form-control" placeholder="Email">
-                  </div>
-                    
+                    </div>
+                    <div v-if="apierror" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{errors.email}}
+                    </div>
+        
                     <div class="input-group flex-nowrap mb-3">
                     <span class="input-group-text" id="addon-wrapping"><img class="imglogin" src="../assets/password2.png"></span>
                     <input type="password" v-model="form.password" class="form-control" placeholder="Password">
                   </div>
-                    
+                    <div v-if="apierror" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{errors.password}}
+                    </div>
   
                     <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-primary">ADMIN LOGIN</button>
@@ -70,6 +76,9 @@ export default {
           email: '',
           password: '',
         },
+        apierrorEmail: false,
+        apierrorPassword: false,
+        apierror: false,
         errors: null
       }
     },
@@ -80,7 +89,30 @@ export default {
           console.log(response)
           this.$router.push({name: 'homePage'})
         }).catch(error => {
-          this.errors = error
+          const errorEmail = error.response.data.error.email
+          const errorPassword = error.response.data.error.password
+          const errorBiasa = error.response.data.error
+          if(errorEmail){
+            this.apierrorEmail = true
+            this.errors = errorEmail
+          }else{
+            this.apierrorEmail = false
+          }
+          if(errorPassword){
+            this.apierrorPassword = true
+            this.errors = errorPassword
+          }else{
+            this.apierrorPassword = false
+          }
+          if(errorBiasa){
+            this.apierror = true
+            this.errors = errorBiasa
+          }else{
+            this.apierror = false
+          }
+          console.log(error.response.data.error)
+          // this.apierror = true
+          // this.errors = error.response.data.error
         })
       }
     }
@@ -97,7 +129,7 @@ export default {
 }
 
 .login-form{
-    height:350px;
+    height:auto;
     width: 330px;
     padding:20px;
     background: #F3F3F3;

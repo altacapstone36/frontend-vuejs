@@ -60,7 +60,7 @@
 
 <script>
 //import Vue from 'vue'
-import axios from 'axios'
+//import axios from 'axios'
 export default {
     name: "outpatientList",
         computed: {
@@ -95,8 +95,11 @@ filterItem() {
           }
           return true;
         })
-    }
-
+    },
+ listPatient() {
+            const items = this.$store.state.pokemon.items
+            return items;
+            },
     },
 
     data() {
@@ -153,22 +156,15 @@ filterItem() {
     },
     formatDate(date) {
       return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date))
-    }
     },
- async mounted(){
-         try {
-    const response1 = await axios.get('http://localhost:8080/api/outpatient/report');
-   this.items = response1.data.data;
-//    const dataOne = response1.data.data
-    console.log(response1.data)
-//    console.log(response1.data.data.id)
-    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
-    // this.arrayTwo = response2.data.data;
-    // console.log(this.arrayTwo)
-  } catch(e) {
-    console.log(e);
-  }
-
+    fetchOutpatient(){
+          this.$store.dispatch('outpatient/fetchoutpatientList')
+          const listItems = this.$store.state.outpatient.items
+          this.items = listItems
+        },
+    },
+  mounted(){
+    this.fetchOutpatient()
   }
 }
 </script>

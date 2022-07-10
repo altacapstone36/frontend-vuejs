@@ -85,6 +85,7 @@
 </template>
 
 <script>
+
 //import axios from 'axios'
 export default {
     name: "outpatientReport",
@@ -98,6 +99,11 @@ export default {
             const z = y / x  
             return Math.floor(z) + 1       
             },
+            listPatient() {
+            const items = this.$store.state.pokemon.items
+            return items;
+            
+    },
 
 },
 
@@ -111,7 +117,7 @@ export default {
                 { key: 'date_check', label: 'Tanggal Kontrol', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
                 ],
-        items: [],
+        items:[],
         tableVariants: [
           'primary',
           'secondary',
@@ -143,47 +149,16 @@ export default {
                 this.sortBy = ''
             }
         },
+        fetchOutpatient(){
+          this.$store.dispatch('outpatient/fetchoutpatientReport')
+          const listItems = this.$store.state.outpatient.items
+          this.items = listItems
+        }
     
   },
-//   async mounted() {
-//      try {
-//     const response1 = await axios.get('http://localhost:8080/api/outpatient');
-//     this.items = response1.data.data;
-// //    const dataOne = response1.data.data
-//     console.log(this.items)
-// //    console.log(response1.data.data.id)
-//     // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
-//     // this.arrayTwo = response2.data.data;
-//     // console.log(this.arrayTwo)
-//   } catch(e) {
-//     console.log(e);
-//   }
-//           //  try{
-//           //  const token = this.$localStorage.get('token')
-//           //   const responseOutpatient = await axios.get('http://localhost:8080/api/outpatient', {
-//           //     headers: { 'Authorization': 'Bearer ' + token ,
-//           //                 "Access-Control-Allow-Origin" : "*",
-//           //                 "Content-type": "Application/json",
-//           //               }
-//           //   })
-//           //   this.arrayOne = responseOutpatient.data.data
-//           //   console.log(this.arrayOne) 
-//           //    const responsePatient = await axios.get('http://localhost:8080/api/patient', {
-//           //     headers: { 'Authorization': 'Bearer ' + token ,
-//           //                 "Access-Control-Allow-Origin" : "*",
-//           //                 "Content-type": "Application/json",
-//           //               }
-//           //   })
-//           //   this.arrayTwo = responsePatient.data.data
-//           //   console.log(this.arrayTwo) 
-//           //   }
-
-//           //   .catch(err => {
-//           //      console.log(err)
-//           //    });
-
-//   },
-
+  mounted(){
+    this.fetchOutpatient()
+  }
   
 }
 </script>

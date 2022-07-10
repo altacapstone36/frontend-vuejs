@@ -93,7 +93,7 @@ const routes = [
     component: patientData
 },
 {
-    path: '/lupapassword',
+    path: '/forgotpassword',
     name: 'forgotPassword',
     meta: {layout: 'blank'},
     component: forgotPassword
