@@ -82,9 +82,9 @@ export default {
             const message = error.response.data.message
             this.message = message
              this.showTop = true
-              setTimeout(() => {
-            this.showTop = false;
-                  }, 2000);
+            //   setTimeout(() => {
+            // this.showTop = false;
+            //       }, 2000);
             }
           })
         

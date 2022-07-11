@@ -60,7 +60,7 @@
 
 <script>
 //import Vue from 'vue'
-//import axios from 'axios'
+import axios from 'axios'
 export default {
     name: "outpatientList",
         computed: {
@@ -157,14 +157,26 @@ filterItem() {
     formatDate(date) {
       return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date))
     },
-    fetchOutpatient(){
-          this.$store.dispatch('outpatient/fetchoutpatientList')
-          const listItems = this.$store.state.outpatient.items
-          this.items = listItems
-        },
+    // fetchOutpatient(){
+    //       this.$store.dispatch('outpatient/fetchoutpatientList')
+    //       const listItems = this.$store.state.outpatient.items
+    //       this.items = listItems
+    //     },
     },
-  mounted(){
-    this.fetchOutpatient()
+ async mounted(){
+    //this.fetchOutpatient()
+    try {
+    const response1 = await axios.get('http://localhost:8080/api/outpatient');
+   this.items = response1.data.data;
+//    const dataOne = response1.data.data
+    console.log(response1.data)
+//    console.log(response1.data.data.id)
+    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
+    // this.arrayTwo = response2.data.data;
+    // console.log(this.arrayTwo)
+  } catch(e) {
+    console.log(e);
+  }
   }
 }
 </script>

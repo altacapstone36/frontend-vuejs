@@ -16,7 +16,17 @@
               <b-form-group
                 id="fieldset-1"
               >
-          <b-form-input id="input-1" v-model="kode_pasien" trim class="hdrop"></b-form-input>
+              <!-- <select v-model="patient_code" class="hdrop w100">
+                <option
+                  :value="data.code"
+                  v-for="data in kode_pasien"
+                  :key="data.id"
+                  >
+                  {{ data.code }}
+                  </option>
+                </select>
+              -->
+          <b-form-input id="input-1" v-model="patient_code" trim class="hdrop"></b-form-input>
           <div v-if="toggleLength" class="d-flex mx-2 text-danger">
             <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
           </div>
@@ -139,14 +149,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "outpatientAdd",
-    computed: {
-    },
+        computed: {
+
+   
+           },
     data() {
       return {
         name: '',
-        kode_pasien: '',
+        patient_code: '',
         patient_name: '',
         complaint: '',
         queue: '',
@@ -159,27 +172,35 @@ export default {
       poli: [{ text: 'Pilih Poli', value: null }, {text:'Umum', value: 1 }, {text:'Anak', value: 2 }, {text:'Gigi', value: 3 }],
       sesi: [{ text: 'Pilih Sesi', value: null }, {text:'Pagi (08.00 - 11.00)', value: 1}, {text:'Siang (13.00 - 15.00)', value: 2 }, {text:'Sore (16.00 - 18.00)', value: 3 }],
       dokter: [{ text: 'Pilih Dokter', value: null }, {text:'dr. Alshad Ahmad', value: 'DCR00001' }, {text:'dr. Adira Putri', value: 'DCR00002' }, {text:'dr. Shelley Herman', value: 'DCR00003' }, {text:'dr. Christie', value: 'DCR00004'}],
-    
+      kode_pasien: [],
 }
     },
     methods: {
-      onSubmit() {
-        const namapasien = this.patient_name
-        const kodepasien = this.kode_pasien
-        const keluhan = this.complaint
-        
-        if(namapasien.length < 4 || kodepasien.length< 4 || keluhan.length < 4){
-          this.toggleLength = true
-
-        }else        
-        console.log(this.doctor)
-        console.log(this.patient_name)
-        console.log(this.jadwal_sesi)
-        console.log(this.facility)
-        console.log(this.kode_pasien)
-        console.log(this.queue)
-        console.log(this.date_check)
-        console.log(this.complaint)
+     async onSubmit() {
+          const data = {
+            patient_code: this.patient_code,
+            complaint: this.complaint,
+            date_check: this.date_check,
+            facility_id: this.facility,
+            session_id: this.jadwal_sesi,
+            doctor_code: this.doctor
+          }
+          const token = this.$localStorage.get('token')
+        console.log(token)
+        await axios.post('outpatient',data, {
+        headers: { "Authorization" : 'Bearer ' + token
+        }
+      })
+      .then(response => {
+        console.log(response)
+        const messageTrue = response.data.message
+        this.$localStorage.set('messageOutpatient', messageTrue)
+        this.$router.push('outpatientlist')
+      })
+      .catch(error => {
+        console.log(error.response.data.error)
+      })
+              
       },
       onReset() {
       this.doctor = null,
@@ -191,12 +212,26 @@ export default {
       this.kode_pasien = '',
       this.date_check = null  
       },
-      fetchPatient(){
-        this.$store.dispatch('outpatient/fetchPatient')
-      }
+
     },
-  mounted(){
-    this.fetchPatient()
+   
+
+ async mounted(){
+    try {
+    const response1 = await axios.get('http://localhost:8080/api/patient');
+    this.kode_pasien = response1.data.data
+
+//   this.items = response1.data.data;
+//    const dataOne = response1.data.data
+    console.log(response1.data.data)
+//    console.log(response1.data.data.id)
+    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
+    // this.arrayTwo = response2.data.data;
+    // console.log(this.arrayTwo)
+  } catch(e) {
+    console.log(e);
+  }
+  console.log(this.patient_code)
   }
 
   

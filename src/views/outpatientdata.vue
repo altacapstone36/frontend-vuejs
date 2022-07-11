@@ -86,7 +86,7 @@
 
 <script>
 
-//import axios from 'axios'
+import axios from 'axios'
 export default {
     name: "outpatientReport",
     computed: {
@@ -149,15 +149,29 @@ export default {
                 this.sortBy = ''
             }
         },
-        fetchOutpatient(){
-          this.$store.dispatch('outpatient/fetchoutpatientReport')
-          this.items = this.$store.state.outpatient.items
-          console.log('test', this.items)
-        }
+        // fetchOutpatient(){
+        //   this.$store.dispatch('outpatient/fetchoutpatientReport')
+        //   this.items = this.$store.state.outpatient.items
+        //   console.log('test', this.items)
+        // }
     
   },
-  mounted(){
-    this.fetchOutpatient()
+  async mounted(){
+   // this.fetchOutpatient()
+  try {
+    const response1 = await axios.get('http://localhost:8080/api/outpatient/report');
+   this.items = response1.data.data;
+//    const dataOne = response1.data.data
+    console.log(response1.data)
+//    console.log(response1.data.data.id)
+    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
+    // this.arrayTwo = response2.data.data;
+    // console.log(this.arrayTwo)
+  } catch(e) {
+    console.log(e);
+  }
+
+
   }
   
 }
