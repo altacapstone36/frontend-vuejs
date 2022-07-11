@@ -4,6 +4,8 @@ import registerPage from '@/views/register.vue'
 import homePage from '@/views/home.vue'
 import addPatient from'@/views/addpatient.vue'
 import editPatient from'@/views/editpatient.vue'
+import manageUser from '@/views/manageuser.vue'
+import userData from '@/views/userdata.vue'
 import patientData from'@/views/patientdata.vue'
 import forgotPassword from'@/views/lupapassword.vue'
 import Vue from 'vue'
@@ -91,12 +93,21 @@ const routes = [
     component: patientData
 },
 {
+    path: '/manageuser',
+    name: 'manageUser',
+    component: manageUser
+},
+{
+    path: '/userdata',
+    name: 'userData',
+    component: userData
+},
+{
     path: '/lupapassword',
     name: 'forgotPassword',
     meta: {layout: 'blank'},
     component: forgotPassword
 },
-
 
 {
     path: '/schedulelist',

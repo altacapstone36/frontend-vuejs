@@ -50,7 +50,6 @@ export default {
     width:50px;
 
 }
-
 .card-head{
      margin-left: 60px;
     font-size: 20px;
@@ -64,11 +63,12 @@ export default {
     background:#F3F3F3;;
     padding-bottom: 3px;
 }
-
 .btn{
     
     height: 33px;
     width: 55px;
     background: #794B93;
 }
+
 </style>
+
