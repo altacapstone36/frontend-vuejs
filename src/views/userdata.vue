@@ -11,20 +11,20 @@
   <div class="row mb-3">
     <label for="inputName3" class="col-sm-2 col-form-label">Nama User</label>
     <div class="col-sm-10">
-      <input type="name" class="form-control" id="inputName3">
+      <input type="name" v-model="newsData.full_name" class="form-control" id="inputName3">
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3">
+      <input type="email" v-model="newsData.email" class="form-control" id="inputEmail3">
     </div>
   </div>
  
   <div class="row mb-3">
     <label for="inputGender3" class="col-sm-2 col-form-label">Jenis Kelamin</label>
     <div class="col-sm-10">
-      <input type="gender" class="form-control" id="inputGender3">
+      <input type="gender" v-model="newsData.gender" class="form-control" id="inputGender3">
     </div>
   </div>
   <div class="row mb-3">
@@ -32,9 +32,9 @@
     <div class="col-sm-10">
      <select class="form-select" aria-label="Default select example">
   <option selected>Pilih Role</option>
-  <option value="1">Dokter</option>
-  <option value="2">Perawat</option>
-  <option value="3">Apoteker</option>
+  <option value="Doctor">Dokter</option>
+  <option value="Nurse">Perawat</option>
+  <option value="Apoteker">Apoteker</option>
 </select>
       
     </div>
@@ -44,11 +44,11 @@
     <div class="col-sm-10">
       <select class="form-select" aria-label="Default select example">
   <option selected>Pilih Fasilitas</option>
-  <option value="1">Dokter Umum</option>
-  <option value="2">Dokter Anak</option>
+  <option value="General">Dokter Umum</option>
+  <option value="Pedeatrician">Dokter Anak</option>
   <option value="3">Dokter Gigi</option>
-  <option value="3">Perawat Umum</option>
-  <option value="3">Perawat Anak</option>
+  <option value="General">Perawat Umum</option>
+  <option value="Pedeatrician">Perawat Anak</option>
   <option value="3">Perawat Gigi</option>
   <option value="3">-</option>
 </select>
@@ -66,7 +66,20 @@
 
 <script>
 export default {
-    name: "userData"
+    name: "userData",
+    computed: {
+   index () { 
+       return this.$route.params.id
+   },
+   newsData() {
+        return this.$store.state.auth.user[this.index];
+    },
+  },
+  mounted() {
+      console.log(this.newsData)
+      console.log(this.index)
+    
+  },
 }
 </script>
 

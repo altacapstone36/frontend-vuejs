@@ -100,7 +100,7 @@ const routes = [
     component: manageUser
 },
 {
-    path: '/userdata',
+    path: '/userdata/:id',
     name: 'userData',
     component: userData
 },

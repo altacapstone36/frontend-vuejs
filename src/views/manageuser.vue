@@ -26,14 +26,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row"></th>
-
-      <td></td>
-      <td></td>
-      <td></td>
-      <td><router-link to="/userdata" class="btn btn-primary me-md-2" type="button">EDIT</router-link></td>
-      <td></td>
+    <tr v-for="(user, id) in listUser" :key="id">
+      <td scope="row">{{user.full_name}}</td>
+      <td scope="row">{{user.email}}</td>
+      <td scope="row">{{user.gender}}</td>
+      <td scope="row">{{user.roles}}</td>
+      <td><button @click="redirect(id)">EDIT</button></td>
+      
 
     </tr>
     
@@ -60,7 +59,27 @@
 
 <script>
 export default {
-    name: "manageUser"
+    name: "manageUser",
+    computed: {
+      listUser() {
+      return this.$store.state.auth.user;
+    },
+    },
+    methods: {
+      fetchUser(){
+        this.store.dispatch('get_user')
+        
+
+      },
+       redirect(id) {
+        this.$router.push('/userdata/' + id);
+        console.log(id)
+
+        }
+    },
+    mounted(){
+      this.fetchUser()
+    }
 }
 </script>
 
@@ -76,7 +95,7 @@ export default {
 }
 .card-body{
     width: 900px;
-    height:450px;
+    height:auto;
     margin: 2rem auto;
     background:#F3F3F3;;
     padding-bottom: 3px;
