@@ -4,18 +4,26 @@ import registerPage from '@/views/register.vue'
 import homePage from '@/views/home.vue'
 import addPatient from'@/views/addpatient.vue'
 import editPatient from'@/views/editpatient.vue'
-import patientData from '@/views/patientdata.vue'
 import manageUser from '@/views/manageuser.vue'
 import userData from '@/views/userdata.vue'
+import patientData from'@/views/patientdata.vue'
+import forgotPassword from'@/views/lupapassword.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
+import outpatientAdd from '@/views/outpatientadd.vue'
+import outpatientData from '@/views/outpatientdata.vue'
+import outpatientList from '@/views/outpatientlist.vue'
 import changePassword from '@/views/changepassword.vue'
-Vue.use(VueRouter)
+import scheduleList from '@/views/schedulelist.vue'
+import adddoctorSchedule from '@/views/adddoctorschedule.vue'
+import store from '../store'
 
+
+Vue.use(VueRouter)
 const routes = [
 {
-    path: '/landingpage',
+    path: '/',
     name: 'landingPage',
     meta: {layout: 'blank'},
     component: landingPage
@@ -29,11 +37,13 @@ const routes = [
 {
     path: '/login',
     name: 'loginPage',
+    meta: {layout: 'blank'},
     component: loginPage
 },
 {
     path: '/register',
     name: 'registerPage',
+    meta: {layout: 'blank'},
     component: registerPage
 },
 {
@@ -42,6 +52,25 @@ const routes = [
     meta: {layout: 'blank'},
     component: notfound
 },
+
+{
+    path: '/addoutpatient',
+    name: 'outpatientAdd',
+    component: outpatientAdd
+},
+
+{
+    path: '/outpatientreport',
+    name: 'outpatientReport',
+    component: outpatientData
+},
+
+{
+    path: '/outpatientlist',
+    name: 'outpatientList',
+    component: outpatientList
+},
+
 {
     path: '/changepassword',
     name: 'changePassword',
@@ -73,9 +102,23 @@ const routes = [
     name: 'userData',
     component: userData
 },
+{
+    path: '/lupapassword',
+    name: 'forgotPassword',
+    meta: {layout: 'blank'},
+    component: forgotPassword
+},
 
-
-
+{
+    path: '/schedulelist',
+    name: 'scheduleList',
+    component: scheduleList
+},
+{
+    path: '/addschedule',
+    name: 'adddoctorSchedule',
+    component: adddoctorSchedule
+},
 ]
 
 
@@ -86,4 +129,26 @@ const router = new VueRouter({
   routes
 })
 
-export default router
+router.beforeEach((to, from, next) => { 
+    if (to.matched.some(record => record.meta.auth)) {
+      if (store.getters.isLoggedIn && store.getters.user) {
+        next()
+        return
+      }
+      next('/login')
+    }
+  
+    if (to.matched.some(record => record.meta.guest)) {
+      if (!store.getters.isLoggedIn) {
+        next()
+        return
+      }
+      next('/profile')
+    }
+  
+    next()
+  })
+  
+  export default router
+  
+

@@ -48,12 +48,14 @@ export default {
 .img1{
     height:50px;
     width:50px;
+
 }
 .card-head{
      margin-left: 60px;
     font-size: 20px;
     margin-top: 1.5rem;
 }
+
 .card-body{
     width: 900px;
     height:450px;
@@ -67,4 +69,6 @@ export default {
     width: 55px;
     background: #794B93;
 }
+
 </style>
+

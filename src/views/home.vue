@@ -5,15 +5,15 @@
         <b-img rounded="circle" src="https://picsum.photos/200/200/?image=54" alt="Image 1"></b-img>
         </div>
         <div class="nameprofile">
-        <h3>Nama User</h3>
-        <p>administrator</p>
+        <h3>{{nama}}</h3>
+        <p>{{roles}}</p>
         </div>
         <div class="icon">
-            <img src = "../assets/Illu/illus2.svg" width="170" alt="My Happy SVG" class="bgbanner"/>
+            <img src = "../assets/Illu/illus2.svg" width="180" alt="My Happy SVG" class="bgbanner"/>
 
             <svg height="250" width="600">
               
-  <ellipse cx="300" cy="110" rx="300" ry="230"
+  <ellipse cx="350" cy="110" rx="300" ry="230"
   class="elips" />
 </svg>
         </div>
@@ -57,7 +57,7 @@
         <b-card-text>Change Password</b-card-text>
       </b-card>
       <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
-        <a href="/logout" class="btn btn-light stretched-link">
+        <a @click="logout()" class="btn btn-light stretched-link">
         <img src="../assets/Icon/logout.svg" width="100px" class="svgmx"/>
         </a>
         <b-card-text>Logout</b-card-text>
@@ -71,6 +71,28 @@
 
 export default {
     name: "homePage",
+    data(){
+      return{
+        nama: null,
+        roles: null
+      }
+    },
+    methods: {
+            logout() {
+          this.$store.dispatch("logout").then(() => {
+          this.$router.push("/");
+        });
+              },
+
+    },  mounted(){
+    const tokenlocal = this.$localStorage.get('nama')
+    const tokenroles = this.$localStorage.get('roles')
+  if (tokenlocal){
+    console.log(tokenlocal)
+    this.roles = tokenroles
+    this.nama = tokenlocal
+  }
+  }
   
 }
 </script>
@@ -90,11 +112,12 @@ export default {
 }
 .imageprofile {
     margin-left: 105px;
+    margin-top: 20px;
 }
 .nameprofile {
-    margin-left: 50px;
+    margin-left: 60px;
     color: white;
-    margin-top: 100px;
+    margin-top: 70px;
 }
 .icon {
   display: flex;
