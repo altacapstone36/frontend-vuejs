@@ -1,5 +1,10 @@
 # frontend-vuejs
 
+### Test (temporary)
+```
+https://capstone-project-holy-hospital.vercel.app/
+```
+
 ## Project setup
 ```
 npm install
