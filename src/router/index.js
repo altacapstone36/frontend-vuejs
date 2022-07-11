@@ -5,6 +5,8 @@ import homePage from '@/views/home.vue'
 import addPatient from'@/views/addpatient.vue'
 import editPatient from'@/views/editpatient.vue'
 import patientData from '@/views/patientdata.vue'
+import manageUser from '@/views/manageuser.vue'
+import userData from '@/views/userdata.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import  notfound  from '@/views/404.vue'
@@ -60,6 +62,16 @@ const routes = [
     path: '/patientdata',
     name: 'patientData',
     component: patientData
+},
+{
+    path: '/manageuser',
+    name: 'manageUser',
+    component: manageUser
+},
+{
+    path: '/userdata',
+    name: 'userData',
+    component: userData
 },
 
 
