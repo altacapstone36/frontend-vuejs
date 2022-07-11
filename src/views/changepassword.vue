@@ -8,7 +8,7 @@
             <b-card bg-variant="light" class="card text-center mx-2 my-2 text-purple">
             <div class="d-flex my-2 mx-2">
             <p class="m-0">Password Baru</p>
-            <b-form-input :id="`type-${type}`" :type="type" class="inputpass"></b-form-input>
+            <b-form-input :id="`type-${type}`" :type="type" class="inputpass" v-model="password"></b-form-input>
             </div>
             <div class="d-flex justify-content-end submit">
             <b-button type="submit" class="ungusecondary">SUBMIT</b-button>
@@ -25,7 +25,8 @@ export default {
     name: "changePassword",
     data() {
         return{
-            type: 'password'
+            type: 'password',
+            password: '',
         }
     }
 }

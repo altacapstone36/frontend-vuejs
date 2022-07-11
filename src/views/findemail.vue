@@ -4,38 +4,30 @@
     <div class="col-sm-4">
         <div class="global-container">
       <div class="card login-form">
-        <b-alert
+        <!-- <b-alert
       v-model="showTop"
-      class="position-fixed fixed-top m-0 rounded-0"
-      style="z-index: 2000;"
-      variant="secondary"
-      
-    >
-      {{message}}
-    </b-alert>
-    <!-- <b-alert
-      v-model="showError"
       class="position-fixed fixed-top m-0 rounded-0"
       style="z-index: 2000;"
       variant="danger"
       
     >
-      {{messageError}}
+      {{message}}
     </b-alert> -->
-   
-
             <div class="card-text">
-                <!-- <form> -->
-                      <div class=" mb-3">
+                <form @submit.prevent="submitEmail">
+                        <div class=" mb-7">
                         <div class="d-flex justify-content-center m-2">
                         <img src="../assets/Icon/reset password.svg" width="50px" />
                         </div>
-                      <label for="exampleInputEmail1" class="form-label my-2">Change Password</label>
-                        <input type="text" v-model="password" class="form-control my-2" placeholder="New Password">
-                        <div class="d-grid gap-2">
-                          <button @click="submitPass()" class="btn btn-primary">SEND NEW PASSWORD</button></div>
-                      </div>
-                <!-- </form> -->
+                      <label for="exampleInputEmail1" class="form-label my-2">Enter Registered Email</label>
+                        <input type="email" v-model="email" class="form-control my-2" placeholder="Email Address">
+                        <div v-if="showTop" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class=" mx-2"></b-icon>{{message}}
+                    </div>
+                        <div class="d-grid gap-2 m-2">
+                          <button type="submit" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
+                          </div>
+                </form>
             </div>
             <br><br>
             <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p>
@@ -62,78 +54,62 @@ report.
 </template>
 
 <script>
-import axios from 'axios'
-
+import axios from 'axios';
 export default {
-    name: "forgotPassword",
+    name: "findEmail",
     data(){
       return{
-        dismissSecs: 5,
-        dismissCountDown: 0,
-        password: '',
-        message: '',
+        email: '',
         showTop: false,
-        showError: false,
+        message: ''
       }
     },
     methods: {
-//await axios.post('find_email', data)
-        //        .then(response => {
-        //         console.log(response)
-        //         const token = response.data.jwt.access_token  
-        //         localStorage.setItem('token', token) 
-        //         setHeaderToken(token) 
-                
-        //         })
-        //        .catch(err => {
-        //          commit('reset_user')  
-        //          console.log(err)
-        //         //  reject(err)
-        //       })
-        //     // })     
-     async submitPass(){
-      const token = this.$localStorage.get('token')
-       await axios.post('forgot_password', {
-        password: this.password
-       },{
-        params: {
-          token: token
-        }
-       }).then(response => {
+     async submitEmail(){
+        await axios.post('find_email', {email: this.email})
+          .then(response => {
         console.log(response)
-        this.$router.push('login')
-      if (response.status === 200){
-        //alert(response.message)
-        const message = response.data.message
-        this.$localStorage.set('messagePass', message)
-        console.log(response.data.message)
-       }
-
-      }).catch(error => {
-        console.log(error)
-        if (error){
-            const message = error.response.data.error.password
+        const token = response.data.jwt.access_token
+        console.log(token)
+        this.$localStorage.set('token', token)
+        if(token){
+           this.$router.push('forgotpassword')   
+          }
+          })
+          .catch(error => {
+            console.log(error.response.data.message)
+            if (error){
+            const message = error.response.data.message
             this.message = message
              this.showTop = true
               setTimeout(() => {
             this.showTop = false;
                   }, 2000);
             }
-       })
-       
-       }
-    },
-    mounted(){
-       const message = this.$localStorage.get('messageEmail')
-       if(message){
-          this.message = message
-               this.showTop = true
-              setTimeout(() => {
-            this.showTop = false;
-                  }, 2000);
-       }
+          })
         
-    }
+          
+            
+            
+          
+
+    //   const data = {
+    //     email: this.email,
+    //   };
+    //   this.$store
+    //     .dispatch("findEmail", data)
+    //     .then(res => {
+    //       console.log(this.email)
+    //       console.log(res)
+
+    //       const token = this.$localStorage.get('token')
+    //      console.log(token)
+    //     }).catch(error => {
+    //       this.errors = error.response.data.errors
+    //     })
+     }
+      },
+    
 }
 </script>
 

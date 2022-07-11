@@ -18,6 +18,8 @@ import changePassword from '@/views/changepassword.vue'
 import scheduleList from '@/views/schedulelist.vue'
 import adddoctorSchedule from '@/views/adddoctorschedule.vue'
 import store from '../store'
+import schedulePage from '@/views/schedule.vue'
+import findEmail from '@/views/findemail.vue'
 
 
 Vue.use(VueRouter)
@@ -103,10 +105,17 @@ const routes = [
     component: userData
 },
 {
-    path: '/lupapassword',
+    path: '/forgotpassword',
     name: 'forgotPassword',
     meta: {layout: 'blank'},
     component: forgotPassword
+},
+
+{
+    path: '/findemail',
+    name: 'findEmail',
+    meta: {layout: 'blank'},
+    component: findEmail
 },
 
 {
@@ -114,6 +123,13 @@ const routes = [
     name: 'scheduleList',
     component: scheduleList
 },
+
+{
+    path: '/schedule',
+    name: 'schedulePage',
+    component: schedulePage
+},
+
 {
     path: '/addschedule',
     name: 'adddoctorSchedule',
