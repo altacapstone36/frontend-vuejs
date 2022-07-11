@@ -26,7 +26,7 @@
                     <a class="d-flex justify-content-between align-items-center border-bottom list-group-item ungusecondary text-white p-3" @click="toggleusers = !toggleusers" @dblclick="togel()"><div><img src="../assets/Icon/usersidebar.svg" width="50" class="svgmx"/>User Menu</div> <img src="../assets/Icon/drop down.svg" width="30" class="iconmx"/></a>        
 <!-- toggle -->                   
                         <div class="sub-menu" v-if="toggleusers">
-                            <a class="list-group-item ungusecondary border-bottom text-white p-3" href="/user">Manage User</a>
+                            <a class="list-group-item ungusecondary border-bottom text-white p-3" href="/manageuser">Manage User</a>
 
                         </div>
 <!-- ENDtoggle -->
