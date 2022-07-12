@@ -120,10 +120,10 @@ export default {
             this.apierrorPassword = false
           }
           if(errorBiasa){
-            this.apierror = true
-            this.errors = errorBiasa
+            this.showTop = true
+            this.message = errorBiasa
           }else{
-            this.apierror = false
+            this.showTop = false
           }
           console.log(error.response.data.error)
           // this.apierror = true

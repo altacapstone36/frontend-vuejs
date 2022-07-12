@@ -27,8 +27,8 @@
                 </select>
               -->
           <b-form-input id="input-1" v-model="patient_code" trim class="hdrop"></b-form-input>
-          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
-            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
+          <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.patient_code}}
           </div>
         </b-form-group>
               </b-col>
@@ -43,11 +43,7 @@
                 id="fieldset-2"
               >
           <b-form-input id="input-2" v-model="patient_name" trim class="hdrop"></b-form-input>
-          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
-            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
-          </div>
-
-        </b-form-group>
+          </b-form-group>
               </b-col>
           </b-row>
 
@@ -57,6 +53,9 @@
             </b-col>
               <b-col cols="10">
            <b-form-datepicker id="example-datepicker" v-model="date_check" class="mb-2 hdrop"></b-form-datepicker>
+          <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.date_check}}
+          </div>
               </b-col>
           </b-row>
           <b-row class="my-3">
@@ -68,8 +67,8 @@
                 id="fieldset-3"
               >
           <b-form-input id="input-3" v-model="complaint" trim class="hdrop"></b-form-input>
-          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
-            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
+          <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon><p>{{error.complaint}}</p>
           </div>
 
         </b-form-group>
@@ -88,6 +87,9 @@
                           required
                            class="hdrop w100"
                         ></b-form-select>
+            <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+                  <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.facility_id}}
+          </div>
               </b-col>
           </b-row>
 
@@ -103,6 +105,9 @@
                           required
                            class="hdrop w100"
                         ></b-form-select>
+                        <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.session_id}}
+                      </div>
               </b-col>
           </b-row>
 
@@ -119,6 +124,9 @@
                            class="hdrop w100"
                         >
                         </b-form-select>
+                        <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.doctor_code}}
+          </div>
               </b-col>
           </b-row>
 
@@ -168,6 +176,7 @@ export default {
         jadwal_sesi: null,
         doctor: null,
         toggleLength : false,
+        error: [],
 
       poli: [{ text: 'Pilih Poli', value: null }, {text:'Umum', value: 1 }, {text:'Anak', value: 2 }, {text:'Gigi', value: 3 }],
       sesi: [{ text: 'Pilih Sesi', value: null }, {text:'Pagi (08.00 - 11.00)', value: 1}, {text:'Siang (13.00 - 15.00)', value: 2 }, {text:'Sore (16.00 - 18.00)', value: 3 }],
@@ -199,10 +208,17 @@ export default {
       })
       .catch(error => {
         console.log(error.response.data.error)
+        const errorinput = error.response.data.error
+        if(error){
+              this.error = errorinput
+              this.toggleLength = true
+        }
+        
       })
               
       },
       onReset() {
+        this.toggleLength = false,
       this.doctor = null,
       this.patient_name = '',
       this.jadwal_sesi = null,

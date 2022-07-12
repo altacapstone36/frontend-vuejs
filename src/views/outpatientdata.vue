@@ -21,6 +21,7 @@
       :sort-by.sync="sortBy"
       :per-page="perPage"
       :current-page="currentPage"
+      sort-desc
 
       class="text-center lightdark-b"
     >

@@ -11,6 +11,9 @@
             <p class="m-0">Password Baru</p>
             <b-form-input :id="`type-${type}`" :type="type" class="inputpass" v-model="password"></b-form-input>
             </div>
+            <div v-if="showTop" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class=" mx-2"></b-icon>{{message}}
+                    </div>
             <div class="d-flex justify-content-end submit">
             <b-button type="submit" class="ungusecondary">SUBMIT</b-button>
             </div>
@@ -30,6 +33,7 @@ export default {
         return{
             type: 'password',
             password: '',
+            message: '',
         }
     },
     methods:{
