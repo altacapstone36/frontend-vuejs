@@ -72,7 +72,8 @@ export default {
 
       },
        redirect(id) {
-        this.$router.push('/userdata/' + id);
+        const index = id+1
+        this.$router.push('/userdata/' + index);
         console.log(id)
 
         }

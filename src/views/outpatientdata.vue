@@ -160,7 +160,7 @@ export default {
   async mounted(){
    // this.fetchOutpatient()
   try {
-    const response1 = await axios.get('http://localhost:8080/api/outpatient/report');
+    const response1 = await axios.get('outpatient/report');
    this.items = response1.data.data;
 //    const dataOne = response1.data.data
     console.log(response1.data)

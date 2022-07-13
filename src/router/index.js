@@ -85,7 +85,7 @@ const routes = [
     component: addPatient
 },
 {
-    path: '/editpatient',
+    path: '/editpatient/:id',
     name: 'editPatient',
     component: editPatient
 },

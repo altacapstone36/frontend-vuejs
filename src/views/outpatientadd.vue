@@ -16,16 +16,6 @@
               <b-form-group
                 id="fieldset-1"
               >
-              <!-- <select v-model="patient_code" class="hdrop w100">
-                <option
-                  :value="data.code"
-                  v-for="data in kode_pasien"
-                  :key="data.id"
-                  >
-                  {{ data.code }}
-                  </option>
-                </select>
-              -->
           <b-form-input id="input-1" v-model="patient_code" trim class="hdrop"></b-form-input>
           <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
             <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.patient_code}}
@@ -232,23 +222,17 @@ export default {
     },
    
 
- async mounted(){
-    try {
-    const response1 = await axios.get('http://localhost:8080/api/patient');
-    this.kode_pasien = response1.data.data
+//  async mounted(){
+//     try {
+//     const response1 = await axios.get('patient');
+//     this.kode_pasien = response1.data.data
+//     console.log(response1.data.data)
 
-//   this.items = response1.data.data;
-//    const dataOne = response1.data.data
-    console.log(response1.data.data)
-//    console.log(response1.data.data.id)
-    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
-    // this.arrayTwo = response2.data.data;
-    // console.log(this.arrayTwo)
-  } catch(e) {
-    console.log(e);
-  }
-  console.log(this.patient_code)
-  }
+//   } catch(e) {
+//     console.log(e);
+//   }
+//   console.log(this.patient_code)
+//   }
 
   
 }

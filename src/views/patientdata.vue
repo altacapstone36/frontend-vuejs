@@ -1,5 +1,13 @@
 <template>
    <div class="container">
+     <b-alert
+      v-model="showTop"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
+      variant="secondary"
+    >
+      {{message}}
+    </b-alert>
     <div class="card-head">
         <img class="img1" src="../assets/Icon/add patient data.svg">
        
@@ -19,13 +27,13 @@
     </tr>
   </thead>
   <tbody class="text-center">
-    <tr v-for="item in items" :key="item">
+    <tr v-for="(item, id) in items" :key="id">
       <td scope="row">{{item.code}}</td>
       <td scope="row">{{item.full_name}}</td>
       <td scope="row">{{item.national_id}}</td>
       <td scope="row">{{item.gender}}</td>
-      <td scope="row">{{item.code}}</td>
-      <td><button class="btn btn-primary me-md-2" type="button">EDIT</button></td>
+      <td scope="row">{{item.blood_type}}</td>
+      <td><button @click="redirect(id)" class="btn btn-primary me-md-2" type="button">EDIT</button></td>
       
 
     </tr>
@@ -45,22 +53,34 @@ export default {
     data(){
       return{
         items: [],
+        message: '',
+        showTop: false,
       }
+    },
+    methods: {
+      redirect(id) {
+              const index = id+1
+              this.$router.push('editpatient/' + index);
+              console.log(id)
+
+              }
     },
     async mounted(){
          try {
-    const response1 = await axios.get('http://localhost:8080/api/patient');
+    const response1 = await axios.get('patient');
    this.items = response1.data.data;
-//    const dataOne = response1.data.data
     console.log(response1.data)
-//    console.log(response1.data.data.id)
-    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
-    // this.arrayTwo = response2.data.data;
-    // console.log(this.arrayTwo)
   } catch(e) {
     console.log(e);
   }
-
+  const message = this.$localStorage.get('messagePatient')
+    if(message){
+                this.message = message
+               this.showTop = true
+              setTimeout(() => {
+            this.showTop = false;
+                  }, 2000);
+    }
   }
 }
 </script>

@@ -13,37 +13,59 @@
     <label for="inputEmail3" class="col-sm-2 col-form-label">Nama Pasien</label>
     <div class="col-sm-10">
       <input type="name" v-model="full_name" class="form-control" id="inputEmail3">
+      <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.full_name}}
+                      </div>
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputNik3" class="col-sm-2 col-form-label">NIK</label>
     <div class="col-sm-10">
       <input type="number" v-model="national_id" class="form-control" id="inputNik3">
+      <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.national_id}}
+                      </div>
+
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputAlamat3" class="col-sm-2 col-form-label">Alamat</label>
     <div class="col-sm-10">
       <input type="text" v-model="address" class="form-control" id="inputAlamat3">
+      <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.address}}
+                      </div>
+
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputGender3" class="col-sm-2 col-form-label">Jenis Kelamin</label>
     <div class="col-sm-10">
       <input type="text" v-model="gender" class="form-control" id="inputGender3">
+      <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.gender}}
+                      </div>
+
     </div>
   </div>
   <div class="row mb-3">
     <label for="inputDate3" class="col-sm-2 col-form-label">Tanggal Lahir</label>
     <div class="col-sm-10">
       <b-datepicker v-model="birthdate" class="form-control" dropright id="example-datepicker"></b-datepicker>
-      <!-- <input type="date" v-model="birthdate" class="form-control" id="inputDate3"> -->
-    </div>
+      <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.birthdate}}
+                      </div>
+
+      </div>
   </div>
   <div class="row mb-3">
     <label for="inputBlood3" class="col-sm-2 col-form-label">Golongan Darah</label>
     <div class="col-sm-10">
       <input type="text" v-model="blood_type" class="form-control" id="inputBlood3">
+      <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.blood_type}}
+                      </div>
+
     </div>
   </div>
 <br><br>
@@ -68,9 +90,8 @@ export default {
         address: '',
         birthdate: '',
         blood_type: '',
-        apierrorNama: '',
-        apierrorGender: '',
-        apierrorBirthdate: '',
+        toggleLength: false,
+        error: [],
       }
     },
     methods: {
@@ -98,37 +119,14 @@ export default {
       })
       .catch(error => {
         console.log(error.response.data.error)
-        const errorNama = error.response.data.error
-        const errorGender = error.response.data.error
-        const errorBirthdate = error.response.data.error
-        // const errorbloodType = error.response.data.error
-        // const errorAddress = error.response.data.error
-        // const errorNational = error.response.data.error
-         if(errorNama){
-            this.apierrorNama = true
-            this.errors = errorNama
-          }else{
-            this.apierrorNama = false
-          }
-           if(errorGender){
-            this.apierrorGender = true
-            this.errors = errorGender
-          }else{
-            this.apierrorGender = false
-          }
-           if(errorBirthdate){
-            this.apierrorBirthdate = true
-            this.errors = errorBirthdate
-          }else{
-            this.apierrorBirthdate = false
-          }
-
+        const errorinput = error.response.data.error
+        if(error){
+              this.error = errorinput
+              this.toggleLength = true
+        }
       })
       }
     },
-    // mounted() {
-    //   this.inputPatient()
-    // }
 
 }
 </script>
@@ -136,7 +134,7 @@ export default {
 <style scoped>
 .card-body{
     width: 900px;
-    height:450px;
+    height:auto;
     margin: 2rem auto;
     background:#F3F3F3;;
     padding-bottom: 3px;

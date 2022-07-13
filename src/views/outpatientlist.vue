@@ -17,9 +17,9 @@
         </div>
         <div class="d-block cardinput lightdark-b tablelong">
 <!-- <div class="card-body"> -->
-        <table class="table">
+        <table class="table ">
   <thead class="lightdark-a">
-    <tr>
+    <tr class="text-center">
      <th scope="col">Nomor Antrian</th>
     <th scope="col">Kode Pasien</th>
     <th scope="col">Nama Pasien</th>
@@ -30,10 +30,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="item in filterItem" :key="item">
+    <tr v-for="item in filterItem" :key="item" class="text-center">
       <td scope="row">{{item.queue}}</td>
-    <td scope="row">{{item.serial_number}}</td>
-    <td scope="row">{{item.patient_name}}</td>
+    <td scope="row">{{item.patient_code}}</td>
+    <td scope="row">{{item.full_name}}</td>
     <td scope="row">{{item.date_check}}</td>
     <td scope="row">{{item.facility}}</td>
     <td scope="row">{{item.doctor}}</td>
@@ -166,7 +166,7 @@ filterItem() {
  async mounted(){
     //this.fetchOutpatient()
     try {
-    const response1 = await axios.get('http://localhost:8080/api/outpatient');
+    const response1 = await axios.get('outpatient');
    this.items = response1.data.data;
 //    const dataOne = response1.data.data
     console.log(response1.data)
