@@ -14,7 +14,23 @@
 </div>
 
     <div class="card-body">
-        <table class="table">
+      
+    <b-table
+      id="my-table"
+      :items="items"
+      :fields="fields"
+      :per-page="perPage"
+      :current-page="currentPage"
+      sort-desc
+
+      class="text-center lightdark-b"
+    >
+    <template #cell(show_detail)>
+      <button @click="redirect(id)" class="btn btn-primary me-md-2" type="button">EDIT</button>
+    </template>
+    </b-table>
+
+<!-- <table class="table">
   <thead>
     <tr>
      
@@ -38,7 +54,7 @@
     
     
   </tbody>
-</table>
+</table> -->
     </div>
     <div class="d-flex my-2 ">
 <p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
@@ -58,19 +74,42 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: "manageUser",
-    computed: {
-      listUser() {
-      return this.$store.state.auth.user;
+    data(){
+      return{
+        fields: [
+                { key: 'full_name', label: 'Nama User', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'email', label: 'Email', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'gender', label: 'Jenis Kelamin', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'roles', label: 'Role', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
+                ],
+        items: [],
+        perPage: 10,
+        currentPage: 1,
+      }
     },
+    computed: {
+     
+    totalRows() {
+        return this.items.length
+        }, 
+        totalPage() {
+            const x = this.perPage
+            const y = this.totalRows
+            const z = y / x  
+            return Math.floor(z) + 1       
+            },
     },
     methods: {
-      fetchUser(){
-        this.store.dispatch('get_user')
+      // fetchUser(){
+      //   this.store.dispatch('get_user')
         
 
-      },
+      // },
        redirect(id) {
         const index = id+1
         this.$router.push('/userdata/' + index);
@@ -78,9 +117,26 @@ export default {
 
         }
     },
-    mounted(){
-      this.fetchUser()
+    // mounted(){
+    //   this.fetchUser()
+    // }
+  async mounted() {
+            try {
+    const response1 = await axios.get('user');
+   this.items = response1.data.data;
+    console.log(response1.data)
+  } catch(e) {
+    console.log(e);
+  }
+  const message = this.$localStorage.get('messagePatient')
+    if(message){
+                this.message = message
+               this.showTop = true
+              setTimeout(() => {
+            this.showTop = false;
+                  }, 2000);
     }
+  }
 }
 </script>
 

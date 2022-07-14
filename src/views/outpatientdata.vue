@@ -14,8 +14,7 @@
         <div class="d-block">
 
     <b-table
-    :id="my-table"
-    
+      id="my-table"
       :items="items"
       :fields="fields"
       :sort-by.sync="sortBy"

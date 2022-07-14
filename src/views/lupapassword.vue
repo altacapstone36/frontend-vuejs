@@ -129,10 +129,11 @@ export default {
         if (error){
             const message = error.response.data.error.password
             this.message = message
-             this.showTop = true
-              setTimeout(() => {
-            this.showTop = false;
-                  }, 2000);
+            this.showPass = true
+            //  this.showTop = true
+            //   setTimeout(() => {
+            // this.showTop = false;
+            //       }, 2000);
             }
        })
        }

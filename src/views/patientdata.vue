@@ -14,35 +14,35 @@
             PATIENT DATA 
             
     </div>
-    <!-- <div class="card-body"> -->
-        <table class="table lightdark-b">
-  <thead class="lightdark-a text-center">
-    <tr>
-      <th scope="col">Kode Pasien</th>
-      <th scope="col">Nama Pasien</th>
-      <th scope="col">NIK</th>
-      <th scope="col">Jenis Kelamin</th>
-      <!-- <th scope="col">Golongan Darah</th> -->
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody class="text-center">
-    <tr v-for="(item, id) in items" :key="id">
-      <td scope="row">{{item.code}}</td>
-      <td scope="row">{{item.full_name}}</td>
-      <td scope="row">{{item.national_id}}</td>
-      <td scope="row">{{item.gender}}</td>
-      <!-- <td scope="row">{{item.blood_type}}</td> -->
-      <td><button @click="redirect(id)" class="btn btn-primary me-md-2" type="button">EDIT</button></td>
-      
+    <!-- <div class="bTable"> -->
+    <b-table
+      id="my-table"
+      :items="items"
+      :fields="fields"
+      :per-page="perPage"
+      :current-page="currentPage"
+      sort-desc
 
-    </tr>
-    
-    
-  </tbody>
-</table>
-
+      class="text-center w100 lightdark-b"
+    >
+    <template #cell(show_detail)>
+      <button @click="redirect(id)" class="btn btn-primary me-md-2" type="button">EDIT</button>
+    </template>
+    </b-table>
     <!-- </div> -->
+<div class="d-flex my-2 ">
+<p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
+<b-pagination
+      v-model="currentPage"
+      :total-rows="totalRows"
+      :per-page="perPage"
+      aria-controls="my-table"
+      label-next-page="nextPage"
+      label-prev-page="prevPage"
+    >
+    </b-pagination>        
+    </div>
+
 </div> 
 </template>
 
@@ -50,11 +50,31 @@
 import axios from 'axios';
 export default {
     name: "patientData",
+    computed: {
+        totalRows() {
+        return this.items.length
+        }, 
+        totalPage() {
+            const x = this.perPage
+            const y = this.totalRows
+            const z = y / x  
+            return Math.floor(z) + 1       
+            },
+    },
     data(){
       return{
+        fields: [
+                { key: 'code', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'full_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'national_id', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'gender', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
+                { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
+                ],
         items: [],
         message: '',
         showTop: false,
+        perPage: 10,
+        currentPage: 1,
       }
     },
     methods: {
@@ -86,6 +106,16 @@ export default {
 </script>
 
 <style scoped>
+
+.w100 {
+  width: 100%;
+}
+
+.bTable {
+  
+    border:solid black 5px;
+    border-radius:10px;
+    }
 .lightdark-a {
   background-color: #DDDDDD;
 ;

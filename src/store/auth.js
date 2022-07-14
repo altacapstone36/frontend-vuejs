@@ -74,6 +74,9 @@ export default{
             return new Promise((resolve) => {
              commit('reset_user')
              localStorage.removeItem('token')
+             localStorage.removeItem('roles')
+             localStorage.removeItem('nama')
+             
              VueCookie.delete('token')
              removeHeaderToken()
              resolve()
