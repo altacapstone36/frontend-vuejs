@@ -23,8 +23,8 @@
      <th scope="col">Nomor Antrian</th>
     <th scope="col">Kode Pasien</th>
     <th scope="col">Nama Pasien</th>
-    <th scope="col">Tanggal Daftar</th>
-    <th scope="col">Jenis Poli</th>
+    <!-- <th scope="col">Tanggal Daftar</th>
+    <th scope="col">Jenis Poli</th> -->
     <th scope="col">Nama Dokter</th>
     <th scope="col">Tanggal Kontrol</th>
     </tr>
@@ -34,8 +34,8 @@
       <td scope="row">{{item.queue}}</td>
     <td scope="row">{{item.patient_code}}</td>
     <td scope="row">{{item.full_name}}</td>
-    <td scope="row">{{item.date_check}}</td>
-    <td scope="row">{{item.facility}}</td>
+    <!-- <td scope="row">{{item.date_check}}</td>
+    <td scope="row">{{item.facility}}</td> -->
     <td scope="row">{{item.doctor}}</td>
     <td scope="row">{{item.date_check}}</td>
     </tr>    

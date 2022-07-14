@@ -22,7 +22,7 @@
       <th scope="col">Nama Pasien</th>
       <th scope="col">NIK</th>
       <th scope="col">Jenis Kelamin</th>
-      <th scope="col">Golongan Darah</th>
+      <!-- <th scope="col">Golongan Darah</th> -->
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -32,7 +32,7 @@
       <td scope="row">{{item.full_name}}</td>
       <td scope="row">{{item.national_id}}</td>
       <td scope="row">{{item.gender}}</td>
-      <td scope="row">{{item.blood_type}}</td>
+      <!-- <td scope="row">{{item.blood_type}}</td> -->
       <td><button @click="redirect(id)" class="btn btn-primary me-md-2" type="button">EDIT</button></td>
       
 
