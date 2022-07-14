@@ -62,12 +62,9 @@
     <div class="col-sm-10">
       <select class="form-select" v-model="newsData.facility_id" aria-label="Default select example">
   <option selected>Pilih Fasilitas</option>
-  <option value="1">Dokter Umum</option>
-  <option value="2">Dokter Anak</option>
-  <option value="3">Dokter Gigi</option>
-  <option value="1">Perawat Umum</option>
-  <option value="2">Perawat Anak</option>
-  <option value="3">Perawat Gigi</option>
+  <option value="1">Umum</option>
+  <option value="2">Anak</option>
+  <option value="3">Gigi</option>
   </select>
   <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
             <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.facility_id}}
@@ -107,8 +104,8 @@ export default {
         email: this.newsData.email,
         full_name: this.newsData.full_name,
         gender: this.newsData.gender,
-        role_id: this.newsData.role_id,
-        facility_id: this.newsData.facility_id,
+        role_id: parseInt(this.newsData.role_id),
+        facility_id: parseInt(this.newsData.facility_id),
       }
   
     await axios.put(`user/${this.index}/update`, data)

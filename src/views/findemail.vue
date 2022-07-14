@@ -2,8 +2,9 @@
     <div>
   <div class="row">
     <div class="col-sm-4">
-        <div class="global-container">
-      <div class="card login-form">
+      <div class="row global-container"></div>
+        <div class="row global-container">
+      <div class="d-block card login-form">
         <!-- <b-alert
       v-model="showTop"
       class="position-fixed fixed-top m-0 rounded-0"
@@ -16,24 +17,26 @@
             <div class="card-text">
                 <form @submit.prevent="submitEmail">
                         <div class=" mb-7">
-                        <div class="d-flex justify-content-center m-2">
+                        <div class="d-flex justify-content-center m-1 mb-4">
                         <img src="../assets/Icon/reset password.svg" width="50px" />
                         </div>
                       <label for="exampleInputEmail1" class="form-label my-2">Enter Registered Email</label>
-                        <input type="email" v-model="email" class="form-control my-2" placeholder="Email Address">
+                        <input type="email" v-model="email" class="form-control my-2 " placeholder="Email Address">
                         <div v-if="showTop" class="d-flex mx-2 my-2 text-danger">
                       <b-icon icon="info-circle" class=" mx-2"></b-icon>{{message}}
                     </div>
-                        <div class="d-grid gap-2 m-2">
-                          <button type="submit" class="btn btn-primary">SEND RECOVERY EMAIL</button></div>
+                        <div class="d-block mt-4">
+                          <button type="submit" class="btn btn-primary w100">CONTINUE</button></div>
                           </div>
                 </form>
             </div>
-            <br><br>
-            <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p>
+            
         </div>
-       
+        <div class="row global-container mt-1">
+            <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p>
+        </div>            
     </div>
+    
     </div>
     <div class="col-sm-8">
       <img class="img2" src="../assets/amico.svg"><br>
@@ -114,15 +117,18 @@ export default {
 </script>
 
 <style scoped>
+.w100{
+  width: 100%;
+}
 .global-container{
-    height:100%;
+    height:30%;
     display:flex;
     align-items:center;
     justify-content: center;
 }
 
 .login-form{
-    height:330px;
+    height:300px;
     width: 330px;
     padding:20px;
     background: #F3F3F3;
@@ -134,7 +140,7 @@ top: 50pxpx;
 }
 
 .col-sm-8{
-    background:#794B93 ;
+    background:#64387E ;
     height: 100vh;
 }
 
