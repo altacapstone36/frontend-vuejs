@@ -105,10 +105,11 @@ export default {
     },
     computed: {
     searchItem(){
+      
          return this.keyword
               ? this.listItem.filter(item => item.full_name.includes(this.keyword) || item.email.includes(this.keyword))
-              : this.listItem.length
-//              this.totalRows = this.listItem.length
+              : this.listItem
+              
 
       }, 
     totalRows() {
