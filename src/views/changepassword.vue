@@ -34,10 +34,19 @@ export default {
             type: 'password',
             password: '',
             message: '',
+            showTop: false
         }
     },
     methods:{
          async submitPass(){
+            // if(this.password == 0 ){
+            // this.message = "Cannot be Blank"
+            // this.showTop = true
+            // }
+            // if(this.password == 1 < 8 ){
+            // this.message = "Password must have at least 8 character"
+            // this.showTop = true
+            // }else{
       const token = this.$localStorage.get('token')
        await axios.post('profile/change_password', {
         password: this.password
@@ -66,8 +75,8 @@ export default {
                   }, 2000);
             }
        })
-       
-       }    
+       } 
+         //}   
     }
 }
 </script>

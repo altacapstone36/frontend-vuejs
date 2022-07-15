@@ -1,6 +1,14 @@
 <template>
    <div class="card-container">
     <div class="card-head">
+      <b-alert
+      v-model="showTop"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
+      variant="secondary"
+    >
+      {{message}}
+    </b-alert>
         <img class="img1" src="../assets/list.svg">
        
             USER LIST
@@ -15,7 +23,7 @@
 
     <div class="card-body">
       
-    <b-table
+    <!-- <b-table
       id="my-table"
       :items="items"
       :fields="fields"
@@ -25,12 +33,12 @@
 
       class="text-center lightdark-b"
     >
-    <template #cell(show_detail)>
+    <template #cell(id)>
       <button @click="redirect(id)" class="btn btn-primary me-md-2" type="button">EDIT</button>
     </template>
-    </b-table>
+    </b-table> -->
 
-<!-- <table class="table">
+<table class="table" id="my-table">
   <thead>
     <tr>
      
@@ -42,19 +50,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="(user, id) in listUser" :key="id">
+    <tr v-for="(user) in listItem" :key="user.id">
       <td scope="row">{{user.full_name}}</td>
       <td scope="row">{{user.email}}</td>
       <td scope="row">{{user.gender}}</td>
       <td scope="row">{{user.roles}}</td>
-      <td><button @click="redirect(id)">EDIT</button></td>
+      <td><button @click="redirect(user.id)">EDIT</button></td>
       
 
     </tr>
     
     
   </tbody>
-</table> -->
+</table>
     </div>
     <div class="d-flex my-2 ">
 <p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
@@ -85,11 +93,13 @@ export default {
                 { key: 'email', label: 'Email', thStyle: {background: '#DDDDDD', color: 'black'} }, 
                 { key: 'gender', label: 'Jenis Kelamin', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'roles', label: 'Role', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
+                { key: 'id', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
                 ],
         items: [],
         perPage: 10,
         currentPage: 1,
+        showTop: false,
+        message: '',
       }
     },
     computed: {
@@ -103,13 +113,16 @@ export default {
             const z = y / x  
             return Math.floor(z) + 1       
             },
+                  listItem() {
+    return this.items.slice(
+    (this.currentPage - 1) * this.perPage,
+    this.currentPage * this.perPage,
+  )
+  //return slice
+},
     },
     methods: {
-      // fetchUser(){
-      //   this.store.dispatch('get_user')
-        
 
-      // },
        redirect(id) {
         const index = id+1
         this.$router.push('/userdata/' + index);
@@ -117,9 +130,6 @@ export default {
 
         }
     },
-    // mounted(){
-    //   this.fetchUser()
-    // }
   async mounted() {
             try {
     const response1 = await axios.get('user');
@@ -128,11 +138,12 @@ export default {
   } catch(e) {
     console.log(e);
   }
-  const message = this.$localStorage.get('messagePatient')
+  const message = this.$localStorage.get('messageUser')
     if(message){
                 this.message = message
                this.showTop = true
               setTimeout(() => {
+                this.$localStorage.remove('messageUser')
             this.showTop = false;
                   }, 2000);
     }

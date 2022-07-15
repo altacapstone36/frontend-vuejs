@@ -102,8 +102,14 @@ export default {
         //       })
         //     // })     
      async submitPass(){
+      if(this.password.length == 0 || this.confirmpass.length == 0){
+        this.messagePass = "Cannot be Blank"
+      }
+      if(this.password.length == 1 < 8 || this.confirmpass.length == 1 < 8){
+        this.messagePass = "Password must have at least 8 character"
+      }
       if(this.password !== this.confirmpass){
-         this.messagePass = 'Password tidak sama'
+         this.messagePass = 'Incorrect Password'
          console.log(this.messagePass)
          this.showPass = true
       }else{
@@ -162,7 +168,7 @@ export default {
 }
 
 .login-form{
-    height:384px;
+    height:auto;
     width: 330px;
     padding:20px;
     background: #F3F3F3;
