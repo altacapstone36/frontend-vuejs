@@ -16,8 +16,8 @@
     </div>
     <div class="search">
     <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Search Name" aria-label="Recipient's username" aria-describedby="basic-addon2">
-  <span class="input-group-text" id="basic-addon2"><img class="img11" src="../assets/search.png"></span>
+  <input type="search" class="form-control" placeholder="Search Name or Email" id="filter-input" v-model="keyword">
+  <button class="input-group-text" id="basic-addon2" @click="searchItem()"><img class="img11" src="../assets/search.png"></button>
     </div>
 </div>
 
@@ -50,7 +50,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="(user) in listItem" :key="user.id">
+    <tr v-for="(user) in searchItem" :key="user.id">
       <td scope="row">{{user.full_name}}</td>
       <td scope="row">{{user.email}}</td>
       <td scope="row">{{user.gender}}</td>
@@ -100,10 +100,17 @@ export default {
         currentPage: 1,
         showTop: false,
         message: '',
+        keyword: '',
       }
     },
     computed: {
-     
+    searchItem(){
+         return this.keyword
+              ? this.listItem.filter(item => item.full_name.includes(this.keyword) || item.email.includes(this.keyword))
+              : this.listItem.length
+//              this.totalRows = this.listItem.length
+
+      }, 
     totalRows() {
         return this.items.length
         }, 
@@ -114,15 +121,17 @@ export default {
             return Math.floor(z) + 1       
             },
                   listItem() {
-    return this.items.slice(
-    (this.currentPage - 1) * this.perPage,
-    this.currentPage * this.perPage,
+                    return this.items.slice(
+                    (this.currentPage - 1) * this.perPage,
+                    this.currentPage * this.perPage,
   )
+        
+		}
   //return slice
-},
     },
     methods: {
 
+      
        redirect(id) {
         const index = id+1
         this.$router.push('/userdata/' + index);
