@@ -47,7 +47,7 @@
         <div class="d-flex my-2 ">
 <p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
  <b-pagination
-          @change="onPageChanged"
+          
           :total-rows="totalRows"
           :per-page="perPage"
           v-model="currentPage"

@@ -46,7 +46,6 @@
   <option selected>Pilih Role</option>
   <option value="2">Dokter</option>
   <option value="3">Perawat</option>
-  <option value="4">Apoteker</option>
   <option value="1">Admin</option>
 
 </select>
@@ -57,10 +56,10 @@
       
     </div>
   </div>
-  <div class="row mb-3">
+  <div class="row">
     <label for="inputFacility3" class="col-sm-2 col-form-label">Fasilitas</label>
     <div class="col-sm-10">
-      <select class="form-select" v-model="newsData.facility_id" aria-label="Default select example">
+      <select class="form-select" v-model="newsData.facility_id">
   <option selected>Pilih Fasilitas</option>
   <option value="1">Umum</option>
   <option value="2">Anak</option>
@@ -73,7 +72,7 @@
     </div>
   </div>
 <br><br>
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <div class="d-flex gap-2 d-md-flex justify-content-md-end">
    <button class="btn btn-primary me-md-2" type="submit">UPDATE</button>
   
 </div>

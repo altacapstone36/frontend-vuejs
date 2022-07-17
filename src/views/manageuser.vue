@@ -49,18 +49,18 @@
       <th scope="col">Action</th>
     </tr>
   </thead>
-  <tbody>
-    <tr v-for="(user) in searchItem" :key="user.id">
+  <tbody v-if="searchItem">
+    <tr v-for="(user) in searchItem" :key="user.id" id="my-table">
       <td scope="row">{{user.full_name}}</td>
       <td scope="row">{{user.email}}</td>
       <td scope="row">{{user.gender}}</td>
       <td scope="row">{{user.roles}}</td>
       <td><button @click="redirect(user.id)">EDIT</button></td>
-      
-
     </tr>
-    
-    
+  </tbody>
+  <tbody v-if="totalRows == 0" class="d-block justify-content-center my-2">
+      <p>Sorry, no matches were found</p>
+      <p>Try a new Search</p>
   </tbody>
 </table>
     </div>
@@ -101,17 +101,31 @@ export default {
         showTop: false,
         message: '',
         keyword: '',
+        toggle: false,
       }
     },
     computed: {
-    searchItem(){
-      
-         return this.keyword
-              ? this.listItem.filter(item => item.full_name.includes(this.keyword) || item.email.includes(this.keyword))
+    searchItem(){              
+        // const slices = this.items.slice(
+        //      (this.currentPage - 1) * this.perPage,
+        //      this.currentPage * this.perPage,
+        //      )
+        const filter = this.keyword
+              ? this.items.filter(item => item.full_name.includes(this.keyword) || item.email.includes(this.keyword))
               : this.listItem
-              
+              console.log(this.listItem)
 
+      // if(!this.toggle){
+      //   return slices
+      // }else{
+      //   return filter
+      // }           
+       return filter
       }, 
+      // pageList(){
+        
+
+      // },
     totalRows() {
         return this.items.length
         }, 
@@ -134,7 +148,7 @@ export default {
 
       
        redirect(id) {
-        const index = id+1
+        const index = id
         this.$router.push('/userdata/' + index);
         console.log(id)
 
@@ -162,6 +176,9 @@ export default {
 </script>
 
 <style scoped>
+p {
+  justify-content: center;
+}
 .img1{
     height:50px;
     width:50px;

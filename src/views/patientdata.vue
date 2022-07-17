@@ -66,7 +66,7 @@ export default {
         fields: [
                 { key: 'code', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'full_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'national_id', label: 'Jenis Poli', thStyle: {background: '#DDDDDD', color: 'black'} }, 
+                { key: 'national_id', label: 'NIK', thStyle: {background: '#DDDDDD', color: 'black'} }, 
                 { key: 'gender', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
                 { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
                 ],

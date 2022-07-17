@@ -16,7 +16,7 @@
               <b-form-group
                 id="fieldset-1"
               >
-          <b-form-input id="input-1" v-model="patient_code" trim class="hdrop"></b-form-input>
+          <b-form-input id="input-1" v-model="patient_code" trim class="hdrop" placeholder="RM"></b-form-input>
           <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
             <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.patient_code}}
           </div>
