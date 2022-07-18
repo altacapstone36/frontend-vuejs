@@ -9,7 +9,6 @@
       class="position-fixed fixed-top m-0 rounded-0"
       style="z-index: 2000;"
       variant="secondary"
-      
     >
       {{message}}
     </b-alert>
@@ -21,7 +20,9 @@
         <div class="global-container">
       <div class="card login-form">
         <div class="card-body">
+          <div class="my-4">
             <img class="img5" src="../assets/login.png">
+                </div>
                 <form @submit.prevent="userLogin">    
                     <div class="input-group flex-nowrap mb-3">
                     <span class="input-group-text" id="addon-wrapping">
@@ -32,7 +33,7 @@
                     <input type="email" v-model="form.email" class="form-control" placeholder="Email">
                     </div>
                     <div v-if="apierror" class="d-flex mx-2 my-2 text-danger">
-                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{errors.email}}
+                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{message.email}}
                     </div>
         
                     <div class="input-group flex-nowrap mb-3">
@@ -40,7 +41,7 @@
                     <input type="password" v-model="form.password" class="form-control" placeholder="Password">
                   </div>
                     <div v-if="apierror" class="d-flex mx-2 my-2 text-danger">
-                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{errors.password}}
+                      <b-icon icon="info-circle" class="mt-2 mx-2"></b-icon>{{message.password}}
                     </div>
   
                     <div class="d-grid gap-2">
@@ -91,8 +92,8 @@ export default {
         apierrorEmail: false,
         apierrorPassword: false,
         apierror: false,
-        errors: null,
-          message: '',
+        errors: '',
+          message: [],
           showTop: false,
 
       }
@@ -104,26 +105,18 @@ export default {
           console.log(response)
           this.$router.push({name: 'homePage'})
         }).catch(error => {
+          const errorApi = error.response.data.error
           const errorEmail = error.response.data.error.email
-          const errorPassword = error.response.data.error.password
-          const errorBiasa = error.response.data.error
-          if(errorEmail){
-            this.apierrorEmail = true
-            this.errors = errorEmail
-          }else{
-            this.apierrorEmail = false
-          }
-          if(errorPassword){
-            this.apierrorPassword = true
-            this.errors = errorPassword
-          }else{
-            this.apierrorPassword = false
-          }
-          if(errorBiasa){
+          const errorPass = error.response.data.error.password
+          if(errorEmail || errorPass){
             this.apierror = true
-            this.errors = errorBiasa
+            this.message = errorApi
+          }
+          if(errorApi == "Wrong Password" || errorApi == "No Record Found"){
+            this.showTop = true
+            this.message = errorApi
           }else{
-            this.apierror = false
+            this.showTop = false
           }
           console.log(error.response.data.error)
           // this.apierror = true

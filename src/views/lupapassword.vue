@@ -27,18 +27,26 @@
             <div class="card-text">
                 <!-- <form> -->
                       <div class=" mb-3">
-                        <div class="d-flex justify-content-center m-2">
+                        <div class="d-flex justify-content-center m-1">
                         <img src="../assets/Icon/reset password.svg" width="50px" />
                         </div>
                       <label for="exampleInputEmail1" class="form-label my-2">Change Password</label>
                         <input type="text" v-model="password" class="form-control my-2" placeholder="New Password">
-                        <div class="d-grid gap-2">
-                          <button @click="submitPass()" class="btn btn-primary">SEND NEW PASSWORD</button></div>
+                        <div v-if="showPass" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class=" mx-2"></b-icon>{{messagePass}}
+                    </div>
+                        <label for="exampleInputEmail1" class="form-label my-2">Confirm New Password</label>
+                        <input type="text" v-model="confirmpass" class="form-control mt-2 mb-2" placeholder="New Password">
+                        <div v-if="showPass" class="d-flex mx-2 my-2 text-danger">
+                      <b-icon icon="info-circle" class=" mx-2"></b-icon>{{messagePass}}
+                    </div>
+                        <div class="d-block mt-4">
+                          <button @click="submitPass()" class="btn btn-primary w100">CONFIRM</button></div>
                       </div>
                 <!-- </form> -->
             </div>
             <br><br>
-            <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p>
+            <!-- <p class=" text-center">Back to<a href="/login" class="text2 text-decoration-none"> Login</a></p> -->
         </div>
        
     </div>
@@ -70,10 +78,12 @@ export default {
       return{
         dismissSecs: 5,
         dismissCountDown: 0,
+        confirmpass: '',
         password: '',
         message: '',
+        messagePass: '',
         showTop: false,
-        showError: false,
+        showPass: false,
       }
     },
     methods: {
@@ -92,6 +102,17 @@ export default {
         //       })
         //     // })     
      async submitPass(){
+      if(this.password.length == 0 || this.confirmpass.length == 0){
+        this.messagePass = "Cannot be Blank"
+      }
+      if(this.password.length == 1 < 8 || this.confirmpass.length == 1 < 8){
+        this.messagePass = "Password must have at least 8 character"
+      }
+      if(this.password !== this.confirmpass){
+         this.messagePass = 'Incorrect Password'
+         console.log(this.messagePass)
+         this.showPass = true
+      }else{
       const token = this.$localStorage.get('token')
        await axios.post('forgot_password', {
         password: this.password
@@ -114,13 +135,14 @@ export default {
         if (error){
             const message = error.response.data.error.password
             this.message = message
-             this.showTop = true
-              setTimeout(() => {
-            this.showTop = false;
-                  }, 2000);
+            this.showPass = true
+            //  this.showTop = true
+            //   setTimeout(() => {
+            // this.showTop = false;
+            //       }, 2000);
             }
        })
-       
+       }
        }
     },
     mounted(){
@@ -146,7 +168,7 @@ export default {
 }
 
 .login-form{
-    height:330px;
+    height:auto;
     width: 330px;
     padding:20px;
     background: #F3F3F3;
@@ -157,8 +179,11 @@ border-radius: 5px;
 top: 50pxpx;
 }
 
+.w100{
+  width: 100%;
+}
 .col-sm-8{
-    background:#794B93 ;
+    background:#64387E ;
     height: 100vh;
 }
 

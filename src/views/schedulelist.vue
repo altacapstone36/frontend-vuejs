@@ -10,44 +10,47 @@
             <p class="m-0 p-2">Tanggal</p>
             <b-form-datepicker id="example-datepicker" v-model="value" class="mb-2 hdrop"></b-form-datepicker>
             </div>
-            <div>
+            <div v-if="value">
                 <div class="cardlist" >
                     <b-card-text class="d-flex justify-content-start" >Perawat (08.00 - 16.00) </b-card-text>
                     <img src="../assets/Icon/drop downblack.svg" @click="togglescheduleSus()" width="30px" class="ddown d-flex justify-content-end"/>
             </div>
             <div v-if="togglejadwalSus">
-                    <div class="cardlist" v-for="schedule in schedules" :key="schedule.id" >
-                        <p>{{schedule}}</p>
+                    <div class="cardlist" v-for="schedule in searchNurse" :key="schedule" >
+                        <p>{{schedule.doctor_name}}</p>
                     </div>
                 </div>
                 <div class="cardlist" >
-                    <b-card-text class="d-flex justify-content-start" >Dokter Pagi (08.00 - 16.00) </b-card-text>
+                    <b-card-text class="d-flex justify-content-start" >Dokter Pagi (08.00 - 10.00) </b-card-text>
                     <img src="../assets/Icon/drop downblack.svg" @click="toggleschedulePagi()" width="30px" class="ddown d-flex justify-content-end"/>
             </div>
             <div v-if="togglejadwalPagi">
-                    <div class="cardlist" v-for="pagi in dokpagis" :key="pagi.id" >
-                        <p>{{pagi}}</p>
+                     <div class="cardlist" v-for="schedule in searchList" :key="schedule" >
+                        <p>{{schedule.doctor_name}}</p>
                     </div>
                 </div>
                 <div class="cardlist" >
-                    <b-card-text class="d-flex justify-content-start" >Dokter Siang (08.00 - 16.00) </b-card-text>
+                    <b-card-text class="d-flex justify-content-start" >Dokter Siang (13.00 - 16.00) </b-card-text>
                     <img src="../assets/Icon/drop downblack.svg" @click="togglescheduleSiang()" width="30px" class="ddown d-flex justify-content-end"/>
             </div>
             <div v-if="togglejadwalSiang">
-                    <div class="cardlist" v-for="pagi in dokpagis" :key="pagi.id" >
-                        <p>{{pagi}}</p>
+                     <div class="cardlist" v-for="schedule in searchList" :key="schedule" >
+                        <p>{{schedule.doctor_name}}</p>
                     </div>
                 </div>
                 <div class="cardlist" >
-                    <b-card-text class="d-flex justify-content-start" >Dokter Sore (08.00 - 16.00) </b-card-text>
+                    <b-card-text class="d-flex justify-content-start" >Dokter Sore (16.00 - 18.00) </b-card-text>
                     <img src="../assets/Icon/drop downblack.svg" @click="togglescheduleSore()" width="30px" class="ddown d-flex justify-content-end"/>
             </div>
             <div v-if="togglejadwalSore">
-                    <div class="cardlist" v-for="pagi in dokpagis" :key="pagi.id" >
-                        <p>{{pagi}}</p>
+                    <div class="cardlist" v-for="schedule in searchList" :key="schedule" >
+                        <p>{{schedule.doctor_name}}</p>
                     </div>
                 </div>
-
+                </div>
+                <div v-if="!value">
+                <p>Sorry, no matches were found</p>
+                <p>Try a new Search</p>
                 </div>
             </b-card>
 
@@ -56,26 +59,46 @@
     </div></template>
 
 <script>
+import axios from 'axios'
+//import { response } from 'express'
 export default {
     name: 'scheduleList',
+    computed: {
+searchList(){              
+        const filter = this.value
+              ? this.schedules.filter(item => item.tanggal.includes(this.value) && item.role.includes(this.doctor)  )
+              : this.schedules
+              console.log(this.value)
+       return filter
+      },
+searchNurse(){              
+        const filter = this.value
+              ? this.schedules.filter(item => item.tanggal.includes(this.value) && item.role.includes(this.nurse) )
+              : this.schedules
+              console.log(this.value)
+       return filter
+      },
+// searchTanggal(){              
+//         const filter = this.value
+//               ? this.schedules.filter(item => item.tanggal.includes(this.value) )
+//               : this.schedules
+//               console.log(this.value)
+//        return filter
+//       },
+ 
+    },
     data() {
       return {
         value: '',
+        nurse: 'nurse',
+        jadwal: 'pagi',
+        doctor: 'doctor',
         togglejadwalSus: false,
         togglejadwalPagi: false,
         togglejadwalSiang: false,
-        togglejadwalSore: false,
-        
-        schedules: [
-            'NR00001','NR00002',
-            'NR00003','NR00004',
-        ],
-        dokpagis: [
-            'DR00001 (Dokter Umum)',
-            'NR00002 (Dokter Umum)',
-            'NR00003 (Dokter Gigi)',
-            'NR00004 (Dokter Gigi)',
-        ]
+        togglejadwalSore: false, 
+        schedules: [],
+       
       }
     },
     methods: {
@@ -89,26 +112,42 @@ export default {
         toggleschedulePagi(){
             if(!this.togglejadwalPagi){
                 this.togglejadwalPagi = true
+                this.jadwal = 'pagi'
+                console.log(this.jadwal)
             }else{
                 this.togglejadwalPagi = false
+                this.jadwal = ''
             }
         },
         togglescheduleSiang(){
             if(!this.togglejadwalSiang){
                 this.togglejadwalSiang = true
+                this.jadwal = 'siang'
             }else{
                 this.togglejadwalSiang = false
+                this.jadwal = ''
             }
         },
         togglescheduleSore(){
             if(!this.togglejadwalSore){
                 this.togglejadwalSore = true
+                this.jadwal = 'sore'
             }else{
                 this.togglejadwalSore = false
+                this.jadwal = ''
             }
         }
 
 
+    },
+    async mounted(){
+    try {
+    const response = await axios.get('https://flexible-marmoset-78.hasura.app/api/rest/schedule/get');
+    this.schedules = response.data.schedule;
+    console.log(response.data.schedule)
+  } catch(e) {
+    console.log(e);
+  }
     }
 }
 </script>

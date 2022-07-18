@@ -85,7 +85,7 @@ const routes = [
     component: addPatient
 },
 {
-    path: '/editpatient',
+    path: '/editpatient/:id',
     name: 'editPatient',
     component: editPatient
 },
@@ -100,7 +100,7 @@ const routes = [
     component: manageUser
 },
 {
-    path: '/userdata',
+    path: '/userdata/:id',
     name: 'userData',
     component: userData
 },

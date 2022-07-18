@@ -16,9 +16,9 @@
               <b-form-group
                 id="fieldset-1"
               >
-          <b-form-input id="input-1" v-model="kode_pasien" trim class="hdrop"></b-form-input>
-          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
-            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
+          <b-form-input id="input-1" v-model="patient_code" trim class="hdrop" placeholder="RM"></b-form-input>
+          <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.patient_code}}
           </div>
         </b-form-group>
               </b-col>
@@ -33,11 +33,7 @@
                 id="fieldset-2"
               >
           <b-form-input id="input-2" v-model="patient_name" trim class="hdrop"></b-form-input>
-          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
-            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
-          </div>
-
-        </b-form-group>
+          </b-form-group>
               </b-col>
           </b-row>
 
@@ -47,6 +43,9 @@
             </b-col>
               <b-col cols="10">
            <b-form-datepicker id="example-datepicker" v-model="date_check" class="mb-2 hdrop"></b-form-datepicker>
+          <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.date_check}}
+          </div>
               </b-col>
           </b-row>
           <b-row class="my-3">
@@ -58,8 +57,8 @@
                 id="fieldset-3"
               >
           <b-form-input id="input-3" v-model="complaint" trim class="hdrop"></b-form-input>
-          <div v-if="toggleLength" class="d-flex mx-2 text-danger">
-            <b-icon icon="info-circle" class="mx-2"></b-icon><p>Minimal 4 karakter huruf</p>
+          <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon><p>{{error.complaint}}</p>
           </div>
 
         </b-form-group>
@@ -78,6 +77,9 @@
                           required
                            class="hdrop w100"
                         ></b-form-select>
+            <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+                  <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.facility_id}}
+          </div>
               </b-col>
           </b-row>
 
@@ -93,6 +95,9 @@
                           required
                            class="hdrop w100"
                         ></b-form-select>
+                        <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.session_id}}
+                      </div>
               </b-col>
           </b-row>
 
@@ -109,6 +114,9 @@
                            class="hdrop w100"
                         >
                         </b-form-select>
+                        <div v-if="toggleLength" class="d-flex mx-2 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.doctor_code}}
+          </div>
               </b-col>
           </b-row>
 
@@ -139,14 +147,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "outpatientAdd",
-    computed: {
-    },
+        computed: {
+
+   
+           },
     data() {
       return {
         name: '',
-        kode_pasien: '',
+        patient_code: '',
         patient_name: '',
         complaint: '',
         queue: '',
@@ -155,33 +166,49 @@ export default {
         jadwal_sesi: null,
         doctor: null,
         toggleLength : false,
+        error: [],
 
       poli: [{ text: 'Pilih Poli', value: null }, {text:'Umum', value: 1 }, {text:'Anak', value: 2 }, {text:'Gigi', value: 3 }],
       sesi: [{ text: 'Pilih Sesi', value: null }, {text:'Pagi (08.00 - 11.00)', value: 1}, {text:'Siang (13.00 - 15.00)', value: 2 }, {text:'Sore (16.00 - 18.00)', value: 3 }],
       dokter: [{ text: 'Pilih Dokter', value: null }, {text:'dr. Alshad Ahmad', value: 'DCR00001' }, {text:'dr. Adira Putri', value: 'DCR00002' }, {text:'dr. Shelley Herman', value: 'DCR00003' }, {text:'dr. Christie', value: 'DCR00004'}],
-    
+      kode_pasien: [],
 }
     },
     methods: {
-      onSubmit() {
-        const namapasien = this.patient_name
-        const kodepasien = this.kode_pasien
-        const keluhan = this.complaint
+     async onSubmit() {
+          const data = {
+            patient_code: this.patient_code,
+            complaint: this.complaint,
+            date_check: this.date_check,
+            facility_id: this.facility,
+            session_id: this.jadwal_sesi,
+            doctor_code: this.doctor
+          }
+          const token = this.$localStorage.get('token')
+        console.log(token)
+        await axios.post('outpatient',data, {
+        headers: { "Authorization" : 'Bearer ' + token
+        }
+      })
+      .then(response => {
+        console.log(response)
+        const messageTrue = response.data.message
+        this.$localStorage.set('messageOutpatient', messageTrue)
+        this.$router.push('outpatientlist')
+      })
+      .catch(error => {
+        console.log(error.response.data.error)
+        const errorinput = error.response.data.error
+        if(error){
+              this.error = errorinput
+              this.toggleLength = true
+        }
         
-        if(namapasien.length < 4 || kodepasien.length< 4 || keluhan.length < 4){
-          this.toggleLength = true
-
-        }else        
-        console.log(this.doctor)
-        console.log(this.patient_name)
-        console.log(this.jadwal_sesi)
-        console.log(this.facility)
-        console.log(this.kode_pasien)
-        console.log(this.queue)
-        console.log(this.date_check)
-        console.log(this.complaint)
+      })
+              
       },
       onReset() {
+        this.toggleLength = false,
       this.doctor = null,
       this.patient_name = '',
       this.jadwal_sesi = null,
@@ -191,13 +218,21 @@ export default {
       this.kode_pasien = '',
       this.date_check = null  
       },
-      fetchPatient(){
-        this.$store.dispatch('outpatient/fetchPatient')
-      }
+
     },
-  mounted(){
-    this.fetchPatient()
-  }
+   
+
+//  async mounted(){
+//     try {
+//     const response1 = await axios.get('patient');
+//     this.kode_pasien = response1.data.data
+//     console.log(response1.data.data)
+
+//   } catch(e) {
+//     console.log(e);
+//   }
+//   console.log(this.patient_code)
+//   }
 
   
 }

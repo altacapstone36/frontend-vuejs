@@ -11,6 +11,7 @@ const mutations = {
 };
 
 const actions = {
+// fetch
   fetchPatient(store) {
     axios.get('http://localhost:8080/api/patient', {
         // params:{
@@ -64,6 +65,22 @@ const actions = {
         store.commit(error);
       });
   },
+
+// endfetch
+ async patientPost(data){
+    const token = localStorage.getItem('token')
+    console.log(token)
+      await axios.post('patient',data, {
+        headers: { "Authorization" : 'Bearer' + token
+        }
+      })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
 };
 

@@ -13,10 +13,7 @@ export default new Vuex.Store({
   },
   modules: {
     auth,
-    outpatient: {
-      namespaced: true,
-      ...outpatient
-    },
+    outpatient
     
   }
 })

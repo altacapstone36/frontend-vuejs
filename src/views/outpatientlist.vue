@@ -17,25 +17,25 @@
         </div>
         <div class="d-block cardinput lightdark-b tablelong">
 <!-- <div class="card-body"> -->
-        <table class="table">
+        <table class="table ">
   <thead class="lightdark-a">
-    <tr>
+    <tr class="text-center">
      <th scope="col">Nomor Antrian</th>
     <th scope="col">Kode Pasien</th>
     <th scope="col">Nama Pasien</th>
-    <th scope="col">Tanggal Daftar</th>
-    <th scope="col">Jenis Poli</th>
+    <!-- <th scope="col">Tanggal Daftar</th>
+    <th scope="col">Jenis Poli</th> -->
     <th scope="col">Nama Dokter</th>
     <th scope="col">Tanggal Kontrol</th>
     </tr>
   </thead>
   <tbody>
-    <tr v-for="item in filterItem" :key="item">
+    <tr v-for="item in filterItem" :key="item" class="text-center">
       <td scope="row">{{item.queue}}</td>
-    <td scope="row">{{item.serial_number}}</td>
-    <td scope="row">{{item.patient_name}}</td>
-    <td scope="row">{{item.date_check}}</td>
-    <td scope="row">{{item.facility}}</td>
+    <td scope="row">{{item.patient_code}}</td>
+    <td scope="row">{{item.full_name}}</td>
+    <!-- <td scope="row">{{item.date_check}}</td>
+    <td scope="row">{{item.facility}}</td> -->
     <td scope="row">{{item.doctor}}</td>
     <td scope="row">{{item.date_check}}</td>
     </tr>    
@@ -47,7 +47,7 @@
         <div class="d-flex my-2 ">
 <p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
  <b-pagination
-          @change="onPageChanged"
+          
           :total-rows="totalRows"
           :per-page="perPage"
           v-model="currentPage"
@@ -60,7 +60,7 @@
 
 <script>
 //import Vue from 'vue'
-//import axios from 'axios'
+import axios from 'axios'
 export default {
     name: "outpatientList",
         computed: {
@@ -157,14 +157,26 @@ filterItem() {
     formatDate(date) {
       return new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date(date))
     },
-    fetchOutpatient(){
-          this.$store.dispatch('outpatient/fetchoutpatientList')
-          const listItems = this.$store.state.outpatient.items
-          this.items = listItems
-        },
+    // fetchOutpatient(){
+    //       this.$store.dispatch('outpatient/fetchoutpatientList')
+    //       const listItems = this.$store.state.outpatient.items
+    //       this.items = listItems
+    //     },
     },
-  mounted(){
-    this.fetchOutpatient()
+ async mounted(){
+    //this.fetchOutpatient()
+    try {
+    const response1 = await axios.get('outpatient');
+   this.items = response1.data.data;
+//    const dataOne = response1.data.data
+    console.log(response1.data)
+//    console.log(response1.data.data.id)
+    // const response2 = await axios.get(`http://localhost:8080/api/outpatient/:id/process`);
+    // this.arrayTwo = response2.data.data;
+    // console.log(this.arrayTwo)
+  } catch(e) {
+    console.log(e);
+  }
   }
 }
 </script>
