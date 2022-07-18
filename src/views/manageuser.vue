@@ -16,8 +16,8 @@
     </div>
     <div class="search">
     <div class="input-group mb-3">
-  <input type="search" class="form-control" placeholder="Search Name or Email" id="filter-input" v-model="keyword">
-  <button class="input-group-text" id="basic-addon2" @click="searchItem()"><img class="img11" src="../assets/search.png"></button>
+  <input type="search" class="form-control" placeholder="Search Name or Email" v-model="keyword">
+  <button class="input-group-text" @click="searchItem()"><img class="img11" src="../assets/search.png"></button>
     </div>
 </div>
 
@@ -106,20 +106,11 @@ export default {
     },
     computed: {
     searchItem(){              
-        // const slices = this.items.slice(
-        //      (this.currentPage - 1) * this.perPage,
-        //      this.currentPage * this.perPage,
-        //      )
+
         const filter = this.keyword
               ? this.items.filter(item => item.full_name.includes(this.keyword) || item.email.includes(this.keyword))
               : this.listItem
-              console.log(this.listItem)
-
-      // if(!this.toggle){
-      //   return slices
-      // }else{
-      //   return filter
-      // }           
+              console.log(this.listItem) 
        return filter
       }, 
       // pageList(){

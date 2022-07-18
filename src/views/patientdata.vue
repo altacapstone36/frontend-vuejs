@@ -14,8 +14,39 @@
             PATIENT DATA 
             
     </div>
+
+ <div class="search">
+    <div class="input-group mb-3">
+  <input type="search" class="form-control" placeholder="Search Name" id="filter-input" v-model="keyword">
+  <button class="input-group-text" id="basic-addon2"><img class="img11" src="../assets/search.png"></button>
+    </div>
+</div>
+    <table class="table">
+  <thead>
+    <tr class="lightdark-a">
+      <th scope="col">Kode Pasien</th>
+      <th scope="col">Nama Pasien</th>
+      <th scope="col">NIK</th>
+      <th scope="col">Jenis Kelamin</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody v-if="totalRows > 1">
+    <tr v-for="(user) in searchItem" :key="user.id" id="my-table" class="lightdark-b ">
+      <td scope="row">{{user.code}}</td>
+      <td scope="row">{{user.full_name}}</td>
+      <td scope="row">{{user.national_id}}</td>
+      <td scope="row">{{user.gender}}</td>
+      <td><button @click="redirect(user.id)" class="btn w100 btn-primary">EDIT</button></td>
+    </tr>
+  </tbody>
+  <tbody v-if="totalRows == 0" class="d-block justify-content-center w100 my-2 lightdark-b">
+      <p>Sorry, no matches were found</p>
+      <p>Try a new Search</p>
+  </tbody>
+</table>
     <!-- <div class="bTable"> -->
-    <b-table
+    <!-- <b-table
       id="my-table"
       :items="items"
       :fields="fields"
@@ -25,11 +56,12 @@
 
       class="text-center w100 lightdark-b"
     >
-    <template #cell(show_detail)>
+    <template #cell(id)>
       <button @click="redirect(id)" class="btn btn-primary me-md-2" type="button">EDIT</button>
     </template>
-    </b-table>
+    </b-table> -->
     <!-- </div> -->
+
 <div class="d-flex my-2 ">
 <p class="mx-4">Page {{currentPage}} of {{totalPage}}</p>    
 <b-pagination
@@ -51,6 +83,14 @@ import axios from 'axios';
 export default {
     name: "patientData",
     computed: {
+      searchItem(){              
+        
+        const filter = this.keyword
+              ? this.items.filter(item => item.full_name.includes(this.keyword))
+              : this.listItem
+              console.log(this.listItem)
+              return filter
+      },
         totalRows() {
         return this.items.length
         }, 
@@ -60,27 +100,28 @@ export default {
             const z = y / x  
             return Math.floor(z) + 1       
             },
+                listItem() {
+                    return this.items.slice(
+                    (this.currentPage - 1) * this.perPage,
+                    this.currentPage * this.perPage,
+  )
+        
+		}
     },
     data(){
       return{
-        fields: [
-                { key: 'code', label: 'Kode Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'full_name', label: 'Nama Pasien', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'national_id', label: 'NIK', thStyle: {background: '#DDDDDD', color: 'black'} }, 
-                { key: 'gender', label: 'Nama Dokter', thStyle: {background: '#DDDDDD', color: 'black'} },
-                { key: 'show_detail', label: 'Action', thStyle: {background: '#DDDDDD', color: 'black'} },                
-                ],
+       
         items: [],
         message: '',
         showTop: false,
         perPage: 10,
         currentPage: 1,
+        keyword: '',
       }
     },
     methods: {
       redirect(id) {
-              const index = id+1
-              this.$router.push('editpatient/' + index);
+              this.$router.push('editpatient/' + id);
               console.log(id)
 
               }
@@ -111,10 +152,8 @@ export default {
   width: 100%;
 }
 
-.bTable {
-  
-    border:solid black 5px;
-    border-radius:10px;
+.table {
+  text-align: center;
     }
 .lightdark-a {
   background-color: #DDDDDD;
@@ -148,8 +187,20 @@ background-color: #F3F3F3;
 .btn{
     
     height: 33px;
-    width: 55px;
+    width: auto;
     background: #794B93;
+}
+.input-group{
+    width: 300px;
+}
+
+.search{
+    margin-left:41rem ;
+}
+
+.img11{
+    height:15px;
+    width:15px; 
 }
 
 </style>
