@@ -15,7 +15,7 @@ import VueCookie from 'vue-cookie'
 Vue.use(VueCookie)
 
 
-axios.defaults.baseURL = 'https://go-hospital-server.herokuapp.com/api/'
+axios.defaults.baseURL = 'https://holyhos.hasura.app/api/rest/'
 Vue.component('default-layout', defaultLayout)
 Vue.component('blank-layout', blankLayout)
 

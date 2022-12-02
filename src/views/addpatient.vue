@@ -68,6 +68,16 @@
 
     </div>
   </div>
+  <div class="row mb-3">
+    <label for="inputBlood3" class="col-sm-2 col-form-label">Kode Pasien</label>
+    <div class="col-sm-10">
+      <input type="text" v-model="patient_code" class="form-control" id="inputBlood3">
+      <div v-if="toggleLength" class="d-flex my-1 toggle text-danger">
+            <b-icon icon="info-circle" class="mx-2"></b-icon>{{error.blood_type}}
+                      </div>
+
+    </div>
+  </div>
 <br><br>
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
    <button type="submit" class="btn btn-primary me-md-2" >SUBMIT</button>
@@ -90,6 +100,7 @@ export default {
         address: '',
         birthdate: '',
         blood_type: '',
+        patient_code: '',
         toggleLength: false,
         error: [],
       }
@@ -102,12 +113,13 @@ export default {
           gender: this.gender,
           address: this.address,
           birthdate: this.birthdate,
-          blood_type: this.blood_type
+          bloodtype: this.blood_type,
+          patient_code: this.patient_code
         }
-        console.log(this.birthdate)
-        const token = this.$localStorage.get('token')
+        console.log(data)
+        const token = this.$localStorage.get('user.token')
         console.log(token)
-        await axios.post('patient',data, {
+        await axios.post('patient/post',data, {
         headers: { "Authorization" : 'Bearer ' + token
         }
       })

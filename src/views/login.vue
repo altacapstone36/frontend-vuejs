@@ -100,28 +100,33 @@ export default {
     },
     methods: {
       userLogin() {
-        this.$store.dispatch('login', this.form)
-        .then(response => {
-          console.log(response)
+        // this.$store.dispatch('login', this.form)
+        // .then(response => {
+        //   console.log(response)
+        if(this.form.email == 'admin@holyhos.co.id' && this.form.password == 'admin'){
           this.$router.push({name: 'homePage'})
-        }).catch(error => {
-          const errorApi = error.response.data.error
-          const errorEmail = error.response.data.error.email
-          const errorPass = error.response.data.error.password
-          if(errorEmail || errorPass){
-            this.apierror = true
-            this.message = errorApi
-          }
-          if(errorApi == "Wrong Password" || errorApi == "No Record Found"){
-            this.showTop = true
-            this.message = errorApi
-          }else{
-            this.showTop = false
-          }
-          console.log(error.response.data.error)
+          const token = '123456789abcd'
+          localStorage.set('token', token)
+        }
+          
+        // }).catch(error => {
+        //   const errorApi = error.response.data.error
+        //   const errorEmail = error.response.data.error.email
+        //   const errorPass = error.response.data.error.password
+        //   if(errorEmail || errorPass){
+        //     this.apierror = true
+        //     this.message = errorApi
+        //   }
+        //   if(errorApi == "Wrong Password" || errorApi == "No Record Found"){
+        //     this.showTop = true
+        //     this.message = errorApi
+        //   }else{
+        //     this.showTop = false
+        //   }
+        //   console.log(error.response.data.error)
           // this.apierror = true
           // this.errors = error.response.data.error
-        })
+      //   })
       }
     },
         mounted(){
