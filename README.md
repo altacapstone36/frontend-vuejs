@@ -1,8 +1,8 @@
 # frontend-vuejs
 
-### Test (temporary)
+### Link Resmi
 ```
-https://capstone-project-holy-hospital.vercel.app/
+https://holy-hospital-vercel.vercel.app/
 ```
 
 ## Project setup
